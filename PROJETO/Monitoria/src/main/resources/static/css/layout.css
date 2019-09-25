@@ -1,0 +1,22 @@
+label {
+	margin-right: 10px;
+}
+
+.tm-div-form-pesquisa {
+	width: 380px;
+	margin: 10px auto 10px auto;
+}
+
+.tm-div-table {
+	width: 80%;
+	margin: auto;
+}
+
+.scroll {
+	height: 350px;
+	overflow-y: scroll;
+}
+
+#div-menu {
+	height: 60px;
+}
