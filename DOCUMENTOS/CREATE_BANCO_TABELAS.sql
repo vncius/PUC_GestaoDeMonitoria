@@ -5,6 +5,6 @@
 -- HeidiSQL Versão:              10.2.0.5599
 -- --------------------------------------------------------
 
-CREATE DATABASE IF NOT EXISTS `bd_aviacao`;
-USE `bd_aviacao`;
+CREATE DATABASE IF NOT EXISTS `sysmonitoria`;
+USE `sysmonitoria`;
 
