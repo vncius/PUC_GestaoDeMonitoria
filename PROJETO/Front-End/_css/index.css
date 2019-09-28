@@ -1,0 +1,139 @@
+@charset "UTF-8";
+
+/* @import url('https://fonts.googleapis.com/css?family=Titillium+Web');
+
+@font-face{
+    font-family: 'FonteLogo';
+    src: url("../_fonts/bubblegum-sans-regular.otf");
+} */
+
+ /* *{
+    border: 1px solid black;
+}  */
+
+/*Cabecalho*/
+header#cabecalho{
+    border-bottom: 1px #606060 solid;
+    }
+
+
+/*Formatando o Menu*/
+nav#menu{
+    display: block;
+}
+
+nav#menu ul{
+    list-style: none;
+    text-transform: uppercase;
+    position: absolute;
+    margin: 0;
+    left: 0;
+    width: 100%;
+    top: 0;
+    right: 0;
+    background-color: rgba(43, 108, 163, 1);
+}
+
+nav#menu li{
+    display: inline-block;
+    padding: 10px;
+    margin: 15px;
+    transition: background-color 0.4s;
+    font-family: Arial,Helvetica,sans-serif;
+}
+
+nav#menu li:hover {
+    background-color:rgba(251, 226, 126, 1);
+}
+
+nav#menu h1 {
+    display: none;
+}
+
+nav#menu a{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+nav#menu a:hover {
+    color: black;
+}
+
+/*Corpo*/
+section#corpo{
+    position: static;
+    display: grid;
+    height: 440px;
+    width: 630px;
+    min-height: auto;
+    grid-template-rows: 1fr;
+    grid-template-columns: 100%;
+    left: 310px;
+}
+/*Imagem Corpo*/
+img#puc{
+    position: absolute;
+    left: 255px;
+    width: 238px;
+    height: 421px;
+    padding: 5px;
+
+}
+/*Cabecalho Corpo*/
+header#cabecalho-corpo h5{
+    text-align: center;
+    margin-bottom: 20px;
+    font: normal normal normal 25px/1.4em 'Open Sans',sans-serif;
+}
+
+/*Campos do Corpo*/
+section#corpo{
+    width: 510px;
+    height: 65px;
+}
+
+aside#campos-corpo {
+    position: absolute;
+    left: 600px;
+    top: 90px;
+    width: 510px;
+    height: 300px;
+}
+
+/*Campo Matricula e Senha*/
+.form-label-group{
+    padding: 10px;
+}
+
+.form-control{
+    height: 50px;
+}
+
+/*Esqueci minha senha*/
+aside#campos-corpo h1{
+   width: 480px;
+   font: normal normal bold 14px/1.4em 'Open Sans',sans-serif;
+   color:#4F4949;
+   text-align: center;
+}
+
+
+/*Botão*/
+.theme-showcase{
+    padding: 10px;
+
+}
+.btn-sample {
+    color: #4F4949;
+    background-color: #FBE27E;
+    border-color: #F2F0FA;
+    width: 100%;
+    height: 100%;
+    left: 20px;
+    text-align: center;
+  }
+
+  .btn-sample:hover{
+    color: #4F4949;
+    background-color: #2B6CA3;
+  }
