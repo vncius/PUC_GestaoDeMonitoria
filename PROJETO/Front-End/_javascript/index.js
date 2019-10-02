@@ -5,15 +5,13 @@
 
 		$.ajax({
 			method: "POST", // TIPO DE REQUISIÇÃO
-			url: "http://191.233.244.144:8080/login/autenticacao", // END POINT DA API
+			url: "http://191.233.244.144:8080/login/", // END POINT DA API
 			dataType: "text",
 			contentType: "application/json;charset=UTF-8",
 			async: true,
 			data: JSON.stringify({
-				"id": "", 
-				"nome": usuario, 
-				"senha": senha, 
-				"matricula": ""
+				"matricula": usuario,
+				"senha": senha
 			}),
 			success: function (result, status, request) {
 				registraTokenEmCookie(result)
