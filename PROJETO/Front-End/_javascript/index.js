@@ -1,23 +1,33 @@
-$(document).ready(function(){
+﻿$(document).ready(function(){
     $("#btnEntrar").click(function(e){
-        var usuario = $('#inputMat').val(); //PEGANDO VALORES DO HTML E INSERINDO EM VARIAVEL JS
-		var senha = $('#inputSenha').val(); //PEGANDO VALORES DO HTML E INSERINDO EM VARIAVEL JS;
+        var usuario = $('#inputMat').val();
+		var senha = $('#inputSenha').val();
 
-
-		var dados = "{'id': '', 'login': '{0}', 'senha': '{1}', 'nome', ''}";
-		dados = dados.replace("{0}", usuario);
-		dados = dados.replace("{1}", senha);
-		
-		alert("Em desenvolvimento, matricula: "+usuario+" senha: "+senha);
-		
 		$.ajax({
-		  method: "POST", // TIPO DE REQUISIÇÃO
-		  url: "191.233.244.144/login/", // END POINT DA API
-		  data: dados // JSON COM USUÁRIO E SENHA PEGA DO FORM NO HTML
-		}).done(function(msg){
-			alert(msg); // MENSAGEM DE RETORNO PELA API EXMP: TRUE, FALSE
-		})
-    });
+			method: "POST", // TIPO DE REQUISIÇÃO
+			url: "http://191.233.244.144:8080/login/autenticacao", // END POINT DA API
+			dataType: "text",
+			contentType: "application/json;charset=UTF-8",
+			async: true,
+			data: JSON.stringify({
+				"id": "", 
+				"nome": usuario, 
+				"senha": senha, 
+				"matricula": ""
+			}),
+			success: function (result, status, request) {
+				registraTokenEmCookie(result)
+				alert("Estado atual: " + status + "\nToken: "+result);
+			},
+			error: function (request, status, erro) {
+				alert("Problema ocorrido: " + status + "\nDescição: " + erro + "\nInformações da requisição: " + request.getAllResponseHeaders());
+			}
+		});
+	});
+	
+	function registraTokenEmCookie(token){
+		console.log("Implementar salvar token em cookie... token: " + token);
+	}
 });
 
 

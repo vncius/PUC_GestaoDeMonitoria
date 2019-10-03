@@ -5,8 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.monitoria.puc.model.UsuarioModel;
+
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 @RestController
@@ -17,12 +19,12 @@ public class ControllerLogin {
 	private RepositoryUsuario usuarioRepository;*/
 
 	@PostMapping(value = "/", produces="application/json")
-	public ResponseEntity<UsuarioModel> login(@RequestBody UsuarioModel usuario) {
-		return  new ResponseEntity(true, HttpStatus.OK);
+	public @ResponseBody ResponseEntity<String> login(@RequestBody UsuarioModel usuario) {
+		return new ResponseEntity(usuario, HttpStatus.OK);
 	}
 	
 	@PostMapping(value = "/autenticacao", produces="application/json")
-	public ResponseEntity<UsuarioModel> autenticacao(@RequestBody UsuarioModel usuario) {
+	public ResponseEntity<String> autenticacao(@RequestBody UsuarioModel usuario) {
 		/*IMPLEMENTAR METODO DE AUTENTICAÇÃO E SESSION*/
 		return  new ResponseEntity("123456789", HttpStatus.OK);
 	}
