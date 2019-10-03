@@ -5,7 +5,7 @@
 
 		$.ajax({
 			method: "POST", // TIPO DE REQUISIÇÃO
-			url: "http://191.233.244.144:8080/login/", // END POINT DA API
+			url: "http://191.233.244.144:8080/apimonitoria/login/", // END POINT DA API
 			dataType: "text",
 			contentType: "application/json;charset=UTF-8",
 			async: true,
