@@ -12,6 +12,7 @@
 	<groupId>com.monitoria.puc</groupId>
 	<artifactId>simpuc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>simpuc</name>
 	<description>Sistema de gestão de monitoria da PUC</description>
 
@@ -49,7 +50,11 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.17</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>5.0.7.RELEASE</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -63,7 +68,18 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<!-- PLUGIN NECESSÁRIO PARA GERAR WAR E IMPORTAR NO SERVIDOR DE APLICAÇÃO -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration> <!-- Java EE 6 doesn't require web.xml, Maven needs to catch up! -->
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+				<executions>
+					<execution></execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
-
 </project>
