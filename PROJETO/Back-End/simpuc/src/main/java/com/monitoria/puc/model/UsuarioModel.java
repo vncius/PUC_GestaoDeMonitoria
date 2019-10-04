@@ -37,8 +37,7 @@ public class UsuarioModel implements UserDetails {
 	private String matricula;
 	
 	@OneToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "usuarios_role", uniqueConstraints = @UniqueConstraint(
-			columnNames = {"usuario_id", "role_id"}, name = "unique_role_user"),
+	@JoinTable(name = "usuarios_role", uniqueConstraints = @UniqueConstraint(columnNames = {"usuario_id", "role_id"}, name = "unique_role_user"),
 	
 	joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id", table = "usuario", unique = false,
 	foreignKey = @ForeignKey(name = "usuario_fk", value = ConstraintMode.CONSTRAINT)),
