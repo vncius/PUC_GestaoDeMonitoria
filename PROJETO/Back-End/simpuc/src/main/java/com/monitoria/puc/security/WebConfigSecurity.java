@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -30,11 +31,13 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 		/*URL DE LOGOUT - REDIRECIONA O USUARIO APOS DESLOGAR*/
 		.anyRequest().authenticated().and().logout().logoutSuccessUrl("/index")
 		/*MAPEIA URL DE LOGOUT E INVALIDA USUARIO*/
-		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 		
 		/*FILTRAR REQUISIÇÕES DE LOGIN PARA AUTENTICACAO*/
-		
+		.and().addFilterBefore(new JWTLoginFilter("/login", authenticationManager()), 
+				UsernamePasswordAuthenticationFilter.class)
 		/*FILTRA DEMAIS REQUISICOES PARA VERIFICAR PRESENCA DO TOKEN JWT NO HEADER HTTP*/
+		.addFilterBefore(new JwtApiAutenticacaoFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 
 	@Override

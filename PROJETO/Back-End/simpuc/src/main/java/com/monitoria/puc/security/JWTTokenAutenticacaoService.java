@@ -1,16 +1,15 @@
 package com.monitoria.puc.security;
 
+import java.io.IOException;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.omg.CORBA.Request;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.monitoria.puc.ApplicationContextLoad;
 import com.monitoria.puc.model.UsuarioModel;
@@ -35,7 +34,7 @@ public class JWTTokenAutenticacaoService {
 	private static final String HEADER_STRING = "Authorization";
 	
 	/*GERA TOKEN E ADICIONA AO CABEÇALHO DA RESPOSTA HTTP*/
-	public void addAuthentication(HttpServletResponse response, String username) throws Exception{
+	public void addAuthentication(HttpServletResponse response, String username) throws IOException {
 		String JWT = Jwts.builder() /*CHAMA O GERADOR DE TOKEN*/
 				.setSubject(username) /*ADICIONA USUARIO*/
 				.setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME)) /*TEMPO DE EXPIRACAO*/
