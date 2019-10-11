@@ -2,12 +2,7 @@ package com.monitoria.puc.controller;
 
 
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,8 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.monitoria.puc.model.UsuarioModel;
+import com.monitoria.puc.model.ModelUsuario;
 import com.monitoria.puc.repository.RepositoryUsuario;
 
 @CrossOrigin
@@ -32,19 +26,19 @@ public class ControllerUsuario {
 	private RepositoryUsuario usuarioRepository;
 	
 	@GetMapping(value = "/", produces = "application/json")
-	public ResponseEntity<Iterable<UsuarioModel>> consultarTodosUsuarios() {
-		Iterable<UsuarioModel> list = usuarioRepository.findAll();
-		return new ResponseEntity<Iterable<UsuarioModel>>(list, HttpStatus.OK);
+	public ResponseEntity<Iterable<ModelUsuario>> consultarTodosUsuarios() {
+		Iterable<ModelUsuario> list = usuarioRepository.findAll();
+		return new ResponseEntity<Iterable<ModelUsuario>>(list, HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/{id}", produces = "application/json")
-	public ResponseEntity<Optional<UsuarioModel>> consultarPorId(@PathVariable(value = "id") Long id) {
-		Optional<UsuarioModel> usuario = usuarioRepository.findById(id);
-		return new ResponseEntity<Optional<UsuarioModel>>(usuario, HttpStatus.OK);
+	public ResponseEntity<Optional<ModelUsuario>> consultarPorId(@PathVariable(value = "id") Long id) {
+		Optional<ModelUsuario> usuario = usuarioRepository.findById(id);
+		return new ResponseEntity<Optional<ModelUsuario>>(usuario, HttpStatus.OK);
 	}
 	
 	@PostMapping(value = "/", produces="application/text")
-	public ResponseEntity<String> cadastrar(@RequestBody UsuarioModel usuario) {
+	public ResponseEntity<String> cadastrar(@RequestBody ModelUsuario usuario) {
 		usuario.setId(null); // CASO OBJ VENHA COM ID PREENCHIDO, ELE É ZERADO PARA VALIDAR QUE END-POINT É PARA CADASTRO
 		Boolean resultado = usuario.validaSeCamposObrigatoriosPreenchidos();
 		if (resultado) {
@@ -60,7 +54,7 @@ public class ControllerUsuario {
 	}
 	
 	@PutMapping(value = "/", produces="application/text")
-	public ResponseEntity<String> atualizar(@RequestBody UsuarioModel usuario) {
+	public ResponseEntity<String> atualizar(@RequestBody ModelUsuario usuario) {
 		Boolean resultado = usuario.validaSeCamposObrigatoriosPreenchidos();
 		if (resultado) {
 			try {

@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.monitoria.puc.model.UsuarioModel;
+import com.monitoria.puc.model.ModelUsuario;
 import com.monitoria.puc.repository.RepositoryUsuario;
 
 @Service
@@ -19,7 +19,7 @@ public class ImplementacaoUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		UsuarioModel usuario = usuarioRepository.findUserByLogin(username);	
+		ModelUsuario usuario = usuarioRepository.findUserByLogin(username);	
 		
 		if (usuario == null) throw new UsernameNotFoundException("Usuário não foi encontrado");
 		
@@ -27,5 +27,4 @@ public class ImplementacaoUserDetailsService implements UserDetailsService {
 				usuario.getPassword(), 
 				usuario.getAuthorities());
 	}
-
 }
