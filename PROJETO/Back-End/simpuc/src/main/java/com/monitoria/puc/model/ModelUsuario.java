@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.UniqueConstraint;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import com.monitoria.puc.utilidades.Validacoes;
+import com.monitoria.puc.utilidades.Utilidades;
 
 @Entity
 public class ModelUsuario implements UserDetails {
@@ -75,9 +75,9 @@ public class ModelUsuario implements UserDetails {
 	}
 
 	public Boolean validaSeCamposObrigatoriosPreenchidos() {
-		if (!Validacoes.valorStringEstaPreenchido(this.matricula)) return false;
-		if (!Validacoes.valorStringEstaPreenchido(this.nome)) return false;
-		if (!Validacoes.valorStringEstaPreenchido(this.senha)) return false;
+		if (!Utilidades.valorStringEstaPreenchido(this.matricula)) return false;
+		if (!Utilidades.valorStringEstaPreenchido(this.nome)) return false;
+		if (!Utilidades.valorStringEstaPreenchido(this.senha)) return false;
 		return true;
 	}
 

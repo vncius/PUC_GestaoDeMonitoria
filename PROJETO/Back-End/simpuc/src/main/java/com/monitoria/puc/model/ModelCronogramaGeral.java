@@ -2,13 +2,12 @@ package com.monitoria.puc.model;
 
 import java.io.Serializable;
 import java.util.GregorianCalendar;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.monitoria.puc.utilidades.Validacoes;
+import com.monitoria.puc.utilidades.Utilidades;
 
 @Entity
 public class ModelCronogramaGeral implements Serializable {
@@ -18,111 +17,145 @@ public class ModelCronogramaGeral implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	private GregorianCalendar publicacaoEdital_dtInicio;
-	private GregorianCalendar publicacaoEdital_dtFim = null;
-	
+	private GregorianCalendar publicacaoEdital_dtFim;
+
 	private GregorianCalendar periodoInscricao_dtInicio;
 	private GregorianCalendar periodoInscricao_dtFim;
-	
+
 	private GregorianCalendar periodoAvaliacao_dtInicio;
 	private GregorianCalendar periodoAvaliacao_dtFim;
-	
+
 	private GregorianCalendar entregaDosResultados_dtInicio;
 	private GregorianCalendar entregaDosResultados_dtFim;
-	
+
 	private GregorianCalendar periodoLetivo_dtInicio;
 	private GregorianCalendar periodoLetivo_dtFim;
-	
+
 	private GregorianCalendar entregaDosCertificados_dtInicio;
 	private GregorianCalendar entregaDosCertificados_dtFim;
 
 	public Boolean validaCronogramaGeral() {
-		if (Validacoes.validaSeDataInicioMaiorQueDataFim(this.publicacaoEdital_dtInicio, this.publicacaoEdital_dtFim)) return false;
-		if (Validacoes.validaSeDataInicioMaiorQueDataFim(this.periodoInscricao_dtInicio, this.periodoInscricao_dtFim)) return false;
-		if (Validacoes.validaSeDataInicioMaiorQueDataFim(this.periodoAvaliacao_dtInicio, this.periodoAvaliacao_dtInicio)) return false;
-		if (Validacoes.validaSeDataInicioMaiorQueDataFim(this.entregaDosResultados_dtInicio, this.entregaDosResultados_dtFim)) return false;
-		if (Validacoes.validaSeDataInicioMaiorQueDataFim(this.periodoLetivo_dtInicio, this.periodoLetivo_dtFim)) return false;
-		if (Validacoes.validaSeDataInicioMaiorQueDataFim(this.entregaDosCertificados_dtInicio, this.entregaDosCertificados_dtFim)) return false;
+		if (Utilidades.validaSeDataInicioMaiorQueDataFim(this.publicacaoEdital_dtInicio, this.publicacaoEdital_dtFim))
+			return false;
+		if (Utilidades.validaSeDataInicioMaiorQueDataFim(this.periodoInscricao_dtInicio, this.periodoInscricao_dtFim))
+			return false;
+		if (Utilidades.validaSeDataInicioMaiorQueDataFim(this.periodoAvaliacao_dtInicio,
+				this.periodoAvaliacao_dtInicio))
+			return false;
+		if (Utilidades.validaSeDataInicioMaiorQueDataFim(this.entregaDosResultados_dtInicio,
+				this.entregaDosResultados_dtFim))
+			return false;
+		if (Utilidades.validaSeDataInicioMaiorQueDataFim(this.periodoLetivo_dtInicio, this.periodoLetivo_dtFim))
+			return false;
+		if (Utilidades.validaSeDataInicioMaiorQueDataFim(this.entregaDosCertificados_dtInicio,
+				this.entregaDosCertificados_dtFim))
+			return false;
 		return true;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public GregorianCalendar getPublicacaoEdital_dtInicio() {
-		return publicacaoEdital_dtInicio;
+
+	public String getPublicacaoEdital_dtInicio() throws Exception {
+		return Utilidades.convertDateParaString(publicacaoEdital_dtInicio);
 	}
-	public void setPublicacaoEdital_dtInicio(GregorianCalendar publicacaoEdital_dtInicio) {
-		this.publicacaoEdital_dtInicio = publicacaoEdital_dtInicio;
+
+	public void setPublicacaoEdital_dtInicio(String publicacaoEdital_dtInicio) throws Exception {
+		this.publicacaoEdital_dtInicio = Utilidades.convertDataStringEmDate(publicacaoEdital_dtInicio);
 	}
-	public GregorianCalendar getPublicacaoEdital_dtFim() {
-		return publicacaoEdital_dtFim;
+
+	public String getPublicacaoEdital_dtFim() throws Exception {
+		return Utilidades.convertDateParaString(publicacaoEdital_dtFim);
 	}
-	public void setPublicacaoEdital_dtFim(GregorianCalendar publicacaoEdital_dtFim) {
-		this.publicacaoEdital_dtFim = publicacaoEdital_dtFim;
+
+	public void setPublicacaoEdital_dtFim(String publicacaoEdital_dtFim) throws Exception {
+		this.publicacaoEdital_dtFim = Utilidades.convertDataStringEmDate(publicacaoEdital_dtFim);
 	}
-	public GregorianCalendar getPeriodoInscricao_dtInicio() {
-		return periodoInscricao_dtInicio;
+
+	public String getPeriodoInscricao_dtInicio() throws Exception {
+		return Utilidades.convertDateParaString(periodoInscricao_dtInicio);
 	}
-	public void setPeriodoInscricao_dtInicio(GregorianCalendar periodoInscricao_dtInicio) {
-		this.periodoInscricao_dtInicio = periodoInscricao_dtInicio;
+
+	public void setPeriodoInscricao_dtInicio(String periodoInscricao_dtInicio) throws Exception {
+		this.periodoInscricao_dtInicio = Utilidades.convertDataStringEmDate(periodoInscricao_dtInicio);
 	}
-	public GregorianCalendar getPeriodoInscricao_dtFim() {
-		return periodoInscricao_dtFim;
+
+	public String getPeriodoInscricao_dtFim() throws Exception {
+		return Utilidades.convertDateParaString(periodoInscricao_dtFim);
 	}
-	public void setPeriodoInscricao_dtFim(GregorianCalendar periodoInscricao_dtFim) {
-		this.periodoInscricao_dtFim = periodoInscricao_dtFim;
+
+	public void setPeriodoInscricao_dtFim(String periodoInscricao_dtFim) throws Exception {
+		this.periodoInscricao_dtFim = Utilidades.convertDataStringEmDate(periodoInscricao_dtFim);
 	}
-	public GregorianCalendar getPeriodoAvaliacao_dtInicio() {
-		return periodoAvaliacao_dtInicio;
+
+	public String getPeriodoAvaliacao_dtInicio() throws Exception {
+		return Utilidades.convertDateParaString(periodoAvaliacao_dtInicio);
 	}
-	public void setPeriodoAvaliacao_dtInicio(GregorianCalendar periodoAvaliacao_dtInicio) {
-		this.periodoAvaliacao_dtInicio = periodoAvaliacao_dtInicio;
+
+	public void setPeriodoAvaliacao_dtInicio(String periodoAvaliacao_dtInicio) throws Exception {
+		this.periodoAvaliacao_dtInicio = Utilidades.convertDataStringEmDate(periodoAvaliacao_dtInicio);
 	}
-	public GregorianCalendar getPeriodoAvaliacao_dtFim() {
-		return periodoAvaliacao_dtFim;
+
+	public String getPeriodoAvaliacao_dtFim() throws Exception {
+		return Utilidades.convertDateParaString(periodoAvaliacao_dtFim);
 	}
-	public void setPeriodoAvaliacao_dtFim(GregorianCalendar periodoAvaliacao_dtFim) {
-		this.periodoAvaliacao_dtFim = periodoAvaliacao_dtFim;
+
+	public void setPeriodoAvaliacao_dtFim(String periodoAvaliacao_dtFim) throws Exception {
+		this.periodoAvaliacao_dtFim = Utilidades.convertDataStringEmDate(periodoAvaliacao_dtFim);
 	}
-	public GregorianCalendar getEntregaDosResultados_dtInicio() {
-		return entregaDosResultados_dtInicio;
+
+	public String getEntregaDosResultados_dtInicio() throws Exception {
+		return Utilidades.convertDateParaString(entregaDosResultados_dtInicio);
 	}
-	public void setEntregaDosResultados_dtInicio(GregorianCalendar entregaDosResultados_dtInicio) {
-		this.entregaDosResultados_dtInicio = entregaDosResultados_dtInicio;
+
+	public void setEntregaDosResultados_dtInicio(String entregaDosResultados_dtInicio) throws Exception {
+		this.entregaDosResultados_dtInicio = Utilidades.convertDataStringEmDate(entregaDosResultados_dtInicio);
 	}
-	public GregorianCalendar getEntregaDosResultados_dtFim() {
-		return entregaDosResultados_dtFim;
+
+	public String getEntregaDosResultados_dtFim() throws Exception {
+		return Utilidades.convertDateParaString(entregaDosResultados_dtFim);
 	}
-	public void setEntregaDosResultados_dtFim(GregorianCalendar entregaDosResultados_dtFim) {
-		this.entregaDosResultados_dtFim = entregaDosResultados_dtFim;
+
+	public void setEntregaDosResultados_dtFim(String entregaDosResultados_dtFim) throws Exception {
+		this.entregaDosResultados_dtFim = Utilidades.convertDataStringEmDate(entregaDosResultados_dtFim);
 	}
-	public GregorianCalendar getPeriodoLetivo_dtInicio() {
-		return periodoLetivo_dtInicio;
+
+	public String getPeriodoLetivo_dtInicio() throws Exception {
+		return Utilidades.convertDateParaString(periodoLetivo_dtInicio);
 	}
-	public void setPeriodoLetivo_dtInicio(GregorianCalendar periodoLetivo_dtInicio) {
-		this.periodoLetivo_dtInicio = periodoLetivo_dtInicio;
+
+	public void setPeriodoLetivo_dtInicio(String periodoLetivo_dtInicio) throws Exception {
+		this.periodoLetivo_dtInicio = Utilidades.convertDataStringEmDate(periodoLetivo_dtInicio);
 	}
-	public GregorianCalendar getPeriodoLetivo_dtFim() {
-		return periodoLetivo_dtFim;
+
+	public String getPeriodoLetivo_dtFim() throws Exception {
+		return Utilidades.convertDateParaString(periodoLetivo_dtFim);
 	}
-	public void setPeriodoLetivo_dtFim(GregorianCalendar periodoLetivo_dtFim) {
-		this.periodoLetivo_dtFim = periodoLetivo_dtFim;
+
+	public void setPeriodoLetivo_dtFim(String periodoLetivo_dtFim) throws Exception {
+		this.periodoLetivo_dtFim = Utilidades.convertDataStringEmDate(periodoLetivo_dtFim);
 	}
-	public GregorianCalendar getEntregaDosCertificados_dtInicio() {
-		return entregaDosCertificados_dtInicio;
+
+	public String getEntregaDosCertificados_dtInicio() throws Exception {
+		return Utilidades.convertDateParaString(entregaDosCertificados_dtInicio);
 	}
-	public void setEntregaDosCertificados_dtInicio(GregorianCalendar entregaDosCertificados_dtInicio) {
-		this.entregaDosCertificados_dtInicio = entregaDosCertificados_dtInicio;
+
+	public void setEntregaDosCertificados_dtInicio(String entregaDosCertificados_dtInicio) throws Exception {
+		this.entregaDosCertificados_dtInicio = Utilidades.convertDataStringEmDate(entregaDosCertificados_dtInicio);
 	}
-	public GregorianCalendar getEntregaDosCertificados_dtFim() {
-		return entregaDosCertificados_dtFim;
+
+	public String getEntregaDosCertificados_dtFim() throws Exception {
+		return Utilidades.convertDateParaString(entregaDosCertificados_dtFim);
 	}
-	public void setEntregaDosCertificados_dtFim(GregorianCalendar entregaDosCertificados_dtFim) {
-		this.entregaDosCertificados_dtFim = entregaDosCertificados_dtFim;
+
+	public void setEntregaDosCertificados_dtFim(String entregaDosCertificados_dtFim) throws Exception {
+		this.entregaDosCertificados_dtFim = Utilidades.convertDataStringEmDate(entregaDosCertificados_dtFim);
 	}
 }
