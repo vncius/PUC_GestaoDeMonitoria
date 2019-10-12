@@ -17,7 +17,11 @@
 				registraTokenEmLocalStorage(result.Authorization)
 			},
 			error: function (request, status, erro) {
-				Console.log("Problema ocorrido: " + status + "\nDescição: " + erro + "\nInformações da requisição: " + request.getAllResponseHeaders());
+				if(request.status = 403){
+					alert("Usuário e/ou senha inválidos");
+				} else {
+					console.log("Ocorreu um erro na requisição para o servidor!");
+				}
 			}
 		});
 	});
