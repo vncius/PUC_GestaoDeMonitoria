@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+#interface{
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /*Cabecalho*/
 header#cabecalho{
     margin:50px auto 50px auto;
@@ -16,7 +22,7 @@ header#cabecalho h4{
 /*Corpo da esqueda*/
 aside#esquerda{
     position: absolute;
-    left: 200px;
+    left: 250px;
     top: 150px;
     width: 400px;
     height: 434px;
@@ -28,12 +34,10 @@ aside#esquerda h6{
     color:black;
 }
 
-
-
 /*Corpo da direita*/
 aside#direita{
     position: absolute;
-    left: 700px;
+    left: 750px;
     top: 150px;
     width: 400px;
     height: 434px;
@@ -47,19 +51,20 @@ aside#direita h6{
 /*Campos DATA*/
 div#camp-dat{
     position: relative;
-    width: 100%;
+    width: 120%;
 }
+
 ul li{
-    list-style: none;
     display: inline-block;
-    margin:5px;
+    list-style: none;
+    margin: 5px;
 }
 
 /*Botões*/
 div#botoes{
     position: absolute;
     top:500px;
-    left: 900px;
+    left: 1050px;
 }
 div#botoes button{
     margin:20px;
