@@ -25,7 +25,7 @@ public class Utilidades {
 
 	public static GregorianCalendar convertDataStringEmDate(String data) throws Exception {
 		try {
-			DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 			GregorianCalendar cal = new GregorianCalendar();
 			cal.setTime(df.parse(data));
 			return cal;
@@ -36,7 +36,7 @@ public class Utilidades {
 	
 	public static String convertDateParaString(GregorianCalendar data) throws Exception {
 		try {
-			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			String dataFormata = dateFormat.format(data.getTime());
 			return dataFormata;
 		} catch (Exception e) {
