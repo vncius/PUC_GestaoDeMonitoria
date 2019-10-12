@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+/*Cabecalho*/
+header#cabecalho{
+    margin:50px auto 50px auto;
+    width: 100%;
+    text-align: center;
+}
+
+header#cabecalho h4{
+    font:  'Proxima Nova';
+    font-size: 40px;
+    color: #414141;
+}
+
+/*Corpo da esqueda*/
+aside#esquerda{
+    position: absolute;
+    left: 200px;
+    top: 150px;
+    width: 400px;
+    height: 434px;
+    text-align: center;
+}
+aside#esquerda h6{
+    font: 'Open Sans';
+    font-size: 22px;
+    color:black;
+}
+
+
+
+/*Corpo da direita*/
+aside#direita{
+    position: absolute;
+    left: 700px;
+    top: 150px;
+    width: 400px;
+    height: 434px;
+    text-align: center;
+}
+aside#direita h6{
+    font: 'Open Sans';
+    font-size: 22px;
+    color:black;
+}
+/*Campos DATA*/
+div#camp-dat{
+    position: relative;
+    width: 100%;
+}
+ul li{
+    list-style: none;
+    display: inline-block;
+    margin:5px;
+}
+
+/*Botões*/
+div#botoes{
+    position: absolute;
+    top:500px;
+    left: 900px;
+}
+div#botoes button{
+    margin:20px;
+}
