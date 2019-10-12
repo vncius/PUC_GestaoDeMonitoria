@@ -6,7 +6,7 @@
 		$.ajax({
 			method: "POST", // TIPO DE REQUISIÇÃO
 			url: "http://localhost:8080/apimonitoria/login", // END POINT DA API
-			dataType: "text",
+			dataType: "JSON",
 			contentType: "application/json;charset=UTF-8",
 			async: true,
 			data: JSON.stringify({
@@ -14,17 +14,17 @@
 				"senha": senha
 			}),
 			success: function (result, status, request) {
-				registraTokenEmCookie(result)
-				alert("Estado atual: " + status + "\nToken: "+result);
+				registraTokenEmLocalStorage(result.Authorization)
 			},
 			error: function (request, status, erro) {
-				alert("Problema ocorrido: " + status + "\nDescição: " + erro + "\nInformações da requisição: " + request.getAllResponseHeaders());
+				Console.log("Problema ocorrido: " + status + "\nDescição: " + erro + "\nInformações da requisição: " + request.getAllResponseHeaders());
 			}
 		});
 	});
 	
-	function registraTokenEmCookie(token){
-		console.log("Implementar salvar token em cookie... token: " + token);
+	function registraTokenEmLocalStorage(token){
+		localStorage.setItem("Authorization", token);
+		//localStorage.getItem("Authorization");  FORMA DE PEGAR O TOKEN PARA PRÓXIMAS REQUISIÇÕES
 	}
 });
 
