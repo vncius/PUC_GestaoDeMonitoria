@@ -27,20 +27,13 @@ public class ControllerCronogramaGeral {
 	
 	@GetMapping(value = "/", produces = "application/json")
 	public ResponseEntity<Optional<ModelCronogramaGeral>> consultaCronogramaGeral() {
-		Iterable<ModelCronogramaGeral> list = repositoryCronogramaGeral.findAll();
-		cronogramaMaisRecente = 1L;
-		list.forEach(x -> {
-			if (x.getId() > cronogramaMaisRecente) { 
-				cronogramaMaisRecente = x.getId(); 
-			}
-		});
-		Optional<ModelCronogramaGeral> cronograma = repositoryCronogramaGeral.findById(cronogramaMaisRecente);
+		Long maiorId = repositoryCronogramaGeral.findMaxIdCronogramaGeral();
+		Optional<ModelCronogramaGeral> cronograma = repositoryCronogramaGeral.findById(maiorId);
 		return new ResponseEntity<Optional<ModelCronogramaGeral>>(cronograma, HttpStatus.OK);
 	}
 	
 	@PutMapping(value = "/", produces="application/text")
 	public ResponseEntity<String> atualizarCronogramaGeral(@RequestBody ModelCronogramaGeral cronogramaGeral) {
-		cronogramaGeral.setId(1L);
 		Boolean resultado = cronogramaGeral.validaCronogramaGeral();
 		if (resultado) {
 			try {
