@@ -1,9 +1,7 @@
 package com.monitoria.puc.model;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
-
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,14 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.UniqueConstraint;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import com.monitoria.puc.utilidades.Validacoes;
+import com.monitoria.puc.utilidades.Utilidades;
 
 @Entity
-public class UsuarioModel implements UserDetails {
+public class ModelUsuario implements UserDetails {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -79,9 +75,9 @@ public class UsuarioModel implements UserDetails {
 	}
 
 	public Boolean validaSeCamposObrigatoriosPreenchidos() {
-		if (!Validacoes.valorStringEstaPreenchido(this.matricula)) return false;
-		if (!Validacoes.valorStringEstaPreenchido(this.nome)) return false;
-		if (!Validacoes.valorStringEstaPreenchido(this.senha)) return false;
+		if (!Utilidades.valorStringEstaPreenchido(this.matricula)) return false;
+		if (!Utilidades.valorStringEstaPreenchido(this.nome)) return false;
+		if (!Utilidades.valorStringEstaPreenchido(this.senha)) return false;
 		return true;
 	}
 

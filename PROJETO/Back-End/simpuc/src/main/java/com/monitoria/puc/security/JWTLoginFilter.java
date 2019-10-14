@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.monitoria.puc.model.UsuarioModel;
+import com.monitoria.puc.model.ModelUsuario;
 
 /*ESTABELECE O GERENCIADOR DO TOKEN*/
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
@@ -33,7 +33,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException, IOException, ServletException {
 		
-		UsuarioModel user = new ObjectMapper().readValue(request.getInputStream(), UsuarioModel.class);
+		ModelUsuario user = new ObjectMapper().readValue(request.getInputStream(), ModelUsuario.class);
 		
 		return getAuthenticationManager()
 				.authenticate(new UsernamePasswordAuthenticationToken(user.getMatricula(), user.getSenha()));

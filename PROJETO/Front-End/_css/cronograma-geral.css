@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+#geral{
+    width: fit-content;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*Cabecalho*/
+header#cabecalho{
+    margin:50px auto 50px auto;
+    width: 100%;
+    text-align: center;
+}
+
+header#cabecalho h4{
+    font:  'Proxima Nova';
+    font-size: 40px;
+    color: #414141;
+}
+
+/*Corpo da esqueda*/
+aside#esquerda{
+    float: left;
+    position: relative;
+    width: 500px;
+    height: 360px;
+    text-align: center;
+}
+aside#esquerda h6{
+    font: 'Open Sans';
+    font-size: 22px;
+    color:black;
+}
+
+/*Corpo da direita*/
+aside#direita{
+    float: right;
+    position: relative;
+    width: 500px;
+    height: 360px;
+    text-align: center;
+}
+aside#direita h6{
+    font: 'Open Sans';
+    font-size: 22px;
+    color:black;
+}
+/*Campos DATA*/
+div#camp-dat{
+    position: relative;
+    width: 500px;
+}
+
+ul li{
+    display: inline-block;
+    list-style: none;
+    margin: 5px;
+}
+
+/*Botões*/
+div#botoes{
+    align-content: center;
+    float: inline-end;
+    position: relative;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+div#align-right{
+    float: right;
+    margin: 20px;
+}
+
+div#mensagens {
+    float: initial;
+    width: auto;
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+
+div#mensagens ul li{
+    width: auto;
+    height: auto;
+}

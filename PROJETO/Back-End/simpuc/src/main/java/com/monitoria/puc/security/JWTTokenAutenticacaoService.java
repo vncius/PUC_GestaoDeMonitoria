@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.monitoria.puc.ApplicationContextLoad;
-import com.monitoria.puc.model.UsuarioModel;
+import com.monitoria.puc.model.ModelUsuario;
 import com.monitoria.puc.repository.RepositoryUsuario;
 
 import io.jsonwebtoken.Jwts;
@@ -60,7 +60,7 @@ public class JWTTokenAutenticacaoService {
 					.getBody().getSubject();
 					
 			if (user != null ) {
-				UsuarioModel usuario = ApplicationContextLoad.getApplicationContext()
+				ModelUsuario usuario = ApplicationContextLoad.getApplicationContext()
 						.getBean(RepositoryUsuario.class).findUserByLogin(user);
 				
 				if (usuario != null) {

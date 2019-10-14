@@ -9,7 +9,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
 
@@ -27,5 +26,4 @@ public class JwtApiAutenticacaoFilter extends GenericFilterBean  {
 		
 		chain.doFilter(request, response);
 	}
-
 }

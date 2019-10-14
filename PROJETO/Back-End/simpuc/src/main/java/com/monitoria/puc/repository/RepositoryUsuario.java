@@ -4,11 +4,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.monitoria.puc.model.UsuarioModel;
+import com.monitoria.puc.model.ModelUsuario;
 
 @Repository
-public interface RepositoryUsuario extends CrudRepository<UsuarioModel, Long> {
+public interface RepositoryUsuario extends CrudRepository<ModelUsuario, Long> {
 
-	@Query("select u from UsuarioModel u where u.matricula = ?1")
-	UsuarioModel findUserByLogin(String matricula);
+	@Query("select u from ModelUsuario u where u.matricula = ?1")
+	ModelUsuario findUserByLogin(String matricula);
 }
