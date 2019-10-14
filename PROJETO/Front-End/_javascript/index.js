@@ -15,6 +15,7 @@
 			}),
 			success: function (result, status, request) {
 				registraTokenEmLocalStorage(result.Authorization)
+				//redirecionar para menu				
 			},
 			error: function (request, status, erro) {
 				if(request.status = 403){

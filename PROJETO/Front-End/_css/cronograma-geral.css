@@ -1,5 +1,12 @@
 @charset "UTF-8";
 
+#geral{
+    width: fit-content;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /*Cabecalho*/
 header#cabecalho{
     margin:50px auto 50px auto;
@@ -15,11 +22,10 @@ header#cabecalho h4{
 
 /*Corpo da esqueda*/
 aside#esquerda{
-    position: absolute;
-    left: 250px;
-    top: 150px;
-    width: 400px;
-    height: 434px;
+    float: left;
+    position: relative;
+    width: 500px;
+    height: 360px;
     text-align: center;
 }
 aside#esquerda h6{
@@ -30,11 +36,10 @@ aside#esquerda h6{
 
 /*Corpo da direita*/
 aside#direita{
-    position: absolute;
-    left: 750px;
-    top: 150px;
-    width: 400px;
-    height: 434px;
+    float: right;
+    position: relative;
+    width: 500px;
+    height: 360px;
     text-align: center;
 }
 aside#direita h6{
@@ -45,7 +50,7 @@ aside#direita h6{
 /*Campos DATA*/
 div#camp-dat{
     position: relative;
-    width: 120%;
+    width: 500px;
 }
 
 ul li{
@@ -56,10 +61,27 @@ ul li{
 
 /*Botões*/
 div#botoes{
-    position: absolute;
-    top:500px;
-    left: 1050px;
+    align-content: center;
+    float: inline-end;
+    position: relative;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
 }
-div#botoes button{
-    margin:20px;
+
+div#align-right{
+    float: right;
+    margin: 20px;
+}
+
+div#mensagens {
+    float: initial;
+    width: auto;
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+
+div#mensagens ul li{
+    width: auto;
+    height: auto;
 }
