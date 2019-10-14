@@ -68,7 +68,7 @@ public class ModelCronogramaGeral implements Serializable {
 	}
 
 	public void setPublicacaoEdital_dtInicio(String publicacaoEdital_dtInicio) throws Exception {
-		this.publicacaoEdital_dtInicio = Utilidades.convertDataStringEmDate(publicacaoEdital_dtInicio);
+		this.publicacaoEdital_dtInicio.setTime(Utilidades.convertDataStringEmDate(publicacaoEdital_dtInicio));
 	}
 
 	public String getPublicacaoEdital_dtFim() throws Exception {
@@ -76,7 +76,7 @@ public class ModelCronogramaGeral implements Serializable {
 	}
 
 	public void setPublicacaoEdital_dtFim(String publicacaoEdital_dtFim) throws Exception {
-		this.publicacaoEdital_dtFim = Utilidades.convertDataStringEmDate(publicacaoEdital_dtFim);
+		this.publicacaoEdital_dtFim.setTime(Utilidades.convertDataStringEmDate(publicacaoEdital_dtFim));
 	}
 
 	public String getPeriodoInscricao_dtInicio() throws Exception {
@@ -84,7 +84,7 @@ public class ModelCronogramaGeral implements Serializable {
 	}
 
 	public void setPeriodoInscricao_dtInicio(String periodoInscricao_dtInicio) throws Exception {
-		this.periodoInscricao_dtInicio = Utilidades.convertDataStringEmDate(periodoInscricao_dtInicio);
+		this.periodoInscricao_dtInicio.setTime(Utilidades.convertDataStringEmDate(periodoInscricao_dtInicio));
 	}
 
 	public String getPeriodoInscricao_dtFim() throws Exception {
@@ -92,7 +92,7 @@ public class ModelCronogramaGeral implements Serializable {
 	}
 
 	public void setPeriodoInscricao_dtFim(String periodoInscricao_dtFim) throws Exception {
-		this.periodoInscricao_dtFim = Utilidades.convertDataStringEmDate(periodoInscricao_dtFim);
+		this.periodoInscricao_dtFim.setTime(Utilidades.convertDataStringEmDate(periodoInscricao_dtFim));
 	}
 
 	public String getPeriodoAvaliacao_dtInicio() throws Exception {
@@ -100,7 +100,7 @@ public class ModelCronogramaGeral implements Serializable {
 	}
 
 	public void setPeriodoAvaliacao_dtInicio(String periodoAvaliacao_dtInicio) throws Exception {
-		this.periodoAvaliacao_dtInicio = Utilidades.convertDataStringEmDate(periodoAvaliacao_dtInicio);
+		this.periodoAvaliacao_dtInicio.setTime(Utilidades.convertDataStringEmDate(periodoAvaliacao_dtInicio));
 	}
 
 	public String getPeriodoAvaliacao_dtFim() throws Exception {
@@ -108,7 +108,7 @@ public class ModelCronogramaGeral implements Serializable {
 	}
 
 	public void setPeriodoAvaliacao_dtFim(String periodoAvaliacao_dtFim) throws Exception {
-		this.periodoAvaliacao_dtFim = Utilidades.convertDataStringEmDate(periodoAvaliacao_dtFim);
+		this.periodoAvaliacao_dtFim.setTime(Utilidades.convertDataStringEmDate(periodoAvaliacao_dtFim));
 	}
 
 	public String getEntregaDosResultados_dtInicio() throws Exception {
@@ -116,7 +116,7 @@ public class ModelCronogramaGeral implements Serializable {
 	}
 
 	public void setEntregaDosResultados_dtInicio(String entregaDosResultados_dtInicio) throws Exception {
-		this.entregaDosResultados_dtInicio = Utilidades.convertDataStringEmDate(entregaDosResultados_dtInicio);
+		this.entregaDosResultados_dtInicio.setTime(Utilidades.convertDataStringEmDate(entregaDosResultados_dtInicio));
 	}
 
 	public String getEntregaDosResultados_dtFim() throws Exception {
@@ -124,7 +124,7 @@ public class ModelCronogramaGeral implements Serializable {
 	}
 
 	public void setEntregaDosResultados_dtFim(String entregaDosResultados_dtFim) throws Exception {
-		this.entregaDosResultados_dtFim = Utilidades.convertDataStringEmDate(entregaDosResultados_dtFim);
+		this.entregaDosResultados_dtFim.setTime(Utilidades.convertDataStringEmDate(entregaDosResultados_dtFim));
 	}
 
 	public String getPeriodoLetivo_dtInicio() throws Exception {
@@ -132,7 +132,7 @@ public class ModelCronogramaGeral implements Serializable {
 	}
 
 	public void setPeriodoLetivo_dtInicio(String periodoLetivo_dtInicio) throws Exception {
-		this.periodoLetivo_dtInicio = Utilidades.convertDataStringEmDate(periodoLetivo_dtInicio);
+		this.periodoLetivo_dtInicio.setTime(Utilidades.convertDataStringEmDate(periodoLetivo_dtInicio));
 	}
 
 	public String getPeriodoLetivo_dtFim() throws Exception {
@@ -140,7 +140,7 @@ public class ModelCronogramaGeral implements Serializable {
 	}
 
 	public void setPeriodoLetivo_dtFim(String periodoLetivo_dtFim) throws Exception {
-		this.periodoLetivo_dtFim = Utilidades.convertDataStringEmDate(periodoLetivo_dtFim);
+		this.periodoLetivo_dtFim.setTime(Utilidades.convertDataStringEmDate(periodoLetivo_dtFim));
 	}
 
 	public String getEntregaDosCertificados_dtInicio() throws Exception {
@@ -148,7 +148,7 @@ public class ModelCronogramaGeral implements Serializable {
 	}
 
 	public void setEntregaDosCertificados_dtInicio(String entregaDosCertificados_dtInicio) throws Exception {
-		this.entregaDosCertificados_dtInicio = Utilidades.convertDataStringEmDate(entregaDosCertificados_dtInicio);
+		this.entregaDosCertificados_dtInicio.setTime(Utilidades.convertDataStringEmDate(entregaDosCertificados_dtInicio));
 	}
 
 	public String getEntregaDosCertificados_dtFim() throws Exception {
@@ -156,6 +156,6 @@ public class ModelCronogramaGeral implements Serializable {
 	}
 
 	public void setEntregaDosCertificados_dtFim(String entregaDosCertificados_dtFim) throws Exception {
-		this.entregaDosCertificados_dtFim = Utilidades.convertDataStringEmDate(entregaDosCertificados_dtFim);
+		this.entregaDosCertificados_dtFim.setTime(Utilidades.convertDataStringEmDate(entregaDosCertificados_dtFim));
 	}
 }
