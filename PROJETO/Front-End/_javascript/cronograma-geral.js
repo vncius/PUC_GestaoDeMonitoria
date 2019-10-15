@@ -64,8 +64,10 @@ $(document).ready(function(){
             contentType: "application/json;charset=UTF-8",
             async: true,
             success: function (result, status, request) {
-                if (result != "null"){
+                if (result != ""){
+                    if(result != "null"){
                     preencheCamposDoCronogramaGeral(result);
+                    }
                 }
             },
             error: function (request, status, erro) {

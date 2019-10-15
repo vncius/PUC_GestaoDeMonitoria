@@ -2,7 +2,6 @@ package com.monitoria.puc.utilidades;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class Utilidades {
@@ -24,10 +23,12 @@ public class Utilidades {
 		return false;
 	}
 
-	public static Date convertDataStringEmDate(String data) throws Exception {
+	public static GregorianCalendar convertDataStringEmDate(String data) throws Exception {
 		try {
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-			return df.parse(data);
+			GregorianCalendar calendar = new GregorianCalendar();
+			calendar.setTime(df.parse(data)); 
+			return calendar;
 		} catch (Exception e) {
 			throw new Exception(String.format("Data com formato inválido: %s! Exception: %s", data.toString(), e.getMessage()));
 		}

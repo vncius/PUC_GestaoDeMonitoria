@@ -28,7 +28,10 @@ public class ControllerCronogramaGeral {
 	@GetMapping(value = "/", produces = "application/json")
 	public ResponseEntity<Optional<ModelCronogramaGeral>> consultaCronogramaGeral() {
 		Long maiorId = repositoryCronogramaGeral.findMaxIdCronogramaGeral();
-		Optional<ModelCronogramaGeral> cronograma = repositoryCronogramaGeral.findById(maiorId);
+		Optional<ModelCronogramaGeral> cronograma = null;
+		if (maiorId != null) {
+			cronograma = repositoryCronogramaGeral.findById(maiorId);
+		}
 		return new ResponseEntity<Optional<ModelCronogramaGeral>>(cronograma, HttpStatus.OK);
 	}
 	
