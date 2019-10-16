@@ -1,7 +1,5 @@
 package com.monitoria.puc.controller;
 
-
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,13 +26,15 @@ public class ControllerUsuario {
 	@GetMapping(value = "/", produces = "application/json")
 	public ResponseEntity<Iterable<ModelUsuario>> consultarTodosUsuarios() {
 		Iterable<ModelUsuario> list = usuarioRepository.findAll();
+		list.forEach(x -> { x.setSenha("**********"); });
 		return new ResponseEntity<Iterable<ModelUsuario>>(list, HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/{id}", produces = "application/json")
-	public ResponseEntity<Optional<ModelUsuario>> consultarPorId(@PathVariable(value = "id") Long id) {
-		Optional<ModelUsuario> usuario = usuarioRepository.findById(id);
-		return new ResponseEntity<Optional<ModelUsuario>>(usuario, HttpStatus.OK);
+	@GetMapping(value = "/{matricula}", produces = "application/json")
+	public ResponseEntity<ModelUsuario> consultarMatricula(@PathVariable(value = "matricula") String matricula) {
+		ModelUsuario usuario = usuarioRepository.findUserByLogin(matricula);
+		usuario.setSenha("**********");
+		return new ResponseEntity<ModelUsuario>(usuario, HttpStatus.OK);
 	}
 	
 	@PostMapping(value = "/", produces="application/text")
