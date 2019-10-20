@@ -19,7 +19,7 @@
 				registraTokenEmLocalStorage(result.Authorization, matricula)				
 			},
 			error: function (request, status, erro) {
-				if(request.status = 403){
+				if(request.status === 403){
 					alert("Usuário e/ou senha inválidos");
 				} else {
 					console.log("Ocorreu um erro na requisição para o servidor!");
