@@ -48,9 +48,7 @@
 				localStorage.setItem("Matricula", matricula)
 				localStorage.setItem("Role", result.authorities[0].authority)
 				localStorage.setItem("Authorization", token);
-				alert(localStorage.getItem("Matricula"));
-				alert(localStorage.getItem("Role"));
-				alert(localStorage.getItem("Authorization"));
+				alert("Usuário autênticado com sucesso!");
 				/*REDIRECIONAR PARA O MENU PRINCIPAL*/
 			},
 			error: function (request, status, erro) {
