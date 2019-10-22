@@ -2,12 +2,15 @@
 <html lang="pt-br">
 
 <!--\/-------------------------------------------------------BOOTSTRAP-------------------------------------------------------\/-->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 <script language="javascript" src="_javascript/funcoes.js"></script>
 <script language="javascript" src="_javascript/index.js"></script>
-
 <!--/\-----------------------------------------------------------------------------------------------------------------------/\-->
 
 <head>
@@ -20,29 +23,18 @@
 
 <body>
     <div id=interface>
-        <header id="cabecalho">
-            <!--<nav id="menu">
-                <h1>Menu Principal</h1>
-                <ul type="circ">
-                    <li><a href="index.html">Início</a></li>
-                    <li><a href="edital.html">Edital</a></li>
-                    <li><a href="sobre.html">Sobre</a></li>
-                    <li><a href="contato.html">Contato</a></li>
-                </ul>
-            </nav>--><!--Menu CANCELADO-->
-        </header>
-    
-        <section id = "corpo">
-            <img id="puc" src="_imagens/pucgo.png"/> 
+        <section id="corpo">
+            <img id="puc" src="_imagens/pucgo.png" />
 
             <aside id="campos-corpo">
 
-                <header id = "cabecalho-corpo">
+                <header id="cabecalho-corpo">
                     <h5>SIMPUC</h5>
                 </header>
 
                 <div class="form-label-group">
-                    <input type="text" id="inputMat" class="form-control" placeholder="Matricula" required="" autofocus="">
+                    <input type="text" id="inputMat" class="form-control" placeholder="Matricula" required=""
+                        autofocus="">
                 </div>
 
                 <div class="form-label-group">
@@ -53,15 +45,21 @@
                     <label>
                         <input type="checkbox" value="lembrar de mim"> Lembrar de mim
                     </label>
-                </div>--><!--Lembre de min CANCELADO-->
+                </div>-->
+                <!--Lembre de min CANCELADO-->
 
                 <a href="">Esqueci minha senha</a>
                 <a href="">Cadastre-se</a>
 
-                <div class="container theme-showcase" role="main"> 
-                    <button class="btn-lg btn-sample" id="btnEntrar">Entrar</button> 
+                <div class="container theme-showcase" role="main">
+                    <button class="btn-lg btn-sample" id="btnEntrar">Entrar</button>
                 </div>
             </aside>
         </section>
     </div>
+    <script src="_javascript/funcoes.js"></script>
+    <script>
+        usuarioEstaAutenticado();
+    </script>
+    <script src="_javascript/publicarEdital.js"></script>
 </body>
