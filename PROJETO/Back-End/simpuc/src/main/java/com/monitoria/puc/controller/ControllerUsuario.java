@@ -1,7 +1,5 @@
 package com.monitoria.puc.controller;
 
-
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,27 +22,34 @@ public class ControllerUsuario {
 
 	@Autowired
 	private RepositoryUsuario usuarioRepository;
-	
+
 	@GetMapping(value = "/", produces = "application/json")
 	public ResponseEntity<Iterable<ModelUsuario>> consultarTodosUsuarios() {
 		Iterable<ModelUsuario> list = usuarioRepository.findAll();
+		list.forEach(x -> {
+			x.setSenha("**********");
+		});
 		return new ResponseEntity<Iterable<ModelUsuario>>(list, HttpStatus.OK);
 	}
-	
-	@GetMapping(value = "/{id}", produces = "application/json")
-	public ResponseEntity<Optional<ModelUsuario>> consultarPorId(@PathVariable(value = "id") Long id) {
-		Optional<ModelUsuario> usuario = usuarioRepository.findById(id);
-		return new ResponseEntity<Optional<ModelUsuario>>(usuario, HttpStatus.OK);
+
+	@GetMapping(value = "/{matricula}", produces = "application/json")
+	public ResponseEntity<ModelUsuario> consultarMatricula(@PathVariable(value = "matricula") String matricula) {
+		ModelUsuario usuario = usuarioRepository.findUserByLogin(matricula);
+		usuario.setSenha("**********");
+		return new ResponseEntity<ModelUsuario>(usuario, HttpStatus.OK);
 	}
-	
-	@PostMapping(value = "/", produces="application/text")
+
+	@PostMapping(value = "/", produces = "application/text")
 	public ResponseEntity<String> cadastrar(@RequestBody ModelUsuario usuario) {
-		usuario.setId(null); // CASO OBJ VENHA COM ID PREENCHIDO, ELE É ZERADO PARA VALIDAR QUE END-POINT É PARA CADASTRO
+		usuario.setId(null); // CASO OBJ VENHA COM ID PREENCHIDO, ELE É ZERADO PARA VALIDAR QUE END-POINT É
+								// PARA CADASTRO
 		Boolean resultado = usuario.validaSeCamposObrigatoriosPreenchidos();
 		if (resultado) {
 			try {
 				usuarioRepository.save(usuario);
-				return new ResponseEntity<String>(String.format("Usuário de matricula %s cadastrado.", usuario.getMatricula()), HttpStatus.CREATED);
+				return new ResponseEntity<String>(
+						String.format("Usuário de matricula %s cadastrado.", usuario.getMatricula()),
+						HttpStatus.CREATED);
 			} catch (Exception e) {
 				return new ResponseEntity<String>("Houve uma erro interno da API", HttpStatus.INTERNAL_SERVER_ERROR);
 			}
@@ -52,14 +57,15 @@ public class ControllerUsuario {
 			return new ResponseEntity<String>("Dados obigatórios não preenchidos.", HttpStatus.PARTIAL_CONTENT);
 		}
 	}
-	
-	@PutMapping(value = "/", produces="application/text")
+
+	@PutMapping(value = "/", produces = "application/text")
 	public ResponseEntity<String> atualizar(@RequestBody ModelUsuario usuario) {
 		Boolean resultado = usuario.validaSeCamposObrigatoriosPreenchidos();
 		if (resultado) {
 			try {
 				usuarioRepository.save(usuario);
-				return new ResponseEntity<String>(String.format("Usuário de matricula %s foi atualizado", usuario.getMatricula()), HttpStatus.OK);
+				return new ResponseEntity<String>(
+						String.format("Usuário de matricula %s foi atualizado", usuario.getMatricula()), HttpStatus.OK);
 			} catch (Exception e) {
 				return new ResponseEntity<String>("Houve uma erro interno da API", HttpStatus.INTERNAL_SERVER_ERROR);
 			}
@@ -67,7 +73,7 @@ public class ControllerUsuario {
 			return new ResponseEntity<String>("Dados obigatórios não preenchidos.", HttpStatus.PARTIAL_CONTENT);
 		}
 	}
-	
+
 	@DeleteMapping(value = "/{id}", produces = "application/text")
 	public ResponseEntity<String> delete(@PathVariable(value = "id") Long id) {
 		try {
@@ -77,4 +83,10 @@ public class ControllerUsuario {
 			return new ResponseEntity<String>("Houve uma erro interno da API", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
+	@GetMapping(value = "/auth", produces = "application/json")
+	public ResponseEntity<Boolean> usuarioEstaAutenticado() {
+		return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+	}
+
 }
