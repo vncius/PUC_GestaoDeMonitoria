@@ -1,6 +1,7 @@
-﻿$(document).ready(function(){
-    $("#btnEntrar").click(function(e){
-        var usuario = $('#inputMat').val();
+﻿$(document).ready(function () {
+	$("#btnEntrar").click(function (e) {
+		limparLocalStorage();
+		var matricula = $('#inputMat').val();
 		var senha = $('#inputSenha').val();
 
 		$.ajax({
@@ -10,15 +11,14 @@
 			contentType: "application/json;charset=UTF-8",
 			async: true,
 			data: JSON.stringify({
-				"matricula": usuario,
+				"matricula": matricula,
 				"senha": senha
 			}),
 			success: function (result, status, request) {
-				registraTokenEmLocalStorage(result.Authorization)
-				//redirecionar para menu				
+				registraTokenEmLocalStorage(result.Authorization, matricula)
 			},
 			error: function (request, status, erro) {
-				if(request.status = 403){
+				if (request.status === 403) {
 					alert("Usuário e/ou senha inválidos");
 				} else {
 					console.log("Ocorreu um erro na requisição para o servidor!");
