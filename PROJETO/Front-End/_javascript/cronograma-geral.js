@@ -1,6 +1,5 @@
 $(document).ready(function(){
     carregarCronograma()
-    $("#mensagens").hide();
     $("#salvar").click(function(e){
         limpaMensagensDeValidacao();
 
@@ -29,8 +28,8 @@ $(document).ready(function(){
                 method: "PUT", // TIPO DE REQUISIÇÃO
                 url: "http://localhost:8080/apimonitoria/cronogramaGeral/", // END POINT DA API
                 headers: {
-                    "Authorization": localStorage.getItem("Authorization"),
-               },
+                    "Authorization": recuperaTokenParaRequisicao(),
+                },
                 dataType: "text",
                 contentType: "application/json;charset=UTF-8",
                 async: true,
@@ -44,9 +43,10 @@ $(document).ready(function(){
                     }
                 },
                 error: function (request, status, erro) {
-                    if(request.status === 400){
-                        $("#mensagens ul").append("<li>Todos os campos são obrigatórios!</li><br/>");
-                        $("#mensagens").show();
+                    if (request.status === 500) {
+                        alert(status);
+                    } else {
+                        alert("Houve uma falha na requisição!");
                     }
                 }
             });
@@ -58,8 +58,8 @@ $(document).ready(function(){
             method: "GET", // TIPO DE REQUISIÇÃO
             url: "http://localhost:8080/apimonitoria/cronogramaGeral/", // END POINT DA API
             headers: {
-                "Authorization": localStorage.getItem("Authorization"),
-           },
+                "Authorization": recuperaTokenParaRequisicao(),
+            },
             dataType: "text",
             contentType: "application/json;charset=UTF-8",
             async: true,
@@ -71,8 +71,8 @@ $(document).ready(function(){
                 }
             },
             error: function (request, status, erro) {
-                if(request.status = 500){
-                    // REDIRECIONAR TELA LOGIN - NÃO ESTÁ AUTENTICADO
+                if (request.status === 500) {
+                    alert(status);
                 }
             }
         });

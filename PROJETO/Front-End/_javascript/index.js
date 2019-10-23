@@ -26,16 +26,32 @@
 			}
 		});
 	});
-	
-	function registraTokenEmLocalStorage(token){
-		localStorage.setItem("Authorization", token);
-		//localStorage.getItem("Authorization");  FORMA DE PEGAR O TOKEN PARA PRÓXIMAS REQUISIÇÕES
-	}
 });
 
+function limparLocalStorage() {
+	localStorage.clear();
+}
 
-
-
-
-
-
+function registraTokenEmLocalStorage(token, matricula) {
+	token = token.replace("Bearer", "");
+	$.ajax({
+		method: "GET", // TIPO DE REQUISIÇÃO
+		url: "http://localhost:8080/apimonitoria/usuario/" + matricula, // END POINT DA API
+		headers: {
+			"Authorization": token,
+		},
+		dataType: "JSON",
+		contentType: "application/json;charset=UTF-8",
+		async: true,
+		success: function (result, status, request) {
+			localStorage.setItem("Matricula", matricula);
+			localStorage.setItem("Role", result.authorities[0].authority);
+			localStorage.setItem("Authorization", "Bearer "+token);
+			alert("Usuário autênticado com sucesso!");
+			/*REDIRECIONAR PARA O MENU PRINCIPAL*/
+		},
+		error: function (request, status, erro) {
+			alert("Falha ao consultar dados na API!");
+		}
+	});
+}
