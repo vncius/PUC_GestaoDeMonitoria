@@ -8,7 +8,7 @@ $(document).ready(function () {
             var ajaxReq = $.ajax({
                 url: 'http://localhost:8080/apimonitoria/edital/',
                 headers: {
-                    "Authorization": localStorage.getItem("Authorization"),
+                    "Authorization": recuperaTokenParaRequisicao(),
                 },
                 type: 'POST',
                 data: formData,
