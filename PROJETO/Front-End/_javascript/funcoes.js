@@ -21,9 +21,18 @@ function usuarioEstaAutenticado() {
             }
         },
         error: function (request, status, erro) {
-            alert("É necessário estar logado para acessar esta página!");
-            window.location = "http://localhost:200/";
+            if (status === "error"){
+                alert("Falha ao conectar com o servidor de aplicação.");
+            }
             return false;
         }
     });
+}
+
+function recuperaTokenParaRequisicao(){
+    if (localStorage.getItem("Authorization") === null || localStorage.getItem("Authorization") === ""){
+        alert("Usuário não autenticado ou sessão experiou, faça login novamente!");
+        window.location = "http://localhost:200/";
+    }
+    return localStorage.getItem("Authorization");
 }
