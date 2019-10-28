@@ -2,6 +2,7 @@ package com.monitoria.puc.utilidades;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class Utilidades {
@@ -21,6 +22,12 @@ public class Utilidades {
 	public static boolean validaSeDataInicioMaiorQueDataFim(GregorianCalendar  dataIni, GregorianCalendar dataFim) {
 		if (dataIni.getTimeInMillis() > dataFim.getTimeInMillis()) return true;
 		return false;
+	}
+	
+	public static boolean validaSeDataInicioMaiorQueDataFimDate(Date  dataIni, Date dataFim) {
+		if (dataIni.after(dataFim)) return true;
+		return false;
+		
 	}
 
 	public static GregorianCalendar convertDataStringEmDate(String data) throws Exception {
