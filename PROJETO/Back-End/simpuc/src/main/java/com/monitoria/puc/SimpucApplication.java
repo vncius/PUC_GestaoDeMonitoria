@@ -1,5 +1,9 @@
 package com.monitoria.puc;
 
+import java.util.TimeZone;
+
+import javax.annotation.PostConstruct;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,4 +28,10 @@ public class SimpucApplication {
 		SpringApplication.run(SimpucApplication.class, args);
 		System.out.println(new BCryptPasswordEncoder().encode("123"));
 	}
+	
+	 @PostConstruct
+	    public void init(){
+	      // Setting Spring Boot SetTimeZone
+	      TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+	    }
 }
