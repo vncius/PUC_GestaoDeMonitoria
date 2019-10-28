@@ -21,12 +21,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter @Setter
 @Entity(name = "curso")
-public class Curso implements Serializable{
+public class ModelCurso implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	@Column(columnDefinition = "text")
@@ -34,12 +34,17 @@ public class Curso implements Serializable{
 	
 	@JsonBackReference
 	@OneToOne(mappedBy = "curso")
-    private CronogramaMonitoria cronogramaMonitoria;
+    private ModelCronogramaMonitoria cronogramaMonitoria;
 
 	
 	@JsonCreator
-	public Curso(Long id) {
+	public ModelCurso(Long id) {
 		this.id = id;
+	}
+	
+	@JsonCreator
+	public ModelCurso(String id) {
+		this.id = Long.parseLong(id);
 	}
 	
 	
