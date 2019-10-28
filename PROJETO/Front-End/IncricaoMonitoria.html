@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="_imagens/_icone.png" type="image/png">
-    <title>Publicar Edital</title>
+    <title>Inscrição de Monitoria</title>
     <!--\/-------------------------------------------------------BOOTSTRAP-------------------------------------------------------\/-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -24,19 +24,35 @@
             <div class="container">
                 <div class="container">
                     <div class="banner_content text-center">
-                        <p style="font-size: 35px">Publicar Edital</p>
+                        <p style="font-size: 35px">Inscrição de Monitoria</p>
                     </div>
                 </div>
 
                 <div class="input-group mb-3">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputGroupFile01" accept="application/pdf"
-                            name="file" required aria-describedby="inputGroupFileAddon01">
-                        <label class="custom-file-label" for="inputGroupFile01">Escolher arquivo</label>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Nome</span>
                     </div>
+                    <input type="text" class="form-control" placeholder="ALUNO X" readonly="false">
+
+                    <div class="input-group-prepend padding-left">
+                        <span class="input-group-text">Matricula</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="20171012000498" readonly="false">
                 </div>
 
-                <div class="single_about row">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Curso</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="ADS" readonly="false">
+
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                        Disciplina
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Tablet</a>
+                        <a class="dropdown-item" href="#">Smartphone</a>
+                    </div>
 
                 </div>
             </div>
