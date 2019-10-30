@@ -12,14 +12,6 @@ import javax.persistence.OneToOne;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter @Setter
 @Entity(name = "curso")
 public class ModelCurso implements Serializable{
 
@@ -46,10 +38,30 @@ public class ModelCurso implements Serializable{
 	public ModelCurso(String id) {
 		this.id = Long.parseLong(id);
 	}
-	
-	
-	
-	
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public ModelCronogramaMonitoria getCronogramaMonitoria() {
+		return cronogramaMonitoria;
+	}
+
+	public void setCronogramaMonitoria(ModelCronogramaMonitoria cronogramaMonitoria) {
+		this.cronogramaMonitoria = cronogramaMonitoria;
+	}
+
 	
 }
