@@ -5,7 +5,7 @@ function mudaFoto(foto) {
 function usuarioEstaAutenticado() {
     $.ajax({
         method: "GET", // TIPO DE REQUISIÇÃO
-        url: "http://localhost:8080/apimonitoria/usuario/auth/", // END POINT DA API
+        url: obterUrlDaAPI("/usuario/auth/"), // END POINT DA API
         headers: {
             "Authorization": localStorage.getItem("Authorization"),
         },
@@ -16,12 +16,12 @@ function usuarioEstaAutenticado() {
                 return true;
             } else {
                 alert("É necessário estar logado para acessar esta página!");
-                window.location = "http://localhost:200/";
+                redirecionarIndexLogin();
                 return false;
             }
         },
         error: function (request, status, erro) {
-            if (status === "error"){
+            if (status === "error") {
                 alert("Falha ao conectar com o servidor de aplicação.");
             }
             return false;
@@ -29,10 +29,22 @@ function usuarioEstaAutenticado() {
     });
 }
 
-function recuperaTokenParaRequisicao(){
-    if (localStorage.getItem("Authorization") === null || localStorage.getItem("Authorization") === ""){
+function recuperaTokenParaRequisicao() {
+    if (localStorage.getItem("Authorization") === null || localStorage.getItem("Authorization") === "") {
         alert("Usuário não autenticado ou sessão experiou, faça login novamente!");
-        window.location = "http://localhost:200/";
+        redirecionarIndexLogin();
     }
     return localStorage.getItem("Authorization");
+}
+
+function obterUrlDePaginas(direcionamento) {
+    return "http://localhost:200/" + direcionamento;
+}
+
+function obterUrlDaAPI(direcionamento) {
+    return "http://localhost:8080/apimonitoria" + direcionamento;
+}
+
+function redirecionarIndexLogin(){
+    window.location = obterUrlDePaginas("");
 }

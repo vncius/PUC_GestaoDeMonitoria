@@ -26,7 +26,7 @@ $(document).ready(function () {
 
             $.ajax({
                 method: "PUT", // TIPO DE REQUISIÇÃO
-                url: "http://localhost:8080/apimonitoria/cronogramaGeral/", // END POINT DA API
+                url: obterUrlDaAPI("/cronogramaGeral/"),
                 headers: {
                     "Authorization": recuperaTokenParaRequisicao(),
                 },
@@ -56,7 +56,7 @@ $(document).ready(function () {
     function carregarCronograma() {
         $.ajax({
             method: "GET", // TIPO DE REQUISIÇÃO
-            url: "http://localhost:8080/apimonitoria/cronogramaGeral/", // END POINT DA API
+            url: obterUrlDaAPI("/cronogramaGeral/"), // END POINT DA API
             headers: {
                 "Authorization": recuperaTokenParaRequisicao(),
             },

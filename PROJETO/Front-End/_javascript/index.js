@@ -6,7 +6,7 @@
 
 		$.ajax({
 			method: "POST", // TIPO DE REQUISIÇÃO
-			url: "http://localhost:8080/apimonitoria/login", // END POINT DA API
+			url: obterUrlDaAPI("/login"), // END POINT DA API
 			dataType: "JSON",
 			contentType: "application/json;charset=UTF-8",
 			async: true,
@@ -36,7 +36,7 @@ function registraTokenEmLocalStorage(token, matricula) {
 	token = token.replace("Bearer", "");
 	$.ajax({
 		method: "GET", // TIPO DE REQUISIÇÃO
-		url: "http://localhost:8080/apimonitoria/usuario/" + matricula, // END POINT DA API
+		url: obterUrlDaAPI("/usuario/"+matricula),
 		headers: {
 			"Authorization": token,
 		},
@@ -49,6 +49,7 @@ function registraTokenEmLocalStorage(token, matricula) {
 			localStorage.setItem("Authorization", "Bearer "+token);
 			alert("Usuário autênticado com sucesso!");
 			/*REDIRECIONAR PARA O MENU PRINCIPAL*/
+			
 		},
 		error: function (request, status, erro) {
 			alert("Falha ao consultar dados na API!");
