@@ -16,6 +16,17 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 public class ModelCurso implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	
+	public ModelCurso(Long id, String descricao, ModelCronogramaMonitoria cronogramaMonitoria) {
+		super();
+		this.id = id;
+		this.descricao = descricao;
+		this.cronogramaMonitoria = cronogramaMonitoria;
+	}
+	
+	public ModelCurso() {
+		super();
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -62,6 +73,6 @@ public class ModelCurso implements Serializable{
 	public void setCronogramaMonitoria(ModelCronogramaMonitoria cronogramaMonitoria) {
 		this.cronogramaMonitoria = cronogramaMonitoria;
 	}
-
+	
 	
 }
