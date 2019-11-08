@@ -4,12 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
-
+import javax.persistence.OneToOne;
 import org.springframework.security.core.GrantedAuthority;
 
-@Entity
-@Table(name = "role")
+@Entity(name = "role")
 public class Role implements GrantedAuthority {
 
 	private static final long serialVersionUID = 1L;
@@ -24,6 +22,9 @@ public class Role implements GrantedAuthority {
 	public String getAuthority() { /*RETORNO O NOME ROLE*/
 		return this.nomeRole;
 	}
+	
+	@OneToOne(mappedBy = "role")
+    private ModelUsuario usuario;
 	
 	public Long getId() {
 		return id;
