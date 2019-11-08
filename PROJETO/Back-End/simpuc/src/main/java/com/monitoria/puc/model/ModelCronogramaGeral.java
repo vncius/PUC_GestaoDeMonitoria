@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 import com.monitoria.puc.utilidades.Utilidades;
 
-@Entity
+@Entity(name="cronograma_geral")
 public class ModelCronogramaGeral implements Serializable {
 
 	private static final long serialVersionUID = 1L;
