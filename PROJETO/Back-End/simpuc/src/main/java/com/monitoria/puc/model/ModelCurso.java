@@ -1,14 +1,15 @@
 package com.monitoria.puc.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
@@ -16,6 +17,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 public class ModelCurso implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+
+	@OneToOne(mappedBy = "curso")
+    private ModelUsuario usuario;
 	
 	public ModelCurso(Long id, String descricao, ModelCronogramaMonitoria cronogramaMonitoria) {
 		super();
@@ -35,10 +39,12 @@ public class ModelCurso implements Serializable{
 	@Column(columnDefinition = "text")
 	private String descricao;
 	
+	@OneToMany(mappedBy = "curso")
+    private List<ModelDisciplina> disciplinas; 
+	
 	@JsonBackReference
 	@OneToOne(mappedBy = "curso")
     private ModelCronogramaMonitoria cronogramaMonitoria;
-
 	
 	@JsonCreator
 	public ModelCurso(Long id) {
@@ -74,5 +80,12 @@ public class ModelCurso implements Serializable{
 		this.cronogramaMonitoria = cronogramaMonitoria;
 	}
 	
+	public List<ModelDisciplina> getDisciplinas() {
+		return disciplinas;
+	}
+
+	public void setDisciplinas(List<ModelDisciplina> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
 	
 }

@@ -47,6 +47,7 @@ function registraTokenEmLocalStorage(token, matricula) {
 			localStorage.setItem("Matricula", matricula);
 			localStorage.setItem("Role", result.authorities[0].authority);
 			localStorage.setItem("Authorization", "Bearer "+token);
+			localStorage.setItem("Course", result.id_curso);
 			alert("Usuário autênticado com sucesso!");
 			/*REDIRECIONAR PARA O MENU PRINCIPAL*/
 			
