@@ -6,9 +6,9 @@ $(document).ready(function () {
 
         if (returnTypeFile() === "pdf") {
             var ajaxReq = $.ajax({
-                url: 'http://localhost:8080/apimonitoria/edital/',
+                url: obterUrlDaAPI("/edital/"),
                 headers: {
-                    "Authorization": localStorage.getItem("Authorization"),
+                    "Authorization": recuperaTokenParaRequisicao(),
                 },
                 type: 'POST',
                 data: formData,

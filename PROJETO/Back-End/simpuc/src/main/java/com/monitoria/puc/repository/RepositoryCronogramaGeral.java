@@ -8,6 +8,6 @@ import com.monitoria.puc.model.ModelCronogramaGeral;
 @Repository
 public interface RepositoryCronogramaGeral extends CrudRepository<ModelCronogramaGeral, Long> {
 	
-	@Query("select max(c.id) from ModelCronogramaGeral c")
+	@Query("select max(c.id) from cronograma_geral c")
 	Long findMaxIdCronogramaGeral();
 }

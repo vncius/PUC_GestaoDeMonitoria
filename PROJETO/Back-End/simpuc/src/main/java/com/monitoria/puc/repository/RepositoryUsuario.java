@@ -9,6 +9,7 @@ import com.monitoria.puc.model.ModelUsuario;
 @Repository
 public interface RepositoryUsuario extends CrudRepository<ModelUsuario, Long> {
 
-	@Query("select u from ModelUsuario u where u.matricula = ?1")
+	@Query("select u from usuario u where u.matricula = ?1")
 	ModelUsuario findUserByLogin(String matricula);
+
 }

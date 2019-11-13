@@ -6,7 +6,7 @@
 
 		$.ajax({
 			method: "POST", // TIPO DE REQUISIÇÃO
-			url: "http://localhost:8080/apimonitoria/login", // END POINT DA API
+			url: obterUrlDaAPI("/login"), // END POINT DA API
 			dataType: "JSON",
 			contentType: "application/json;charset=UTF-8",
 			async: true,
@@ -26,20 +26,17 @@
 			}
 		});
 	});
-
-
 });
 
 function limparLocalStorage() {
-	localStorage.setItem("Matricula", "null");
-	localStorage.setItem("Role", "null");
-	localStorage.setItem("Authorization", "null");
+	localStorage.clear();
 }
 
 function registraTokenEmLocalStorage(token, matricula) {
+	token = token.replace("Bearer", "");
 	$.ajax({
 		method: "GET", // TIPO DE REQUISIÇÃO
-		url: "http://localhost:8080/apimonitoria/usuario/" + matricula, // END POINT DA API
+		url: obterUrlDaAPI("/usuario/"+matricula),
 		headers: {
 			"Authorization": token,
 		},
@@ -49,9 +46,11 @@ function registraTokenEmLocalStorage(token, matricula) {
 		success: function (result, status, request) {
 			localStorage.setItem("Matricula", matricula);
 			localStorage.setItem("Role", result.authorities[0].authority);
-			localStorage.setItem("Authorization", token);
+			localStorage.setItem("Authorization", "Bearer "+token);
+			localStorage.setItem("Course", result.id_curso);
 			alert("Usuário autênticado com sucesso!");
 			/*REDIRECIONAR PARA O MENU PRINCIPAL*/
+			
 		},
 		error: function (request, status, erro) {
 			alert("Falha ao consultar dados na API!");

@@ -33,7 +33,7 @@ $(document).ready(function () {
             if (idCronograma == "") {
                 $.ajax({
                     method: "POST", // TIPO DE REQUISIÇÃO
-                    url: "http://localhost:8080/apimonitoria/cronograma_monitoria/", // END POINT DA API
+                    url: obterUrlDaAPI("/cronograma_monitoria/"), // END POINT DA API
                     headers: {
                         "Authorization": localStorage.getItem("Authorization"),
                     },
@@ -60,7 +60,7 @@ $(document).ready(function () {
             } else {
                 $.ajax({
                     method: "PUT", // TIPO DE REQUISIÇÃO
-                    url: "http://localhost:8080/apimonitoria/cronograma_monitoria/" + idCronograma, // END POINT DA API
+                    url: obterUrlDaAPI("/cronograma_monitoria/" + idCronograma), // END POINT DA API
                     headers: {
                         "Authorization": localStorage.getItem("Authorization"),
                     },
@@ -91,7 +91,7 @@ $(document).ready(function () {
     function carregarComboboxCursos() {
         $.ajax({
             method: "GET",
-            url: "http://localhost:8080/apimonitoria/curso/",
+            url: obterUrlDaAPI("/curso/"),
             headers: {
                 "Authorization": localStorage.getItem("Authorization"),
             },
@@ -123,7 +123,7 @@ $(document).ready(function () {
         limpaCampos();
         $.ajax({
             method: "GET", // TIPO DE REQUISIÇÃO
-            url: "http://localhost:8080/apimonitoria/cronograma_monitoria/" + valorIdcurso, // END POINT DA API
+            url: obterUrlDaAPI("/cronograma_monitoria/" + valorIdcurso),
             headers: {
                 "Authorization": localStorage.getItem("Authorization"),
             },
@@ -307,7 +307,7 @@ $(document).ready(function () {
 
         $.ajax({
             method: "GET", // TIPO DE REQUISIÇÃO
-            url: "http://localhost:8080/apimonitoria/cronograma_monitoria/" + valorIdcurso, // END POINT DA API
+            url: obterUrlDaAPI("/cronograma_monitoria/" + valorIdcurso),
             headers: {
                 "Authorization": localStorage.getItem("Authorization"),
             },
@@ -346,7 +346,7 @@ $(document).ready(function () {
     function consultaTodosCronograma() {
         $.ajax({
             method: "GET", // TIPO DE REQUISIÇÃO
-            url: "http://localhost:8080/apimonitoria/cronograma_monitoria/", // END POINT DA API
+            url: obterUrlDaAPI("/cronograma_monitoria/"),
             headers: {
                 "Authorization": localStorage.getItem("Authorization"),
             },

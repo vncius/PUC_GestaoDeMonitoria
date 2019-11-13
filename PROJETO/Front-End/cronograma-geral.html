@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
+<!--\/-------------------------------------------------------BOOTSTRAP-------------------------------------------------------\/-->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+<!--/\-----------------------------------------------------------------------------------------------------------------------/\-->
+
 <head>
-    <!--\/-------------------------------------------------------BOOTSTRAP-------------------------------------------------------\/-->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <!--/\-----------------------------------------------------------------------------------------------------------------------/\-->
     <meta charset="utf-8" />
     <title>Monitoria PUC-GO</title>
-    <link rel="icon" href="_imagens/_icone.png" type="image/png">
+    <link rel="icon" href="" type="image/png">
     <!--\/-----------CSS da pagina------------\/-->
     <link rel="stylesheet" href="_css/cronograma-geral.css">
     <!--/\------------------------------------/\-->
@@ -24,6 +27,7 @@
         <section id="corpo">
             <div id="geral">
                 <div id="mensagens">
+                    <script>$("#mensagens").hide();</script>
                     <ul class="list-group-item list-group-item-danger">
                         <!--MENSAGENS DE ERRO OU VALIDAÇÃO SÃO EXIBIDAS AQUI-->
                     </ul>
@@ -91,11 +95,10 @@
                         </div>
                     </div>
                 </aside>
-
+                
             </div>
         </section>
     </div>
-
     <script src="_javascript/funcoes.js"></script>
     <script>
         usuarioEstaAutenticado();

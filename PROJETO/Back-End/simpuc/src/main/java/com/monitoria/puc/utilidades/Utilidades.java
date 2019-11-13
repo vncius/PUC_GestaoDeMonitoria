@@ -27,7 +27,6 @@ public class Utilidades {
 	public static boolean validaSeDataInicioMaiorQueDataFimDate(Date  dataIni, Date dataFim) {
 		if (dataIni.after(dataFim)) return true;
 		return false;
-		
 	}
 
 	public static GregorianCalendar convertDataStringEmDate(String data) throws Exception {
@@ -48,6 +47,23 @@ public class Utilidades {
 			return dataFormata;
 		} catch (Exception e) {
 			throw new Exception(String.format("Data com formato inválido: %s! Exception: %s", data.toString(), e.getMessage()));
+		}
+	}
+	
+	public static boolean validaSeArquivoEhValido(byte[] file) {
+		if (file.length > 1000) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public static boolean quantidadeDeCaracteresEhValido(String atributo, int min, int max) {
+		if (atributo.length() < min || atributo.length() > max) {
+			return false;
+		} else {
+			return true;
 		}
 	}
 }

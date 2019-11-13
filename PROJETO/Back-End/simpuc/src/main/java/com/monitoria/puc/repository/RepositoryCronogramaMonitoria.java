@@ -12,4 +12,7 @@ public interface RepositoryCronogramaMonitoria extends JpaRepository<ModelCronog
 
 	@Query("SELECT cm FROM cronogramaMonitoria cm WHERE curso_id = ?1")
 	public Optional<ModelCronogramaMonitoria> findByIdCurso(Long id);
+	
+	@Query("SELECT cm FROM cronogramaMonitoria cm WHERE curso_id = ?1")
+	public ModelCronogramaMonitoria findCronogramaByIdCurso(Long id);
 }

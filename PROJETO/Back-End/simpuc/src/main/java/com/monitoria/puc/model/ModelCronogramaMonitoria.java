@@ -2,8 +2,6 @@ package com.monitoria.puc.model;
 
 import java.io.Serializable;
 import java.util.Date;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,19 +12,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.monitoria.puc.utilidades.Utilidades;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter @Setter
 @Entity(name = "cronogramaMonitoria")
 public class ModelCronogramaMonitoria implements Serializable{
 	
@@ -130,5 +119,125 @@ public class ModelCronogramaMonitoria implements Serializable{
 				this.dataEntregaCertificadoFim))
 			return false;
 		return true;
+	}
+	
+	public Boolean validaSeEstaNoPeriodoDeInscricao() {
+		Date data = new Date(System.currentTimeMillis());
+		if (data.after(this.dataInscricaoFim) || data.before(this.dataInscricaoInicio)) {
+			return false;
+		}
+		return true;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public ModelCurso getCurso() {
+		return curso;
+	}
+
+	public void setCurso(ModelCurso curso) {
+		this.curso = curso;
+	}
+
+	public Date getDataEditalInicio() {
+		return dataEditalInicio;
+	}
+
+	public void setDataEditalInicio(Date dataEditalInicio) {
+		this.dataEditalInicio = dataEditalInicio;
+	}
+
+	public Date getDataEditalFim() {
+		return dataEditalFim;
+	}
+
+	public void setDataEditalFim(Date dataEditalFim) {
+		this.dataEditalFim = dataEditalFim;
+	}
+
+	public Date getDataInscricaoInicio() {
+		return dataInscricaoInicio;
+	}
+
+	public void setDataInscricaoInicio(Date dataInscricaoInicio) {
+		this.dataInscricaoInicio = dataInscricaoInicio;
+	}
+
+	public Date getDataInscricaoFim() {
+		return dataInscricaoFim;
+	}
+
+	public void setDataInscricaoFim(Date dataInscricaoFim) {
+		this.dataInscricaoFim = dataInscricaoFim;
+	}
+
+	public Date getDataPeriodoAvaliacaoInicio() {
+		return dataPeriodoAvaliacaoInicio;
+	}
+
+	public void setDataPeriodoAvaliacaoInicio(Date dataPeriodoAvaliacaoInicio) {
+		this.dataPeriodoAvaliacaoInicio = dataPeriodoAvaliacaoInicio;
+	}
+
+	public Date getDataPeriodoAvaliacaoFim() {
+		return dataPeriodoAvaliacaoFim;
+	}
+
+	public void setDataPeriodoAvaliacaoFim(Date dataPeriodoAvaliacaoFim) {
+		this.dataPeriodoAvaliacaoFim = dataPeriodoAvaliacaoFim;
+	}
+
+	public Date getDataEntregaResultadosInicio() {
+		return dataEntregaResultadosInicio;
+	}
+
+	public void setDataEntregaResultadosInicio(Date dataEntregaResultadosInicio) {
+		this.dataEntregaResultadosInicio = dataEntregaResultadosInicio;
+	}
+
+	public Date getDataEntregaResultadosFim() {
+		return dataEntregaResultadosFim;
+	}
+
+	public void setDataEntregaResultadosFim(Date dataEntregaResultadosFim) {
+		this.dataEntregaResultadosFim = dataEntregaResultadosFim;
+	}
+
+	public Date getDataPeriodoLetivoInicio() {
+		return dataPeriodoLetivoInicio;
+	}
+
+	public void setDataPeriodoLetivoInicio(Date dataPeriodoLetivoInicio) {
+		this.dataPeriodoLetivoInicio = dataPeriodoLetivoInicio;
+	}
+
+	public Date getDataPeriodoLetivoFim() {
+		return dataPeriodoLetivoFim;
+	}
+
+	public void setDataPeriodoLetivoFim(Date dataPeriodoLetivoFim) {
+		this.dataPeriodoLetivoFim = dataPeriodoLetivoFim;
+	}
+
+	public Date getDataEntregaCertificadoInicio() {
+		return dataEntregaCertificadoInicio;
+	}
+
+	public void setDataEntregaCertificadoInicio(Date dataEntregaCertificadoInicio) {
+		this.dataEntregaCertificadoInicio = dataEntregaCertificadoInicio;
+	}
+
+	public Date getDataEntregaCertificadoFim() {
+		return dataEntregaCertificadoFim;
+	}
+
+	public void setDataEntregaCertificadoFim(Date dataEntregaCertificadoFim) {
+		this.dataEntregaCertificadoFim = dataEntregaCertificadoFim;
 	}
 }

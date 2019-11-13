@@ -28,7 +28,7 @@ public class CronogramaMonitoriaService {
 	
 	public ModelCronogramaMonitoria getById(Long id) {
 		Optional<ModelCronogramaMonitoria> result = repositoryCronogramaMonitoria.findByIdCurso(id);
-		return result.orElseThrow(()-> new NotFoundException("Não existe cronograma para o curso de id = " + id));
+		return result.orElseThrow(()-> new NotFoundException("Não há cronograma cadastrado para o curso de id = " + id));
 	}
 	
 	public List<ModelCronogramaMonitoria>listAll(){

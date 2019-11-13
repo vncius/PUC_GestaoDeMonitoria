@@ -13,10 +13,12 @@
 
 
 -- Copiando estrutura do banco de dados para sysmonitoria
+DROP DATABASE IF EXISTS `sysmonitoria`;
 CREATE DATABASE IF NOT EXISTS `sysmonitoria` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `sysmonitoria`;
 
 -- Copiando estrutura para tabela sysmonitoria.cronograma_monitoria
+DROP TABLE IF EXISTS `cronograma_monitoria`;
 CREATE TABLE IF NOT EXISTS `cronograma_monitoria` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `data_edital_fim` date NOT NULL,
@@ -38,37 +40,43 @@ CREATE TABLE IF NOT EXISTS `cronograma_monitoria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela sysmonitoria.cronograma_monitoria: ~0 rows (aproximadamente)
-DELETE FROM `cronograma_monitoria`;
 /*!40000 ALTER TABLE `cronograma_monitoria` DISABLE KEYS */;
 /*!40000 ALTER TABLE `cronograma_monitoria` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela sysmonitoria.curso
+DROP TABLE IF EXISTS `curso`;
 CREATE TABLE IF NOT EXISTS `curso` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `descricao` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela sysmonitoria.curso: ~0 rows (aproximadamente)
-DELETE FROM `curso`;
 /*!40000 ALTER TABLE `curso` DISABLE KEYS */;
+REPLACE INTO `curso` (`id`, `descricao`) VALUES
+	(1, 'ADS'),
+	(2, 'CIENCIAS DA COMPUTAÇÃO'),
+	(3, 'ARTES'),
+	(4, 'FILOSOFIA'),
+	(5, 'ENGENHARIA');
 /*!40000 ALTER TABLE `curso` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela sysmonitoria.hibernate_sequence
+DROP TABLE IF EXISTS `hibernate_sequence`;
 CREATE TABLE IF NOT EXISTS `hibernate_sequence` (
   `next_val` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela sysmonitoria.hibernate_sequence: ~2 rows (aproximadamente)
-DELETE FROM `hibernate_sequence`;
+-- Copiando dados para a tabela sysmonitoria.hibernate_sequence: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
-INSERT INTO `hibernate_sequence` (`next_val`) VALUES
+REPLACE INTO `hibernate_sequence` (`next_val`) VALUES
 	(40),
 	(40),
 	(40);
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela sysmonitoria.model_cronograma_geral
+DROP TABLE IF EXISTS `model_cronograma_geral`;
 CREATE TABLE IF NOT EXISTS `model_cronograma_geral` (
   `id` bigint(20) NOT NULL,
   `entrega_dos_certificados_dt_fim` datetime(6) DEFAULT NULL,
@@ -86,12 +94,31 @@ CREATE TABLE IF NOT EXISTS `model_cronograma_geral` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela sysmonitoria.model_cronograma_geral: ~1 rows (aproximadamente)
-DELETE FROM `model_cronograma_geral`;
+-- Copiando dados para a tabela sysmonitoria.model_cronograma_geral: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `model_cronograma_geral` DISABLE KEYS */;
 /*!40000 ALTER TABLE `model_cronograma_geral` ENABLE KEYS */;
 
+-- Copiando estrutura para tabela sysmonitoria.model_inscricao_monitoria
+DROP TABLE IF EXISTS `model_inscricao_monitoria`;
+CREATE TABLE IF NOT EXISTS `model_inscricao_monitoria` (
+  `id` bigint(20) NOT NULL,
+  `distribuicao_carga_horaria` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `id_curso` bigint(20) NOT NULL,
+  `id_disciplina` bigint(20) NOT NULL,
+  `id_orientador` bigint(20) NOT NULL,
+  `matricula` varchar(255) DEFAULT NULL,
+  `nome` varchar(255) DEFAULT NULL,
+  `telefone` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela sysmonitoria.model_inscricao_monitoria: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `model_inscricao_monitoria` DISABLE KEYS */;
+/*!40000 ALTER TABLE `model_inscricao_monitoria` ENABLE KEYS */;
+
 -- Copiando estrutura para tabela sysmonitoria.model_usuario
+DROP TABLE IF EXISTS `model_usuario`;
 CREATE TABLE IF NOT EXISTS `model_usuario` (
   `id` bigint(20) NOT NULL,
   `matricula` varchar(255) DEFAULT NULL,
@@ -101,24 +128,23 @@ CREATE TABLE IF NOT EXISTS `model_usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela sysmonitoria.model_usuario: ~2 rows (aproximadamente)
-DELETE FROM `model_usuario`;
 /*!40000 ALTER TABLE `model_usuario` DISABLE KEYS */;
-INSERT INTO `model_usuario` (`id`, `matricula`, `nome`, `senha`) VALUES
+REPLACE INTO `model_usuario` (`id`, `matricula`, `nome`, `senha`) VALUES
 	(1, 'admin', 'SENHA = 123', '$2a$10$YI3cwynq4Q.y6ZTzNzFjXOmlmLWgraKz5HwtfU.jqrRhp2CXLO1TS'),
 	(2, '20171012000498', 'SENHA = 123', '$2a$10$YI3cwynq4Q.y6ZTzNzFjXOmlmLWgraKz5HwtfU.jqrRhp2CXLO1TS');
 /*!40000 ALTER TABLE `model_usuario` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela sysmonitoria.role
+DROP TABLE IF EXISTS `role`;
 CREATE TABLE IF NOT EXISTS `role` (
   `id` bigint(20) NOT NULL,
   `nome_role` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela sysmonitoria.role: ~0 rows (aproximadamente)
-DELETE FROM `role`;
+-- Copiando dados para a tabela sysmonitoria.role: ~4 rows (aproximadamente)
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` (`id`, `nome_role`) VALUES
+REPLACE INTO `role` (`id`, `nome_role`) VALUES
 	(1, 'ROLE_ADMIN'),
 	(2, 'ROLE_ALUNO'),
 	(3, 'ROLE_PROFESSOR'),
@@ -126,6 +152,7 @@ INSERT INTO `role` (`id`, `nome_role`) VALUES
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela sysmonitoria.usuarios_role
+DROP TABLE IF EXISTS `usuarios_role`;
 CREATE TABLE IF NOT EXISTS `usuarios_role` (
   `usuario_id` bigint(20) NOT NULL,
   `role_id` bigint(20) NOT NULL,
@@ -135,10 +162,9 @@ CREATE TABLE IF NOT EXISTS `usuarios_role` (
   CONSTRAINT `usuario_fk` FOREIGN KEY (`usuario_id`) REFERENCES `model_usuario` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela sysmonitoria.usuarios_role: ~0 rows (aproximadamente)
-DELETE FROM `usuarios_role`;
+-- Copiando dados para a tabela sysmonitoria.usuarios_role: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `usuarios_role` DISABLE KEYS */;
-INSERT INTO `usuarios_role` (`usuario_id`, `role_id`) VALUES
+REPLACE INTO `usuarios_role` (`usuario_id`, `role_id`) VALUES
 	(1, 2),
 	(2, 1);
 /*!40000 ALTER TABLE `usuarios_role` ENABLE KEYS */;

@@ -1,23 +1,21 @@
 package com.monitoria.puc.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import javax.persistence.ConstraintMode;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.ManyToOne;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.monitoria.puc.utilidades.Utilidades;
 
-@Entity
+@Entity(name = "usuario")
 public class ModelUsuario implements UserDetails {
 	
 	private static final long serialVersionUID = 1L;
@@ -32,15 +30,13 @@ public class ModelUsuario implements UserDetails {
 	
 	private String matricula;
 	
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "usuarios_role", uniqueConstraints = @UniqueConstraint(columnNames = {"usuario_id", "role_id"}, name = "unique_role_user"),
+	@ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "fk_role_id", referencedColumnName = "id",nullable = false)
+	private Role role;
 	
-	joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id", table = "usuario", unique = false,
-	foreignKey = @ForeignKey(name = "usuario_fk", value = ConstraintMode.CONSTRAINT)),
-	
-	inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id", table = "role", unique = false, updatable = false,
-	foreignKey = @ForeignKey(name = "role_fk", value = ConstraintMode.CONSTRAINT)))
-	private List<Role> roles;
+	@ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "fk_curso_id", referencedColumnName = "id",nullable = false)
+	private ModelCurso curso;
 
 	public Long getId() {
 		return id;
@@ -83,6 +79,8 @@ public class ModelUsuario implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<Role> roles = new ArrayList<Role>();
+		roles.add(this.role);
 		return roles;
 	}
 
@@ -114,5 +112,13 @@ public class ModelUsuario implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+	
+	public ModelCurso getCurso() {
+		return curso;
+	}
+
+	public void setCurso(ModelCurso curso) {
+		this.curso = curso;
 	}
 }

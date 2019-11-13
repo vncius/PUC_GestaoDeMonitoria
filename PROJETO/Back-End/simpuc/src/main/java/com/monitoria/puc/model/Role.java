@@ -1,15 +1,17 @@
 package com.monitoria.puc.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
 
 import org.springframework.security.core.GrantedAuthority;
 
-@Entity
-@Table(name = "role")
+@Entity(name = "role")
 public class Role implements GrantedAuthority {
 
 	private static final long serialVersionUID = 1L;
@@ -20,6 +22,9 @@ public class Role implements GrantedAuthority {
 	
 	private String nomeRole; /*ROLE_ALUNO OU ROLE_PROFESSOR*/
 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "curso")
+	private List<ModelUsuario> usuarios;
+	
 	@Override
 	public String getAuthority() { /*RETORNO O NOME ROLE*/
 		return this.nomeRole;
