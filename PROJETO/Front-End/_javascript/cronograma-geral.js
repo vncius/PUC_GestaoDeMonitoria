@@ -1,7 +1,7 @@
 $(document).ready(function () {
     carregarCronograma()
     $("#salvar").click(function(e){
-        limpaMensagensDeValidacao();
+        limpaCamposInconsistencias()
 
         if (validaCronogramaGeral()) {
             var cronogramaGeral = JSON.stringify({
@@ -35,7 +35,7 @@ $(document).ready(function () {
                 async: true,
                 data: cronogramaGeral,
                 success: function (result, status, request) {
-                    limpaMensagensDeValidacao();
+                    limpaCamposInconsistencias()
                     if (request.status === 206) {
                         alert(result + "\nCode status request: " + request.status);
                     } else {
@@ -203,10 +203,5 @@ $(document).ready(function () {
             $("#mensagens").show();
         }
         return retorno;
-    }
-
-    function limpaMensagensDeValidacao() {
-        $('#mensagens ul li, #mensagens ul br').remove();
-        $("#mensagens").hide();
     }
 });

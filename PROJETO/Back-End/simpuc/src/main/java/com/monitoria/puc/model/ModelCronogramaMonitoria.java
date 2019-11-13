@@ -120,6 +120,14 @@ public class ModelCronogramaMonitoria implements Serializable{
 			return false;
 		return true;
 	}
+	
+	public Boolean validaSeEstaNoPeriodoDeInscricao() {
+		Date data = new Date(System.currentTimeMillis());
+		if (data.after(this.dataInscricaoFim) || data.before(this.dataInscricaoInicio)) {
+			return false;
+		}
+		return true;
+	}
 
 	public Long getId() {
 		return id;

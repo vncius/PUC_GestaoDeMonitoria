@@ -3,6 +3,7 @@ package com.monitoria.puc.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,9 +18,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 public class ModelCurso implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
-	@OneToOne(mappedBy = "curso")
-    private ModelUsuario usuario;
 	
 	public ModelCurso(Long id, String descricao, ModelCronogramaMonitoria cronogramaMonitoria) {
 		super();
@@ -38,6 +36,9 @@ public class ModelCurso implements Serializable{
 	
 	@Column(columnDefinition = "text")
 	private String descricao;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "curso")
+	private List<ModelUsuario> usuarios;
 	
 	@OneToMany(mappedBy = "curso")
     private List<ModelDisciplina> disciplinas; 

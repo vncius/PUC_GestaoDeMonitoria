@@ -29,6 +29,11 @@ function usuarioEstaAutenticado() {
     });
 }
 
+// FUNÇOES DE RECUPERAÇÕES DE INFORMAÇÕES GRAVADAS LOCAL
+function recuperaMatriculaAluno() {
+    return localStorage.getItem("Matricula");
+}
+
 function recuperaTokenParaRequisicao() {
     if (localStorage.getItem("Authorization") === null || localStorage.getItem("Authorization") === "") {
         alert("Usuário não autenticado ou sessão experiou, faça login novamente!");
@@ -37,14 +42,32 @@ function recuperaTokenParaRequisicao() {
     return localStorage.getItem("Authorization");
 }
 
-function obterUrlDePaginas(direcionamento) {
-    return "http://localhost:200/" + direcionamento;
-}
-
+// FUNCOES PARA OBTER URL'S DA API E DO CLIENT
 function obterUrlDaAPI(direcionamento) {
     return "http://localhost:8080/apimonitoria" + direcionamento;
 }
 
 function redirecionarIndexLogin(){
-    window.location = obterUrlDePaginas("");
+    $(location).attr('href', obterUrlDePaginas(""));
 }
+
+function obterUrlDePaginas(direcionamento) {
+    return `http://localhost:200/${direcionamento}`;
+}
+
+// FUNÇOES DE INCONSISTENCIAS
+function registraInconsistencia(Mensagem) {
+    $("#mensagens ul").append(`<li style="margin-left: 30px;">${Mensagem}</li>`);
+    $("#mensagens").show();
+    window.location.href = "#mensagens";
+}
+
+function limpaCamposInconsistencias() {
+    $('#mensagens ul li, #mensagens ul br').remove();
+    ocultaCamposInconsistencias();
+}
+
+function ocultaCamposInconsistencias() {
+    $("#mensagens").hide();
+}
+

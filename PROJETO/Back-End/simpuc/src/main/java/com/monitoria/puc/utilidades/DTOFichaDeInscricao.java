@@ -18,6 +18,8 @@ public class DTOFichaDeInscricao {
 	private String carga_horaria_quarta;
 	private String carga_horaria_quinta;
 	private String carga_horaria_sexta;
+	private String carga_horaria_sabado;
+	private String statusIncricao;
 	
 	private ModelCurso curso;
 
@@ -33,6 +35,7 @@ public class DTOFichaDeInscricao {
 		this.carga_horaria_quarta = "";
 		this.carga_horaria_quinta = "";
 		this.carga_horaria_sexta = "";
+		this.carga_horaria_sabado = "";
 		this.curso = curso;
 	}
 
@@ -113,5 +116,21 @@ public class DTOFichaDeInscricao {
 	}
 	public void setCursos(ModelCurso cursos) {
 		this.curso = cursos;
+	}
+
+	public String getCarga_horaria_sabado() {
+		return carga_horaria_sabado;
+	}
+
+	public void setCarga_horaria_sabado(String carga_horaria_sabado) {
+		this.carga_horaria_sabado = carga_horaria_sabado;
+	}
+
+	public String getStatusIncricao() {
+		return statusIncricao;
+	}
+
+	public void setStatusIncricao(String statusIncricao) {
+		this.statusIncricao = statusIncricao;
 	}
 }

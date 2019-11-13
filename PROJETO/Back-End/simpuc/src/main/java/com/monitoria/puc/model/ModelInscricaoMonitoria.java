@@ -18,7 +18,7 @@ public class ModelInscricaoMonitoria implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
+	
 	private String matricula;
 	private String telefone;
 	private boolean possuiBolsa;
@@ -31,7 +31,9 @@ public class ModelInscricaoMonitoria implements Serializable {
 	private String carga_horaria_quarta;
 	private String carga_horaria_quinta;
 	private String carga_horaria_sexta;
-
+	private String carga_horaria_sabado;
+	private String statusIncricao;
+	
 	private long id_curso;
 	private long id_disciplina;
 	private long id_orientador;
@@ -49,6 +51,7 @@ public class ModelInscricaoMonitoria implements Serializable {
 		this.carga_horaria_quarta = "";
 		this.carga_horaria_quinta = "";
 		this.carga_horaria_sexta = "";
+		this.carga_horaria_sabado = "";
 		this.id_curso = 0;
 		this.id_disciplina = 0;
 		this.id_orientador = 0;
@@ -84,11 +87,14 @@ public class ModelInscricaoMonitoria implements Serializable {
 		model.setJaPossuiuBolsa(this.jaPossuiuBolsa);
 		model.setNome(this.nome);
 		model.setEmail(this.email);
+		model.setTelefone(this.telefone);
 		model.setCarga_horaria_segunda(this.carga_horaria_segunda);
 		model.setCarga_horaria_terca(this.carga_horaria_terca);
 		model.setCarga_horaria_quarta(this.carga_horaria_quarta);
 		model.setCarga_horaria_quinta(this.carga_horaria_quinta);
 		model.setCarga_horaria_sexta(this.carga_horaria_sexta);
+		model.setCarga_horaria_sabado(this.carga_horaria_sabado);
+		model.setStatusIncricao(this.statusIncricao);
 		Iterable<ModelCurso> listCursos = cursoRepository.findAll();
 
 		//PERCORRE A LISTA DE CURSOS E VERIFICA O ID DO CURSO INFORMADO NA FICHA DE INSCRICAO
@@ -237,5 +243,21 @@ public class ModelInscricaoMonitoria implements Serializable {
 
 	public void setId_orientador(long id_orientador) {
 		this.id_orientador = id_orientador;
+	}
+
+	public String getStatusIncricao() {
+		return statusIncricao;
+	}
+
+	public void setStatusIncricao(String statusIncricao) {
+		this.statusIncricao = statusIncricao;
+	}
+
+	public String getCarga_horaria_sabado() {
+		return carga_horaria_sabado;
+	}
+
+	public void setCarga_horaria_sabado(String carga_horaria_sabado) {
+		this.carga_horaria_sabado = carga_horaria_sabado;
 	}
 }

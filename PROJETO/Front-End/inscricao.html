@@ -15,12 +15,9 @@
 	<!-- javascript -->
 	<script src="_javascript/jquery.mask.js"></script>
 	<script src="_javascript/jquery.mask.min.js"></script>
-
-
-
 </head>
 
-<body>
+<body id="body">
 	<section class="about_area section_gap">
 		<div class="container">
 			<div class="container">
@@ -36,11 +33,12 @@
 
 			<div id="mensagens" class="topo">
 				<ul class="list-group-item list-group-item-danger">
+					<script>$("#mensagens").hide();</script>
 					<!--MENSAGENS DE ERRO OU VALIDAÇÃO SÃO EXIBIDAS AQUI-->
 				</ul>
 			</div>
 
-			<form action="/########" method="post">
+			<form id="formulario" action="/########" method="post" enctype="multipart/form-data">
 				<div>
 					<div class="input-group mb-3">
 
@@ -48,51 +46,42 @@
 					<div class="form-row">
 						<div class="col">
 							<label for="inputEmail4">Nome</label>
-							<input type="text" class="form-control" maxlength="100" name="nome" placeholder="Nome"
-								required readonly>
+							<input type="text" class="form-control" maxlength="100" name="nome" required readonly>
 						</div>
 						<div class="col">
 							<label for="inputEmail4">Matricula</label>
-							<input type="text" class="form-control" name="matricula" max="30" min="50"
-								placeholder="Matricula" required readonly>
+							<input type="text" class="form-control" name="matricula" max="30" min="50" required
+								readonly>
 						</div>
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-4">
 							<label for="inputCity">Curso</label>
-							<input type="text" class="form-control" name="curso" id="curso" maxlength="100"
-								placeholder="Curso" required readonly>
+							<input type="text" class="form-control" name="curso" maxlength="100" required readonly>
 						</div>
 						<div class="form-group col-md-4">
-							<label for="inputEstado">Disciplina</label>
-							<select id="inputEstado" class="form-control" name="disciplina" required>
-								<option selected>Selesione</option>
-								<option>...</option>
+							<label for="disciplina">Disciplina</label>
+							<select id="disciplina" class="form-control" name="disciplina" required>
 							</select>
 						</div>
 						<div class="form-group col-md-4">
-							<label for="inputEstado">Orientador</label>
-							<select id="inputEstado" class="form-control" name="orientador" maxlength="100" required>
-								<option selected>Selecione</option>
-								<option>...</option>
+							<label for="orientador">Orientador</label>
+							<select id="orientador" class="form-control" name="orientador" maxlength="100" required>
 							</select>
 						</div>
-
 					</div>
 
 					<div class="form-row ">
 						<div class="col">
-							<label for="inputEmail4">Telefone</label>
-							<input type="text" class="form-control" id="telefone" placeholder="Telefone" name="telefone"
-								pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" required />
+							<label for="telefone">Telefone</label>
+							<input type="text" class="form-control" id="telefone" name="telefone" required />
 							<script type="text/javascript">$("#telefone").mask("(00) 0 0000-0000");</script>
 						</div>
 
 						<div class="col">
-							<label for="inputEmail4">Email</label>
+							<label for="exampleInputEmail1">Email</label>
 							<input type="email" class="form-control" name="email" id="exampleInputEmail1"
 								placeholder="email" maxlength="50" required>
-
 						</div>
 					</div>
 
@@ -126,7 +115,8 @@
 									<li class="list-group-item active">Segunda</li>
 								</div>
 								<div class="col">
-									<input type="text" class="form-control1" name="segunda" maxlength="100"
+									<input type="text" class="form-control1" name="carga_horaria_segunda"
+										maxlength="100"
 										placeholder="Digite o seu horário disponivel. Ex:11:00 as 12:00">
 								</div>
 							</div>
@@ -136,7 +126,7 @@
 									<li class="list-group-item active">Terça</li>
 								</div>
 								<div class="col">
-									<input type="text" class="form-control1" name="terca" maxlength="100"
+									<input type="text" class="form-control1" name="carga_horaria_terca" maxlength="100"
 										placeholder="Digite o seu horário disponivel. Ex:14:00 as 15:00">
 								</div>
 							</div>
@@ -146,7 +136,7 @@
 									<li class="list-group-item active">Quarta</li>
 								</div>
 								<div class="col">
-									<input type="text" class="form-control1" name="quarta" maxlength="100"
+									<input type="text" class="form-control1" name="carga_horaria_quarta" maxlength="100"
 										placeholder="Digite o seu horário disponivel. Ex:17:00 as 18:00">
 								</div>
 							</div>
@@ -155,7 +145,7 @@
 									<li class="list-group-item active">Quinta</li>
 								</div>
 								<div class="col">
-									<input type="text" class="form-control1" name="quinta" maxlength="100"
+									<input type="text" class="form-control1" name="carga_horaria_quinta" maxlength="100"
 										placeholder="Digite o seu horário disponivel. Ex:09:00 as 10:00">
 								</div>
 							</div>
@@ -164,7 +154,7 @@
 									<li class="list-group-item active">Sexta</li>
 								</div>
 								<div class="col">
-									<input type="text" class="form-control1" name="sexta" maxlength="100"
+									<input type="text" class="form-control1" name="carga_horaria_sexta" maxlength="100"
 										placeholder="Digite o seu horário disponivel. Ex:16:00 as 17:00">
 								</div>
 							</div>
@@ -173,7 +163,7 @@
 									<li class="list-group-item active">Sabado</li>
 								</div>
 								<div class="col">
-									<input type="text" class="form-control1" name="sabado" maxlength="100"
+									<input type="text" class="form-control1" name="carga_horaria_sabado" maxlength="100"
 										placeholder="Digite o seu horário disponivel. Ex:14:00 as 15:00">
 								</div>
 							</div>
@@ -182,47 +172,55 @@
 
 					<p style="font-size:15px;margin-top:3%">Já foi bolsista da PUC GOIÀS?</p>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="jaFoiBolsista" id="jaFoiBolsistaS"
+						<input class="form-check-input" type="radio" name="InputJaFoiBolsista" id="InputJaFoiBolsistaS"
 							value="S">
-						<label class="form-check-label" for="inlineRadio1">Sim</label>
+						<label class="form-check-label" for="InputJaFoiBolsistaS">Sim</label>
 					</div>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" checked name="jaFoiBolsista" id="jaFoiBolsistaN"
-							value="N">
-						<label class="form-check-label" for="inlineRadio2">Não</label>
+						<input class="form-check-input" type="radio" checked name="InputJaFoiBolsista"
+							id="InputJaFoiBolsistaN" value="N">
+						<label class="form-check-label" for="InputJaFoiBolsistaN">Não</label>
 					</div>
 					<p style="font-size:15px;margin-top:3%">Possui algum tipo de bolsa na PUC GOIÀS( FUNDO EDUCACIONAL,
 						BIC/INSENTIVO Á CULTURA, BIC/INICIAÇÃO CIENTÍFICA, PROUNI 100%, PROUNI 50%, DESCONTO FAMILIA,
 						BOLSA DA OVG, VESTIBULAR SOCIAL, PODE PUC)?</p>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="possuiBolsa" id="inlineRadio2" value="S">
-						<label class="form-check-label" for="inlineRadio2">Sim</label>
+						<input class="form-check-input" type="radio" name="InputPossuiBolsa" id="InputPossuiBolsaS"
+							value="S">
+						<label class="form-check-label" for="inlineRadio3">Sim</label>
 					</div>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" checked type="radio" name="possuiBolsa" id="inlineRadio2"
-							value="N">
-						<label class="form-check-label" for="inlineRadio2">Não</label>
+						<input class="form-check-input" checked type="radio" name="InputPossuiBolsa"
+							id="InputPossuiBolsaN" value="N">
+						<label class="form-check-label" for="inlineRadio4">Não</label>
 					</div>
-					<div class="banner_content text-center">
-						<p style="font-size:15px;margin-top:3%">DOCUMENTOS A SEREM ANEXADOS:</p>
-					</div>
-					<p style="font-size:15px;">(1) Fotocópia do Diagnóstico de Matrícula:</p>
-					<p style="font-size:15px">(2) Duas fotos 3x4</p>
-					<p style="font-size:15px;">(3) Fotocópia do Histórico Escolar (pode ser a do SOL)</p>
 
-					<div class="banner_content text-center">
-						<label for="filePDF">Anexe um PDF com todos os documentos aqui</label>
-						<div class="form-group">
-							<input type="file" class="btn btn-primary" id="filePDF">
+					<div id="div_impresao" style="margin: 15px; padding: 30px;">
+
+					</div>
+
+					<div id="div_documentos">
+						<div class="banner_content text-center">
+							<p style="font-size:15px;margin-top:3%">DOCUMENTOS A SEREM ANEXADOS:</p>
 						</div>
-					</div>
+						<p style="font-size:15px;">(1) Fotocópia do Diagnóstico de Matrícula:</p>
+						<p style="font-size:15px">(2) Duas fotos 3x4</p>
+						<p style="font-size:15px;">(3) Fotocópia do Histórico Escolar (pode ser a do SOL)</p>
 
-					<div class="banner_content text-center">
-						<div class="form-group">
-							<button type="button" class="btn btn-danger ju">Cancelar</button>
-							<button type="button" class="btn btn-warning ju ">Editar</button>
-							<button type="submit" class="btn btn-success ju">Salvar</button>
-							<button type="button" class="btn btn-secondary ju">Imprimir</button>
+						<div class="banner_content text-center">
+							<label for="file">Anexe um PDF com todos os documentos aqui</label>
+							<div class="form-group">
+								<input type="file" name="file" class="btn btn-primary" id="file" required>
+							</div>
+						</div>
+
+						<div class="banner_content text-center">
+							<div class="form-group">
+								<button type="button" id="cancelar" class="btn btn-danger ju">Cancelar</button>
+								<button type="button" id="editar" class="btn btn-warning ju ">Editar</button>
+								<button type="submit" id="salvar" class="btn btn-success ju">Salvar</button>
+								<button type="button" id="imprimir" class="btn btn-secondary ju">Imprimir</button>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -230,5 +228,10 @@
 		</div>
 	</section>
 </body>
+<script src="_javascript/funcoes.js"></script>
+<script>
+	usuarioEstaAutenticado();
+</script>
+<script language="javascript" src="_javascript/inscricao.js"></script>
 
 </html>
