@@ -1,3 +1,4 @@
+// ------------------------------- UTILIDADES -------------------------------
 function mudaFoto(foto) {
     document.getElementById("icone").src = foto;
 }
@@ -10,26 +11,20 @@ function usuarioEstaAutenticado() {
             "Authorization": localStorage.getItem("Authorization"),
         },
         dataType: "text",
-        async: true,
+        async: false,
         success: function (result, status, request) {
-            if (request.status === 200) {
+            if (result === "true") {
                 return true;
-            } else {
-                alert("É necessário estar logado para acessar esta página!");
-                redirecionarIndexLogin();
-                return false;
             }
+            return false;
         },
         error: function (request, status, erro) {
-            if (status === "error") {
-                alert("Falha ao conectar com o servidor de aplicação.");
-            }
             return false;
         }
     });
 }
 
-// FUNÇOES DE RECUPERAÇÕES DE INFORMAÇÕES GRAVADAS LOCAL
+// ------------------------------- FUNÇOES DE RECUPERAÇÕES DE INFORMAÇÕES GRAVADAS LOCAL -------------------------------
 function recuperaMatriculaAluno() {
     return localStorage.getItem("Matricula");
 }
@@ -42,7 +37,7 @@ function recuperaTokenParaRequisicao() {
     return localStorage.getItem("Authorization");
 }
 
-// FUNCOES PARA OBTER URL'S DA API E DO CLIENT
+// ------------------------------- FUNCOES PARA OBTER URL'S DA API E DO CLIENT -------------------------------
 function obterUrlDaAPI(direcionamento) {
     return "http://localhost:8080/apimonitoria" + direcionamento;
 }
@@ -55,7 +50,12 @@ function obterUrlDePaginas(direcionamento) {
     return `http://localhost:200/${direcionamento}`;
 }
 
-// FUNÇOES DE INCONSISTENCIAS
+
+function redirecionamentoDePagina(url) {
+    $(location).attr('href', obterUrlDePaginas(url));
+}
+
+// ------------------------------- FUNÇOES DE INCONSISTENCIAS -------------------------------
 function registraInconsistencia(Mensagem) {
     $("#mensagens ul").append(`<li style="margin-left: 30px;">${Mensagem}</li>`);
     $("#mensagens").show();
@@ -71,3 +71,15 @@ function ocultaCamposInconsistencias() {
     $("#mensagens").hide();
 }
 
+// ------------------------------- FUNÇOES DE MENU -------------------------------
+
+function preencheCamposMenu(){
+    $(".nome").html(localStorage.getItem("Nome"));
+    $(".matricula").html(localStorage.getItem("Matricula"));
+}
+
+function logout() {
+    localStorage.clear();
+    $(location).attr('href', obterUrlDaAPI("/logout"));
+    redirecionarIndexLogin();
+}

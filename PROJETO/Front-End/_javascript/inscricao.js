@@ -1,19 +1,24 @@
 $(document).ready(function () {
-    //-------------------------------------------- VALIDAÇÕES PRÉ-CARREGAMENTO
-    var cursoEstaNoPeriodo = verificaSeCursoEstaNoPeriodoDeInscricao();
-
-    if (cursoEstaNoPeriodo) {
-
-        var dadosInscricao = buscaDadosInscricao();
-
-        if (dadosInscricao != null && dadosInscricao != "null") {
-            registraDadosPreCadastradosInscricao(dadosInscricao);
-            preencheFormulario(dadosInscricao);
-            habilitaCamposNecessariosInicializacao();
-            carregaElementos();
-        } else {
-            registraInconsistencia("Não foi possivel inicializar o formulário de inscrição!");
-            desabilitaTodosOsCamposDoForm();
+    if(usuarioEstaAutenticado() === false) { 
+        redirecionarIndexLogin(); 
+        return;
+    } else {
+        //-------------------------------------------- VALIDAÇÕES PRÉ-CARREGAMENTO
+        var cursoEstaNoPeriodo = verificaSeCursoEstaNoPeriodoDeInscricao();
+    
+        if (cursoEstaNoPeriodo) {
+    
+            var dadosInscricao = buscaDadosInscricao();
+    
+            if (dadosInscricao != null && dadosInscricao != "null") {
+                registraDadosPreCadastradosInscricao(dadosInscricao);
+                preencheFormulario(dadosInscricao);
+                habilitaCamposNecessariosInicializacao();
+                carregaElementos();
+            } else {
+                registraInconsistencia("Não foi possivel inicializar o formulário de inscrição!");
+                desabilitaTodosOsCamposDoForm();
+            }
         }
     }
 });
@@ -370,7 +375,7 @@ function removeDadosPreCadastradosInscricao() {
 }
 
 function recarregarPagina() {
-    $(location).attr('href', obterUrlDePaginas("/inscricao.html"));
+    $(location).attr('href', obterUrlDePaginas("inscricao.html"));
 }
 
 /* ------------------------------------ HABILITA/DESABILITA CAMPOS --------------------------------------*/

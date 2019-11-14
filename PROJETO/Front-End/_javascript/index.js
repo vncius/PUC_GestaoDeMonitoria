@@ -21,7 +21,7 @@
 				if (request.status === 403) {
 					alert("Usuário e/ou senha inválidos");
 				} else {
-					console.log("Ocorreu um erro na requisição para o servidor!");
+					alert("Falha ao consultar dados na API!");
 				}
 			}
 		});
@@ -47,13 +47,13 @@ function registraTokenEmLocalStorage(token, matricula) {
 			localStorage.setItem("Matricula", matricula);
 			localStorage.setItem("Role", result.authorities[0].authority);
 			localStorage.setItem("Authorization", "Bearer "+token);
-			localStorage.setItem("Course", result.id_curso);
-			alert("Usuário autênticado com sucesso!");
-			/*REDIRECIONAR PARA O MENU PRINCIPAL*/
-			
+			localStorage.setItem("Course", result.curso.id);
+			localStorage.setItem("Nome", result.nome);
+			redirecionamentoDePagina("menu-principal.html");
 		},
 		error: function (request, status, erro) {
 			alert("Falha ao consultar dados na API!");
+			$(location).attr('href', obterUrlDePaginas("/inscricao.html"));
 		}
 	});
 }

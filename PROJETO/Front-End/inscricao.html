@@ -15,6 +15,10 @@
 	<!-- javascript -->
 	<script src="_javascript/jquery.mask.js"></script>
 	<script src="_javascript/jquery.mask.min.js"></script>
+	<script src="_javascript/funcoes.js"></script>
+    <script>
+		if(usuarioEstaAutenticado() === false) { redirecionarIndexLogin(); }
+    </script>
 </head>
 
 <body id="body">
@@ -228,10 +232,6 @@
 		</div>
 	</section>
 </body>
-<script src="_javascript/funcoes.js"></script>
-<script>
-	usuarioEstaAutenticado();
-</script>
 <script language="javascript" src="_javascript/inscricao.js"></script>
 
 </html>

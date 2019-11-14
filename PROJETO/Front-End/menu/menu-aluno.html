@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Monitoria PUC-GO</title>
+    <!--\/-------------------------------------------------------BOOTSTRAP-------------------------------------------------------\/-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--/\-----------------------------------------------------------------------------------------------------------------------/\-->
+    <!--\/-----------CSS da pagina------------\/-->
+    <link rel="stylesheet" href="../_css/_css_menu/menuh-aluno.css">
+    <!--/\------------------------------------/\-->
+    <!--\/------------------------------FONTS GOOGLE----------------------------------------------\/-->
+    <link href="https://fonts.googleapis.com/css?family=Acme|Baloo+Bhaina|Open+Sans&display=swap" rel="stylesheet"> 
+    <!--/\----------------------------------------------------------------------------------------/\-->
+</head>
+
+<body>
+    <div id=interface>
+            <a onclick="logout();"><div class="sair">Sair</div></a>
+        <header id="cabecalho">
+            <h1 class="ola">Olá,</h1>
+            <h2 class="nome">'MATHEUS SILVA SALRO FERREIRA'</h2><!--Trocar pelo nome do usuário-->
+            <h4 class="matricula">Matrícula: '2019.2.0150.0025-3'</h4><!--Trocar pelo login do usuário-->
+            <h3>SIM PUC</h3>
+        </header>
+
+        <section id="corpo">
+            <div id="geral">
+                <!-- <div id="mensagens">
+                    <ul class="list-group-item list-group-item-danger">
+                        MENSAGENS DE ERRO OU VALIDAÇÃO SÃO EXIBIDAS AQUI
+                    </ul>
+                </div> -->
+                
+                <aside id="esquerda">
+                        <h3 style="text-align: center; margin: 50px 0">
+                            <a target="_blank" style="text-decoration: none; font-size: 22pt; color: red;">
+                            <!--Para comunicado importantes-->
+                            </a>
+                        </h3>
+                    <a href = "inscricao.html" ><!--target="_blank"-->
+                        <div class="serv inscricao-in"><p>Realizar Inscrição</p></div>
+                    </a>
+                    <a href = "#"><!--Colocar href com nome verdadeiro-->
+                        <div class="serv processo-acomp"><p>Acompanhar Processo</p></div>
+                    </a>
+                </aside>
+                
+                <aside id="direita">
+                    <div class="boxinfo b-graduacao">
+                        <h4>Perfil:</h4>
+                        <p>Aluno</p>
+                    </div>    
+                    <div class="avisos">
+                        <img  width="100%">
+                    </div>
+                </aside>
+            </div>
+        </section>
+        <script>preencheCamposMenu();</script>
+    </div>
+</body>                    
+</html>
