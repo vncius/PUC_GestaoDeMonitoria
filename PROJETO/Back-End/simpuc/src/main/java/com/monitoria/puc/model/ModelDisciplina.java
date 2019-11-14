@@ -19,6 +19,8 @@ public class ModelDisciplina implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	private String codigoDisciplina;
+	
 	@ManyToOne
     @JoinColumn(name = "fk_curso_id", referencedColumnName = "id")
 	private ModelCurso curso;
@@ -61,4 +63,14 @@ public class ModelDisciplina implements Serializable {
 	public void setOrientadores(List<ModelOrientador> orientadores) {
 		this.orientadores = orientadores;
 	}
+
+	public String getCodigoDisciplina() {
+		return codigoDisciplina;
+	}
+
+	public void setCodigoDisciplina(String codigoDisciplina) {
+		this.codigoDisciplina = codigoDisciplina;
+	}
+	
+	
 }
