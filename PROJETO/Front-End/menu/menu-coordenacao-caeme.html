@@ -5,8 +5,7 @@
     <meta charset="utf-8" />
     <title>Monitoria PUC-GO</title>
     <!--\/-------------------------------------------------------BOOTSTRAP-------------------------------------------------------\/-->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="../_javascript/jquery-3.4.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!--/\-----------------------------------------------------------------------------------------------------------------------/\-->
@@ -14,63 +13,73 @@
     <link rel="stylesheet" href="../_css/_css_menu/menuh-coo-caeme.css">
     <!--/\------------------------------------/\-->
     <!--\/------------------------------FONTS GOOGLE----------------------------------------------\/-->
-    <link href="https://fonts.googleapis.com/css?family=Acme|Baloo+Bhaina|Open+Sans&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Acme|Baloo+Bhaina|Open+Sans&display=swap" rel="stylesheet">
     <!--/\----------------------------------------------------------------------------------------/\-->
 </head>
 
 <body>
     <div id=interface>
-            <a href="../index.html"><div class="sair">Sair</div></a>
+        <a onclick="logout();">
+            <div class="sair">Sair</div>
+        </a>
         <header id="cabecalho">
             <h1 class="ola">Olá,</h1>
-            <h2 class="nome">'KATIA SILVA'</h2><!--Trocar pelo nome do usuário-->
-            <h4 class="matricula">Credencias: 8888888</h4><!--Trocar pelo login do usuário-->
+            <h2 class="nome">Null</h2>
+            <h4 class="matricula">Null</h4>
             <h3>SIM PUC</h3>
         </header>
-
         <section id="corpo">
             <div id="geral">
-                <!-- <div id="mensagens">
-                    <ul class="list-group-item list-group-item-danger">
-                        MENSAGENS DE ERRO OU VALIDAÇÃO SÃO EXIBIDAS AQUI
-                    </ul>
-                </div> -->
-                
                 <aside id="esquerda">
-                        <h3 style="text-align: center; margin: 50px 0">
-                            <a target="_blank" style="text-decoration: none; font-size: 22pt; color: red;">
+                    <h3 style="text-align: center; margin: 50px 0">
+                        <a target="_blank" style="text-decoration: none; font-size: 22pt; color: red;">
                             <!--Para comunicado importantes-->
-                            </a>
-                        </h3>
-                    <a href = "../cronograma-monitoria.html" target="_blank"><!--target="_blank"-->
-                        <div class="serv inscricao-in"><p>Publicar Cronograma</p></div>
+                        </a>
+                    </h3>
+                    <a href="../cronograma-monitoria.html" target="_blank">
+                        <!--target="_blank"-->
+                        <div class="serv inscricao-in">
+                            <p>Publicar Cronograma</p>
+                        </div>
                     </a>
-                    <a href = "../consulta-cronograma-monitoria.html" target="_blank"><!--Colocar href com nome verdadeiro-->
-                        <div class="serv cronograma"><p>Consultar Cronograma Monitoria</p></div>
+                    <a href="../consulta-cronograma-monitoria.html" target="_blank">
+                        <!--Colocar href com nome verdadeiro-->
+                        <div class="serv cronograma">
+                            <p>Consultar Cronograma Monitoria</p>
+                        </div>
                     </a>
-                    <a href = "#" target="_blank"><!--Colocar href com nome verdadeiro-->
-                        <div class="serv consult"><p>Consultar Inscrições</p></div>
+                    <a href="#" target="_blank">
+                        <!--Colocar href com nome verdadeiro-->
+                        <div class="serv consult">
+                            <p>Consultar Inscrições</p>
+                        </div>
                     </a>
-                    <a href = "#" target="_blank"><!--Colocar href com nome verdadeiro-->
-                        <div class="serv geral"><p>Publicar Resultado Geral</p></div>
+                    <a href="#" target="_blank">
+                        <!--Colocar href com nome verdadeiro-->
+                        <div class="serv geral">
+                            <p>Publicar Resultado Geral</p>
+                        </div>
                     </a>
-                    <a href = "#" target="_blank"><!--Colocar href com nome verdadeiro-->
-                        <div class="serv certific"><p>Emitir Certificado</p></div>
+                    <a href="#" target="_blank">
+                        <!--Colocar href com nome verdadeiro-->
+                        <div class="serv certific">
+                            <p>Emitir Certificado</p>
+                        </div>
                     </a>
                 </aside>
-                
+
                 <aside id="direita">
                     <div class="boxinfo b-graduacao">
                         <h4>Perfil:</h4>
                         <p>Coordenador CAEME</p>
-                    </div>    
+                    </div>
                     <div class="avisos">
-                        <img  width="100%">
+                        <img width="100%">
                     </div>
                 </aside>
-
             </div>
         </section>
+        <script>preencheCamposMenu();</script>
     </div>
-</body>                    
+</body>
 </html>

@@ -5,20 +5,24 @@
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="icon" href="_imagens/logo-graduacao.png" type="image/png">
 	<title>SIMPUC</title>
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="_css/bootstrap.css">
+	<link rel="stylesheet" href="_css/bootstrap_4.0.min.css">
 	<link rel="stylesheet" href="_css/font-awesome.min.css">
 	<!-- main css -->
 	<link rel="stylesheet" href="_css/inscricao.css">
 	<link rel="stylesheet" href="_css/responsive.css">
 	<!-- javascript -->
+	<script src="_javascript/jquery-3.4.1.min.js"></script>
 	<script src="_javascript/jquery.mask.js"></script>
 	<script src="_javascript/jquery.mask.min.js"></script>
+	<!------------------------ Verify Autenticação ---------------------------->
 	<script src="_javascript/funcoes.js"></script>
-    <script>
+	<script>
 		if(usuarioEstaAutenticado() === false) { redirecionarIndexLogin(); }
-    </script>
+	</script>
+	<!-------------------------------------------------------------------------->
 </head>
 
 <body id="body">
@@ -233,5 +237,4 @@
 	</section>
 </body>
 <script language="javascript" src="_javascript/inscricao.js"></script>
-
 </html>
