@@ -3,162 +3,166 @@ $(document).ready(function () {
         redirecionarIndexLogin();
         return;
     } else {
-        carregarComboboxCursos();
-        consultaTodosCronograma();
+        if (localStorage.getItem("Role") != "ROLE_COORD_MONITORIA") {
+            redirecionarMenuPrincipal();
+        } else {
+            carregarComboboxCursos();
+            consultaTodosCronograma();
 
-        $("#mensagens").hide();
-        $("#salvar").click(function (e) {
-            limpaMensagensDeValidacao();
+            $("#mensagens").hide();
+            $("#salvar").click(function (e) {
+                limpaMensagensDeValidacao();
 
-            if (validaCronogramaMonitoria()) {
-                var cronogramaMonitoria = JSON.stringify({
-                    "id": $('idCronograma').val(),
-                    "curso": $('#cboCursos').val(),
-                    "dataEditalInicio": $('#DtIniPublicacaoEdital').val(),
-                    "dataEditalFim": $('#DtFimPublicacaoEdital').val(),
+                if (validaCronogramaMonitoria()) {
+                    var cronogramaMonitoria = JSON.stringify({
+                        "id": $('idCronograma').val(),
+                        "curso": $('#cboCursos').val(),
+                        "dataEditalInicio": $('#DtIniPublicacaoEdital').val(),
+                        "dataEditalFim": $('#DtFimPublicacaoEdital').val(),
 
-                    "dataInscricaoInicio": $('#DtIniPeriodoDeIncricao').val(),
-                    "dataInscricaoFim": $('#DtFimPeriodoDeIncricao').val(),
+                        "dataInscricaoInicio": $('#DtIniPeriodoDeIncricao').val(),
+                        "dataInscricaoFim": $('#DtFimPeriodoDeIncricao').val(),
 
-                    "dataPeriodoAvaliacaoInicio": $('#DtIniPeriodoAvaliacao').val(),
-                    "dataPeriodoAvaliacaoFim": $('#DtFimPeriodoAvaliacao').val(),
+                        "dataPeriodoAvaliacaoInicio": $('#DtIniPeriodoAvaliacao').val(),
+                        "dataPeriodoAvaliacaoFim": $('#DtFimPeriodoAvaliacao').val(),
 
-                    "dataEntregaResultadosInicio": $('#DtIniEntregaDeResultados').val(),
-                    "dataEntregaResultadosFim": $('#DtFimEntregaDeResultados').val(),
+                        "dataEntregaResultadosInicio": $('#DtIniEntregaDeResultados').val(),
+                        "dataEntregaResultadosFim": $('#DtFimEntregaDeResultados').val(),
 
-                    "dataPeriodoLetivoInicio": $('#DtIniPeriodoLetivo').val(),
-                    "dataPeriodoLetivoFim": $('#DtFimPeriodoLetivo').val(),
+                        "dataPeriodoLetivoInicio": $('#DtIniPeriodoLetivo').val(),
+                        "dataPeriodoLetivoFim": $('#DtFimPeriodoLetivo').val(),
 
-                    "dataEntregaCertificadoInicio": $('#DtIniEntregaDeCertificados').val(),
-                    "dataEntregaCertificadoFim": $('#DtFimEntregaDeCertificados').val()
-                });
-                var idCronograma = $("#idCronograma").val();
-                if (idCronograma == "") {
-                    $.ajax({
-                        method: "POST", // TIPO DE REQUISIÇÃO
-                        url: obterUrlDaAPI("/cronograma_monitoria/"), // END POINT DA API
-                        headers: {
-                            "Authorization": localStorage.getItem("Authorization"),
-                        },
-                        dataType: "text",
-                        contentType: "application/json;charset=UTF-8",
-                        async: true,
-                        data: cronogramaMonitoria,
-                        success: function (result, status, request) {
-                            limpaMensagensDeValidacao();
-                            if (request.status === 206) {
-                                alert(result + "\nCode status request: " + request.status);
-                            } else {
-                                alert(result);
-                            }
-                        },
-                        error: function (request, status, erro) {
-                            if (request.status === 400) {
-                                $("#mensagens ul").append("<li>Todos os campos são obrigatórios!</li><br/>");
-                                $("#mensagens").show();
-                            }
-                        }
+                        "dataEntregaCertificadoInicio": $('#DtIniEntregaDeCertificados').val(),
+                        "dataEntregaCertificadoFim": $('#DtFimEntregaDeCertificados').val()
                     });
-
-                } else {
-                    $.ajax({
-                        method: "PUT", // TIPO DE REQUISIÇÃO
-                        url: obterUrlDaAPI("/cronograma_monitoria/" + idCronograma), // END POINT DA API
-                        headers: {
-                            "Authorization": localStorage.getItem("Authorization"),
-                        },
-                        dataType: "text",
-                        contentType: "application/json;charset=UTF-8",
-                        async: true,
-                        data: cronogramaMonitoria,
-                        success: function (result, status, request) {
-                            limpaMensagensDeValidacao();
-                            if (request.status === 206) {
-                                alert(result + "\nCode status request: " + request.status);
-                            } else {
-                                alert(result);
+                    var idCronograma = $("#idCronograma").val();
+                    if (idCronograma == "") {
+                        $.ajax({
+                            method: "POST", // TIPO DE REQUISIÇÃO
+                            url: obterUrlDaAPI("/cronograma_monitoria/"), // END POINT DA API
+                            headers: {
+                                "Authorization": localStorage.getItem("Authorization"),
+                            },
+                            dataType: "text",
+                            contentType: "application/json;charset=UTF-8",
+                            async: true,
+                            data: cronogramaMonitoria,
+                            success: function (result, status, request) {
+                                limpaMensagensDeValidacao();
+                                if (request.status === 206) {
+                                    exibaAlerta(result + "\nCode status request: " + request.status);
+                                } else {
+                                    exibaAlerta(result);
+                                }
+                            },
+                            error: function (request, status, erro) {
+                                if (request.status === 400) {
+                                    $("#mensagens ul").append("<li>Todos os campos são obrigatórios!</li><br/>");
+                                    $("#mensagens").show();
+                                }
                             }
-                        },
-                        error: function (request, status, erro) {
-                            if (request.status === 400) {
-                                $("#mensagens ul").append("<li>Todos os campos são obrigatórios!</li><br/>");
-                                $("#mensagens").show();
+                        });
+
+                    } else {
+                        $.ajax({
+                            method: "PUT", // TIPO DE REQUISIÇÃO
+                            url: obterUrlDaAPI("/cronograma_monitoria/" + idCronograma), // END POINT DA API
+                            headers: {
+                                "Authorization": localStorage.getItem("Authorization"),
+                            },
+                            dataType: "text",
+                            contentType: "application/json;charset=UTF-8",
+                            async: true,
+                            data: cronogramaMonitoria,
+                            success: function (result, status, request) {
+                                limpaMensagensDeValidacao();
+                                if (request.status === 206) {
+                                    exibaAlerta(result + "\nCode status request: " + request.status);
+                                } else {
+                                    exibaAlerta(result);
+                                }
+                            },
+                            error: function (request, status, erro) {
+                                if (request.status === 400) {
+                                    $("#mensagens ul").append("<li>Todos os campos são obrigatórios!</li><br/>");
+                                    $("#mensagens").show();
+                                }
                             }
-                        }
-                    });
-                }
-            }
-        });
-
-        $("#cboCursos").change(function () {
-
-            var id_curso = document.getElementById("cboCursos");
-            var valorIdcurso = id_curso.options[id_curso.selectedIndex].value;
-            limpaCampos();
-            $.ajax({
-                method: "GET", // TIPO DE REQUISIÇÃO
-                url: obterUrlDaAPI("/cronograma_monitoria/" + valorIdcurso),
-                headers: {
-                    "Authorization": localStorage.getItem("Authorization"),
-                },
-                dataType: "text",
-                contentType: "application/json;charset=UTF-8",
-                async: true,
-                success: function (result, status, request) {
-                    if (result != "") {
-                        if (result != "null") {
-                            preencheCamposDoCronogramaMonitoria(result);
-                        }
-                    }
-                },
-                error: function (request, status, erro) {
-                    if (request.status = 500) {
-                        // REDIRECIONAR TELA LOGIN - NÃO ESTÁ AUTENTICADO
+                        });
                     }
                 }
             });
-        });
 
-        $('#btnconsulta').on("click", function (e) {
-            var id_curso = document.getElementById("cboCursos");
-            var valorIdcurso = id_curso.options[id_curso.selectedIndex].value;
-    
-            $.ajax({
-                method: "GET", // TIPO DE REQUISIÇÃO
-                url: obterUrlDaAPI("/cronograma_monitoria/" + valorIdcurso),
-                headers: {
-                    "Authorization": localStorage.getItem("Authorization"),
-                },
-                dataType: "json",
-                contentType: "application/json;charset=UTF-8",
-                async: true,
-                success: function (result, status, request) {
-                    if (result != null) {
-                        if (valorIdcurso != "") {
-                            preencheCamposTabelaPorCurso(result);
-                            $("#mensagensConsulta ul").empty();
-                            document.getElementById("mensagensConsulta").style.display = "none";
-                        } else {
-                            preencheCamposTabela(result);
+            $("#cboCursos").change(function () {
+
+                var id_curso = document.getElementById("cboCursos");
+                var valorIdcurso = id_curso.options[id_curso.selectedIndex].value;
+                limpaCampos();
+                $.ajax({
+                    method: "GET", // TIPO DE REQUISIÇÃO
+                    url: obterUrlDaAPI("/cronograma_monitoria/" + valorIdcurso),
+                    headers: {
+                        "Authorization": localStorage.getItem("Authorization"),
+                    },
+                    dataType: "text",
+                    contentType: "application/json;charset=UTF-8",
+                    async: true,
+                    success: function (result, status, request) {
+                        if (result != "") {
+                            if (result != "null") {
+                                preencheCamposDoCronogramaMonitoria(result);
+                            }
+                        }
+                    },
+                    error: function (request, status, erro) {
+                        if (request.status = 500) {
+                            // REDIRECIONAR TELA LOGIN - NÃO ESTÁ AUTENTICADO
+                        }
+                    }
+                });
+            });
+
+            $('#btnconsulta').on("click", function (e) {
+                var id_curso = document.getElementById("cboCursos");
+                var valorIdcurso = id_curso.options[id_curso.selectedIndex].value;
+
+                $.ajax({
+                    method: "GET", // TIPO DE REQUISIÇÃO
+                    url: obterUrlDaAPI("/cronograma_monitoria/" + valorIdcurso),
+                    headers: {
+                        "Authorization": localStorage.getItem("Authorization"),
+                    },
+                    dataType: "json",
+                    contentType: "application/json;charset=UTF-8",
+                    async: true,
+                    success: function (result, status, request) {
+                        if (result != null) {
+                            if (valorIdcurso != "") {
+                                preencheCamposTabelaPorCurso(result);
+                                $("#mensagensConsulta ul").empty();
+                                document.getElementById("mensagensConsulta").style.display = "none";
+                            } else {
+                                preencheCamposTabela(result);
+                                $("#mensagensConsulta ul").empty();
+                                document.getElementById("mensagensConsulta").style.display = "inline-block";
+                                $("#mensagensConsulta ul").append("<li>É necessário selecionar pelo menos uma opção no campo curso!</li><br/>");
+                            }
+                        }
+                    },
+                    error: function (request, status, erro) {
+                        if (request.status = 500) {
+                            // REDIRECIONAR TELA LOGIN - NÃO ESTÁ AUTENTICADO
+                        }
+                        if (request.status = 404) {
+                            $('#tabela').empty();
                             $("#mensagensConsulta ul").empty();
                             document.getElementById("mensagensConsulta").style.display = "inline-block";
-                            $("#mensagensConsulta ul").append("<li>É necessário selecionar pelo menos uma opção no campo curso!</li><br/>");
+                            $("#mensagensConsulta ul").append("<li>Não existe nenhum cronograma definido para o curso selecionado!</li><br/>");
                         }
                     }
-                },
-                error: function (request, status, erro) {
-                    if (request.status = 500) {
-                        // REDIRECIONAR TELA LOGIN - NÃO ESTÁ AUTENTICADO
-                    }
-                    if(request.status = 404){
-                        $('#tabela').empty();
-                        $("#mensagensConsulta ul").empty();
-                        document.getElementById("mensagensConsulta").style.display = "inline-block";
-                        $("#mensagensConsulta ul").append("<li>Não existe nenhum cronograma definido para o curso selecionado!</li><br/>");
-                    }
-                }
+                });
             });
-        });
+        }
     }
 });
 

@@ -4,24 +4,30 @@ function mudaFoto(foto) {
 }
 
 function usuarioEstaAutenticado() {
-    $.ajax({
-        method: "GET", // TIPO DE REQUISIÇÃO
-        url: obterUrlDaAPI("/usuario/auth/"), // END POINT DA API
-        headers: {
-            "Authorization": localStorage.getItem("Authorization"),
-        },
-        dataType: "text",
-        async: false,
-        success: function (result, status, request) {
-            if (result === "true") {
-                return true;
+    var retorno = true;
+    if (localStorage.getItem("Authorization") === null || localStorage.getItem("Authorization") === "") { 
+        retorno = false;
+    } else {
+        $.ajax({
+            method: "GET", // TIPO DE REQUISIÇÃO
+            url: obterUrlDaAPI("/usuario/auth/"), // END POINT DA API
+            headers: {
+                "Authorization": localStorage.getItem("Authorization"),
+            },
+            dataType: "text",
+            async: false,
+            success: function (result, status, request) {
+                if (result === "true") {
+                    retorno = true;
+                } 
+            },
+            error: function (request, status, erro) {
+                retorno = false;
             }
-            return false;
-        },
-        error: function (request, status, erro) {
-            return false;
-        }
-    });
+        });
+    }
+    if (retorno === false) { exibaAlerta("É necessário estar autênticado para acessar esta página!"); }
+    return retorno;
 }
 
 // ------------------------------- FUNÇOES DE RECUPERAÇÕES DE INFORMAÇÕES GRAVADAS LOCAL -------------------------------
@@ -31,7 +37,7 @@ function recuperaMatriculaAluno() {
 
 function recuperaTokenParaRequisicao() {
     if (localStorage.getItem("Authorization") === null || localStorage.getItem("Authorization") === "") {
-        alert("Usuário não autenticado ou sessão experiou, faça login novamente!");
+        exibaAlerta("Usuário não autenticado ou sessão experiou, faça login novamente!");
         redirecionarIndexLogin();
     }
     return localStorage.getItem("Authorization");
@@ -42,14 +48,17 @@ function obterUrlDaAPI(direcionamento) {
     return "http://localhost:8080/apimonitoria" + direcionamento;
 }
 
-function redirecionarIndexLogin(){
-    $(location).attr('href', obterUrlDePaginas(""));
-}
-
 function obterUrlDePaginas(direcionamento) {
     return `http://localhost:200/${direcionamento}`;
 }
 
+function redirecionarIndexLogin(){
+    $(location).attr('href', obterUrlDePaginas(""));
+}
+
+function redirecionarMenuPrincipal(){
+    $(location).attr('href', obterUrlDePaginas(""));
+}
 
 function redirecionamentoDePagina(url) {
     $(location).attr('href', obterUrlDePaginas(url));
@@ -82,4 +91,9 @@ function logout() {
     localStorage.clear();
     $(location).attr('href', obterUrlDaAPI("/logout"));
     redirecionarIndexLogin();
+}
+
+// ------------------------------- FUNÇÕES DE MENSAGENS -------------------------------
+function exibaAlerta(mensagem) {
+    alert(mensagem);
 }

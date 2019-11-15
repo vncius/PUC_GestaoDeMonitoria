@@ -3,60 +3,63 @@ $(document).ready(function () {
         redirecionarIndexLogin();
         return;
     } else {
-        carregarCronograma()
-        $("#salvar").click(function (e) {
-            limpaCamposInconsistencias()
+        if (localStorage.getItem("Role") != "ROLE_COORD_CAEME") {
+            redirecionarMenuPrincipal();
+        } else {
+            carregarCronograma()
+            $("#salvar").click(function (e) {
+                limpaCamposInconsistencias()
 
-            if (validaCronogramaGeral()) {
-                var cronogramaGeral = JSON.stringify({
-                    "publicacaoEdital_dtInicio": $('#DtIniPublicacaoEdital').val(),
-                    "publicacaoEdital_dtFim": $('#DtFimPublicacaoEdital').val(),
+                if (validaCronogramaGeral()) {
+                    var cronogramaGeral = JSON.stringify({
+                        "publicacaoEdital_dtInicio": $('#DtIniPublicacaoEdital').val(),
+                        "publicacaoEdital_dtFim": $('#DtFimPublicacaoEdital').val(),
 
-                    "periodoInscricao_dtInicio": $('#DtIniPeriodoDeIncricao').val(),
-                    "periodoInscricao_dtFim": $('#DtFimPeriodoDeIncricao').val(),
+                        "periodoInscricao_dtInicio": $('#DtIniPeriodoDeIncricao').val(),
+                        "periodoInscricao_dtFim": $('#DtFimPeriodoDeIncricao').val(),
 
-                    "periodoAvaliacao_dtInicio": $('#DtIniPeriodoAvaliacao').val(),
-                    "periodoAvaliacao_dtFim": $('#DtFimPeriodoAvaliacao').val(),
+                        "periodoAvaliacao_dtInicio": $('#DtIniPeriodoAvaliacao').val(),
+                        "periodoAvaliacao_dtFim": $('#DtFimPeriodoAvaliacao').val(),
 
-                    "entregaDosResultados_dtInicio": $('#DtIniEntregaDeResultados').val(),
-                    "entregaDosResultados_dtFim": $('#DtFimEntregaDeResultados').val(),
+                        "entregaDosResultados_dtInicio": $('#DtIniEntregaDeResultados').val(),
+                        "entregaDosResultados_dtFim": $('#DtFimEntregaDeResultados').val(),
 
-                    "periodoLetivo_dtInicio": $('#DtIniPeriodoLetivo').val(),
-                    "periodoLetivo_dtFim": $('#DtFimPeriodoLetivo').val(),
+                        "periodoLetivo_dtInicio": $('#DtIniPeriodoLetivo').val(),
+                        "periodoLetivo_dtFim": $('#DtFimPeriodoLetivo').val(),
 
-                    "entregaDosCertificados_dtInicio": $('#DtIniEntregaDeCertificados').val(),
-                    "entregaDosCertificados_dtFim": $('#DtFimEntregaDeCertificados').val()
-                });
+                        "entregaDosCertificados_dtInicio": $('#DtIniEntregaDeCertificados').val(),
+                        "entregaDosCertificados_dtFim": $('#DtFimEntregaDeCertificados').val()
+                    });
 
-                $.ajax({
-                    method: "PUT", // TIPO DE REQUISIÇÃO
-                    url: obterUrlDaAPI("/cronogramaGeral/"),
-                    headers: {
-                        "Authorization": recuperaTokenParaRequisicao(),
-                    },
-                    dataType: "text",
-                    contentType: "application/json;charset=UTF-8",
-                    async: true,
-                    data: cronogramaGeral,
-                    success: function (result, status, request) {
-                        limpaCamposInconsistencias()
-                        if (request.status === 206) {
-                            alert(result + "\nCode status request: " + request.status);
-                        } else {
-                            alert(result);
+                    $.ajax({
+                        method: "PUT", // TIPO DE REQUISIÇÃO
+                        url: obterUrlDaAPI("/cronogramaGeral/"),
+                        headers: {
+                            "Authorization": recuperaTokenParaRequisicao(),
+                        },
+                        dataType: "text",
+                        contentType: "application/json;charset=UTF-8",
+                        async: true,
+                        data: cronogramaGeral,
+                        success: function (result, status, request) {
+                            limpaCamposInconsistencias()
+                            if (request.status === 206) {
+                                exibaAlerta(result + "\nCode status request: " + request.status);
+                            } else {
+                                exibaAlerta(result);
+                            }
+                        },
+                        error: function (request, status, erro) {
+                            if (request.status === 500) {
+                                exibaAlerta(status);
+                            } else {
+                                exibaAlerta("Houve uma falha na requisição!");
+                            }
                         }
-                    },
-                    error: function (request, status, erro) {
-                        if (request.status === 500) {
-                            alert(status);
-                        } else {
-                            alert("Houve uma falha na requisição!");
-                        }
-                    }
-                });
-            }
-        });
-
+                    });
+                }
+            });
+        }
     }
 });
 
@@ -79,7 +82,7 @@ function carregarCronograma() {
         },
         error: function (request, status, erro) {
             if (request.status === 500) {
-                alert(status);
+                exibaAlerta(status);
             }
         }
     });
