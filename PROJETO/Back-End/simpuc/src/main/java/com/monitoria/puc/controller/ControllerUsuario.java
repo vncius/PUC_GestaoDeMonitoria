@@ -41,8 +41,6 @@ public class ControllerUsuario {
 
 	@PostMapping(value = "/", produces = "application/text")
 	public ResponseEntity<String> cadastrar(@RequestBody ModelUsuario usuario) {
-		usuario.setId(null); // CASO OBJ VENHA COM ID PREENCHIDO, ELE É ZERADO PARA VALIDAR QUE END-POINT É
-								// PARA CADASTRO
 		Boolean resultado = usuario.validaSeCamposObrigatoriosPreenchidos();
 		if (resultado) {
 			try {
