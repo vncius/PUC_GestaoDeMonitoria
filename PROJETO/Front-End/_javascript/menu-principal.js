@@ -21,6 +21,9 @@ function validaSeUsuarioLogado() {
 
 function selecioneMenu(role) {
     switch (role) {
+        case "ROLE_ADMIN":
+            $("#div_menu").load(obterUrlDePaginas("menu/menu-adm.html"));
+            break;
         case "ROLE_ALUNO":
             $("#div_menu").load(obterUrlDePaginas("menu/menu-aluno.html"));
             break;

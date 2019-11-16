@@ -3,7 +3,7 @@ $(document).ready(function () {
         redirecionarIndexLogin();
         return;
     } else {
-        if (localStorage.getItem("Role") != "ROLE_COORD_CAEME") {
+        if (localStorage.getItem("Role") != "ROLE_COORD_CAEME" || localStorage.getItem("Role") != "ROLE_ADMIN") {
             redirecionarMenuPrincipal();
         } else {
             carregarCronograma()

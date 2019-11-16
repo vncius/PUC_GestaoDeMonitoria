@@ -27,11 +27,11 @@ public class ModelUsuario implements UserDetails {
 	
 	
 	@ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "fk_role_id", referencedColumnName = "id",nullable = false)
+    @JoinColumn(name = "fk_role_id", referencedColumnName = "id", nullable = false)
 	private Role role;
 	
 	@ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "fk_curso_id", referencedColumnName = "id",nullable = false)
+    @JoinColumn(name = "fk_curso_id", referencedColumnName = "id", nullable = false)
 	private ModelCurso curso;
 
 	public String getNome() {
