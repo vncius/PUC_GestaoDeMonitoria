@@ -3,7 +3,7 @@ $(document).ready(function () {
         redirecionarIndexLogin();
         return;
     } else {
-        if (localStorage.getItem("Role") != "ROLE_COORD_MONITORIA" || localStorage.getItem("Role") != "ROLE_ADMIN") {
+        if (localStorage.getItem("Role") != "ROLE_COORD_MONITORIA" && localStorage.getItem("Role") != "ROLE_ADMIN") {
             redirecionarMenuPrincipal();
         } else {
             $('#formulario').submit(function (e) {

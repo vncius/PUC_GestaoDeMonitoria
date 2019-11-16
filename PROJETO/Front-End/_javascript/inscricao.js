@@ -3,7 +3,7 @@ $(document).ready(function () {
         redirecionarIndexLogin();
         return;
     } else {
-        if (localStorage.getItem("Role") != "ROLE_ALUNO" || localStorage.getItem("Role") != "ROLE_ADMIN") {
+        if (localStorage.getItem("Role") != "ROLE_ALUNO" && localStorage.getItem("Role") != "ROLE_ADMIN") {
             redirecionarMenuPrincipal();
         } else {
             //-------------------------------------------- VALIDAÇÕES PRÉ-CARREGAMENTO
