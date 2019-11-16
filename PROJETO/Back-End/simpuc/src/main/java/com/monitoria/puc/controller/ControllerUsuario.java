@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.monitoria.puc.model.ModelUsuario;
 import com.monitoria.puc.repository.RepositoryUsuario;
 
+/*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
+/*DATA: 16/11/2019*/
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/usuario")

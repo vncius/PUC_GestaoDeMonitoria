@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 
 import org.springframework.security.core.GrantedAuthority;
 
+/*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
+/*DATA: 16/11/2019*/
 @Entity(name = "role")
 public class Role implements GrantedAuthority {
 
