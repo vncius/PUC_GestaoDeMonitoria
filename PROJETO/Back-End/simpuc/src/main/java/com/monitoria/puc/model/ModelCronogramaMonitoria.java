@@ -124,17 +124,17 @@ public class ModelCronogramaMonitoria implements Serializable{
 	
 	public String validaSeEstaNoPeriodoDeInscricao() {
 		Date data = new Date(System.currentTimeMillis());
-		if (data.after(this.dataEditalInicio) || data.before(this.dataEditalFim)) {
+		if (data.after(this.dataEditalInicio) && data.before(this.dataEditalFim)) {
 			return Constantes.PERIODO_PUBLICACAO_EDITAL;
-		} else if (data.after(this.dataInscricaoInicio) || data.before(this.dataInscricaoFim)) {
+		} else if (data.after(this.dataInscricaoInicio) && data.before(this.dataInscricaoFim)) {
 			return Constantes.PERIODO_INSCRICAO;
-		} else if (data.after(this.dataPeriodoAvaliacaoInicio) || data.before(this.dataPeriodoAvaliacaoFim)) {
+		} else if (data.after(this.dataPeriodoAvaliacaoInicio) && data.before(this.dataPeriodoAvaliacaoFim)) {
 			return Constantes.PERIODO_AVALIACAO;
-		} else if (data.after(this.dataEntregaResultadosInicio) || data.before(this.dataEntregaResultadosFim)) {
+		} else if (data.after(this.dataEntregaResultadosInicio) && data.before(this.dataEntregaResultadosFim)) {
 			return Constantes.PERIODO_ENTREGA_RESULTADOS;
-		} else if (data.after(this.dataPeriodoLetivoInicio) || data.before(this.dataPeriodoLetivoFim)) {
+		} else if (data.after(this.dataPeriodoLetivoInicio) && data.before(this.dataPeriodoLetivoFim)) {
 			return Constantes.PERIODO_LETIVO;
-		} else if (data.after(this.dataEntregaCertificadoInicio) || data.before(this.dataEntregaCertificadoFim)) {
+		} else if (data.after(this.dataEntregaCertificadoInicio) && data.before(this.dataEntregaCertificadoFim)) {
 			return Constantes.PERIODO_ENTREGA_CERTIFICADOS;
 		} 
 		return Constantes.PERIODO_NENHUM;
