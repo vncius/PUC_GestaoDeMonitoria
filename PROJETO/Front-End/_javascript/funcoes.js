@@ -57,7 +57,7 @@ function redirecionarIndexLogin(){
 }
 
 function redirecionarMenuPrincipal(){
-    $(location).attr('href', obterUrlDePaginas(""));
+    $(location).attr('href', obterUrlDePaginas("menu-principal.html"));
 }
 
 function redirecionamentoDePagina(url) {
