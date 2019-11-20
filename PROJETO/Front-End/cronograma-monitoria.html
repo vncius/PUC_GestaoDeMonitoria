@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<!--\/-------------------------------------------------------BOOTSTRAP-------------------------------------------------------\/-->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-<!--/\-----------------------------------------------------------------------------------------------------------------------/\-->
-
 <head>
     <meta charset="utf-8" />
-    <title>Monitoria PUC-GO</title>
+    <title>SIMPUC - Cronograma Curso</title>
+    <link rel="icon" href="_imagens/logo-graduacao.png" type="image/png">
     <!--\/-----------CSS da pagina------------\/-->
     <link rel="stylesheet" href="_css/cronograma-geral.css">
     <!--/\------------------------------------/\-->
+    <!--\/-------------------------------------------------------BOOTSTRAP-------------------------------------------------------\/-->
+    <script src="_javascript/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="_css/bootstrap_4.0.min.css">
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <!--/\-----------------------------------------------------------------------------------------------------------------------/\-->
+    <!------------------------ Verify Autenticação ---------------------------->
+    <script src="_javascript/funcoes.js"></script>
+    <!-------------------------------------------------------------------------->
 </head>
 
 <body>
@@ -31,13 +32,13 @@
                     </ul>
                 </div>
                 <div class="col-6" id="camp-dat">
-                         <h4>Curso</h4>
-                            <select name="sel" class="form-control" id="cboCursos">
-                                <option value="">Escolha o curso</option>
-                            </select>
+                    <h4>Curso</h4>
+                    <select name="sel" class="form-control" id="cboCursos">
+                        <option value="">Escolha o curso</option>
+                    </select>
                 </div>
                 <div>
-                    <input type="hidden" id="idCronograma" >
+                    <input type="hidden" id="idCronograma">
                 </div>
                 <aside id="esquerda">
                     <h6>Publicação do Edital</h6>
@@ -102,13 +103,9 @@
                         </div>
                     </div>
                 </aside>
-                
+
             </div>
         </section>
     </div>
-    <script src="_javascript/funcoes.js"></script>
-    <script>
-        usuarioEstaAutenticado();
-    </script>
     <script language="javascript" src="_javascript/cronograma-monitoria.js"></script>
 </body>

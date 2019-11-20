@@ -28,6 +28,8 @@ import com.monitoria.puc.utilidades.Constantes;
 import com.monitoria.puc.utilidades.DTOFichaDeInscricao;
 import com.monitoria.puc.utilidades.Utilidades;
 
+/*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
+/*DATA: 16/11/2019*/
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/fichaInscricao")
@@ -87,9 +89,9 @@ public class ControllerInscricaoMonitoria {
 	@PutMapping(value = "/")
 	public ResponseEntity<String> cadastrar_atualizar(ModelInscricaoMonitoria inscricaoMonitoria, MultipartFile file)
 			throws IOException {
-		HttpStatus retorno = validaSeCursoEmPeriodoDeInscricao(inscricaoMonitoria.getMatricula());
+		String retorno = validaSeCursoEmPeriodoDeInscricao(inscricaoMonitoria.getMatricula());
 				 
-		if (retorno == HttpStatus.OK){
+		if (retorno == Constantes.PERIODO_INSCRICAO){
 			inscricaoMonitoria.setStatusIncricao(Constantes.SITUACAO_CADASTRADA);
 
 			if (inscricaoMonitoria.validaInscricao() && file.getBytes().length > 0) {
@@ -121,8 +123,8 @@ public class ControllerInscricaoMonitoria {
 			} else {
 				return new ResponseEntity<String>("Dados obigatórios não preenchidos.", HttpStatus.PARTIAL_CONTENT);
 			}
-		} else if (retorno == HttpStatus.PARTIAL_CONTENT) {
-			return new ResponseEntity<String>("O curso não está no periodo de inscrição. Periodo de inscrição!", HttpStatus.PARTIAL_CONTENT);
+		} else if (retorno != Constantes.PERIODO_INSCRICAO && retorno != Constantes.SEM_CRONOGRAMA) {
+			return new ResponseEntity<String>("O curso não está no periodo de inscrição.", HttpStatus.PARTIAL_CONTENT);
 		} else {
 			return new ResponseEntity<String>("O curso ainda não possui cronograma de monitoria!", HttpStatus.NOT_FOUND);
 		}
@@ -136,13 +138,14 @@ public class ControllerInscricaoMonitoria {
 		ModelCronogramaMonitoria cronograma = repositoryCronogramaMonitoria.findCronogramaByIdCurso(id_curso);
 		
 		if (cronograma != null) {
-			if (cronograma.validaSeEstaNoPeriodoDeInscricao()) {
+			String retornoValidacao = cronograma.validaSeEstaNoPeriodoDeInscricao();
+			
+			if (retornoValidacao == Constantes.PERIODO_INSCRICAO) {
 				return new ResponseEntity<String>("true", HttpStatus.OK);
 			} else {
 				return new ResponseEntity<String>(
-						String.format("O curso %s não está no periodo de inscrição. Periodo de inscrição: %s a %s",
-								usuario.getCurso().getDescricao(), cronograma.getDataInscricaoInicio(),
-								cronograma.getDataInscricaoFim()),
+						String.format("Não é possivel alterar ou cancelar a inscrição para o curso de %s, pois o mesmo se encontra no periodo de %s.", 
+								usuario.getCurso().getDescricao(), retornoValidacao),
 						HttpStatus.PARTIAL_CONTENT);
 			}
 		} else {
@@ -171,20 +174,15 @@ public class ControllerInscricaoMonitoria {
 		return FILEPATH + "\\" + matricula + "\\" + NAMEFILE;
 	}
 	
-	private HttpStatus validaSeCursoEmPeriodoDeInscricao(String matricula) {
+	private String validaSeCursoEmPeriodoDeInscricao(String matricula) {
 		ModelUsuario usuario = usuarioRepository.findUserByLogin(matricula);
 		long id_curso = usuario.getCurso().getId();
-
 		ModelCronogramaMonitoria cronograma = repositoryCronogramaMonitoria.findCronogramaByIdCurso(id_curso);
 
 		if (cronograma != null) {
-			if (cronograma.validaSeEstaNoPeriodoDeInscricao()) {
-				return HttpStatus.OK;
-			} else {
-				return HttpStatus.PARTIAL_CONTENT;
-			}
+			return cronograma.validaSeEstaNoPeriodoDeInscricao();
 		} else {
-			return HttpStatus.NOT_FOUND;
+			return Constantes.SEM_CRONOGRAMA;
 		}
 	}
 }

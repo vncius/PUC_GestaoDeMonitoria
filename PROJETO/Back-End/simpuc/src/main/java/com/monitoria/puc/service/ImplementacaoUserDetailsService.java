@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.monitoria.puc.model.ModelUsuario;
 import com.monitoria.puc.repository.RepositoryUsuario;
 
+/*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
+/*DATA: 16/11/2019*/
 @Service
 public class ImplementacaoUserDetailsService implements UserDetailsService {
 

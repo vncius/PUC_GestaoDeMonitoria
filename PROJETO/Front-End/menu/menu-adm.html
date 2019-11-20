@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <title>SIMPUC - Menu Principal</title>
+    <!--\/-------------------------------------------------------BOOTSTRAP-------------------------------------------------------\/-->
+    <script src="../_javascript/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--/\-----------------------------------------------------------------------------------------------------------------------/\-->
+    <!--\/-----------CSS da pagina------------\/-->
+    <link rel="stylesheet" href="../_css/_css_menu/menuh-aluno.css">
+    <link rel="stylesheet" href="../_css/_css_menu/menuh-coo-caeme.css">
+    <link rel="stylesheet" href="../_css/_css_menu/menuh-coo-cur.css">
+    <link rel="stylesheet" href="../_css/_css_menu/menuh-coo-moni.css">
+    <link rel="stylesheet" href="../_css/_css_menu/menuh-prof.css">
+    <!--/\------------------------------------/\-->
+    <!--\/------------------------------FONTS GOOGLE----------------------------------------------\/-->
+    <link href="https://fonts.googleapis.com/css?family=Acme|Baloo+Bhaina|Open+Sans&display=swap" rel="stylesheet">
+    <!--/\----------------------------------------------------------------------------------------/\-->
+</head>
+
+<body>
+    <div id=interface>
+        <a onclick="logout();">
+            <div class="sair">Sair</div>
+        </a>
+        <header id="cabecalho">
+            <h1 class="ola">Olá,</h1>
+            <h2 class="nome">Null</h2>
+            <h4 class="matricula">Null</h4>
+            <h3>SIM PUC</h3>
+        </header>
+
+        <section id="corpo">
+            <div id="geral">
+                <aside id="esquerda">
+                    <h3 style="text-align: center; margin: 50px 0">
+                        <a target="_blank" style="text-decoration: none; font-size: 22pt; color: red;">
+                            <!--Para comunicado importantes-->
+                        </a>
+                    </h3>
+                    <a href="../inscricao.html" target="_blank">
+                        <div class="serv inscricao-in">
+                            <p>Realizar Inscrição</p>
+                        </div>
+                    </a>
+                    <a href="../cronograma-monitoria.html" target="_blank">
+                        <div class="serv inscricao-in">
+                            <p>Publicar Cronograma</p>
+                        </div>
+                    </a>
+                    <a href="../consulta-cronograma-monitoria.html" target="_blank">
+                        <div class="serv cronograma">
+                            <p>Consultar Cronograma Monitoria</p>
+                        </div>
+                    </a>
+                    <a href="../not_implemented.html" target="_blank">
+                        <div class="serv consult">
+                            <p>Consultar Inscrições</p>
+                        </div>
+                    </a>
+                    <a href="../not_implemented.html" target="_blank">
+                        <div class="serv geral">
+                            <p>Publicar Resultado Geral</p>
+                        </div>
+                    </a>
+                    <a href="../not_implemented.html" target="_blank">
+                        <div class="serv certific">
+                            <p>Emitir Certificado</p>
+                        </div>
+                    </a>
+                    <a href="../not_implemented.html">
+                        <div class="serv inscricao-in" target="_blank">
+                            <p>Disponibilizar Vagas</p>
+                        </div>
+                    </a>
+                    <a href="../not_implemented.html" target="_blank">
+                        <div class="serv consult">
+                            <p>Consultar Inscrições</p>
+                        </div>
+                    </a>
+                    <a href="../not_implemented.html" target="_blank">
+                        <div class="serv inscricao-in">
+                            <p>Publicar Cronograma do Curso</p>
+                        </div>
+                    </a>
+
+                    <a href="../PublicarEdital.html" target="_blank">
+                        <div class="serv inscricao-in">
+                            <p>Publicar Edital</p>
+                        </div>
+                    </a>
+
+                    <a href="../not_implemented.html" target="_blank">
+                        <div class="serv consult">
+                            <p>Consultar Inscrições</p>
+                        </div>
+                    </a>
+
+                    <a href="../not_implemented.html" target="_blank">
+                        <div class="serv avalia">
+                            <p>Avaliar Inscrições</p>
+                        </div>
+                    </a>
+                    <a href="../solicitar-monitores.html" target="_blank">
+                        <div class="serv inscricao-in">
+                            <p>Solicitar Monitores</p>
+                        </div>
+                    </a>
+                    <a href="../not_implemented.html" target="_blank">
+                        <div class="serv consult">
+                            <p>Consultar Inscrições</p>
+                        </div>
+                    </a>
+                </aside>
+
+                <aside id="direita">
+                    <div class="boxinfo b-graduacao">
+                        <h4>Perfil:</h4>
+                        <p>Administrador</p>
+                    </div>
+                    <div class="avisos">
+                        <img width="100%">
+                    </div>
+                </aside>
+            </div>
+        </section>
+        <script>preencheCamposMenu();</script>
+    </div>
+</body>
+
+</html>

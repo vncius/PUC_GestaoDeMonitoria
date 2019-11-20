@@ -66,7 +66,4 @@ public class ControllerCronogramaMonitoria {
 		List<ModelCronogramaMonitoria> listaCronogramaMonitoria = cronogramaMonitoriaService.listAll();
 		return ResponseEntity.ok(listaCronogramaMonitoria);
 	}
-	
-	
-
 }

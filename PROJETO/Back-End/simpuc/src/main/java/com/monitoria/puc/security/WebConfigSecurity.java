@@ -13,6 +13,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.monitoria.puc.service.ImplementacaoUserDetailsService;
 
+/*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
+/*DATA: 16/11/2019*/
 /*CLASSE DE MAPEAMENTO DE URL/ENDERECOS/END-POINT BLOQUEIA OU LIBERA ACESSO*/
 @Configuration
 @EnableWebSecurity
