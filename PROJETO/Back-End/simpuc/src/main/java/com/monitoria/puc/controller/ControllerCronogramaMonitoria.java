@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.monitoria.puc.model.ModelCronogramaGeral;
 import com.monitoria.puc.model.ModelCronogramaMonitoria;
+import com.monitoria.puc.repository.RepositoryCronogramaGeral;
 import com.monitoria.puc.service.CronogramaMonitoriaService;
 
 @RestController
@@ -22,25 +25,43 @@ public class ControllerCronogramaMonitoria {
 	@Autowired
 	private CronogramaMonitoriaService cronogramaMonitoriaService;
 
+	@Autowired
+	private RepositoryCronogramaGeral cronogramaGeralRepository;
+
 	@PostMapping
-	public ResponseEntity<String> save(@RequestBody ModelCronogramaMonitoria cronogramaMonitoria) {
-		Boolean resultado = cronogramaMonitoria.validaCronogramaMonitoria();
+	public ResponseEntity<String> save(@RequestBody ModelCronogramaMonitoria cronogramaMonitoria) throws Exception {
+		Long idCronogramaGeral = cronogramaGeralRepository.findMaxIdCronogramaGeral();
+		Boolean resultado = false;
+		if (idCronogramaGeral != null) {
+			ModelCronogramaGeral cronogramaGeral = cronogramaGeralRepository.findById(idCronogramaGeral).get();
+			resultado = cronogramaMonitoria.validaCronogramaMonitoria(cronogramaGeral);
+		}
+
 		if (resultado) {
 			try {
+
 				cronogramaMonitoriaService.save(cronogramaMonitoria);
 				return new ResponseEntity<String>("Cronograma monitoria salvo com sucesso.", HttpStatus.OK);
 			} catch (Exception e) {
 				return new ResponseEntity<String>("Houve uma erro interno da API", HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		} else {
-			return new ResponseEntity<String>("Cronograma monitoria não válido. Existe data inicio maior que data fim.",
+			return new ResponseEntity<String>(
+					"Cronograma de curso não válido. Existe data inicio maior que data fim ou está fora do periodo do Cronograma Geral!",
 					HttpStatus.PARTIAL_CONTENT);
 		}
 	}
-	
+
 	@PutMapping("/{id}")
-	public ResponseEntity<String> update(@PathVariable(name = "id") Long id, @RequestBody ModelCronogramaMonitoria cronogramaMonitoria) {
-		Boolean resultado = cronogramaMonitoria.validaCronogramaMonitoria();
+	public ResponseEntity<String> update(@PathVariable(name = "id") Long id,
+			@RequestBody ModelCronogramaMonitoria cronogramaMonitoria) throws Exception {
+		Long idCronogramaGeral = cronogramaGeralRepository.findMaxIdCronogramaGeral();
+		Boolean resultado = false;
+		if (idCronogramaGeral != null) {
+			ModelCronogramaGeral cronogramaGeral = cronogramaGeralRepository.findById(idCronogramaGeral).get();
+			resultado = cronogramaMonitoria.validaCronogramaMonitoria(cronogramaGeral);
+		}
+
 		if (resultado) {
 			try {
 				cronogramaMonitoria.setId(id);
@@ -50,19 +71,20 @@ public class ControllerCronogramaMonitoria {
 				return new ResponseEntity<String>("Houve uma erro interno da API", HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		} else {
-			return new ResponseEntity<String>("Cronograma monitoria não válido. Existe data inicio maior que data fim.",
+			return new ResponseEntity<String>(
+					"Cronograma de curso não válido. Existe data inicio maior que data fim ou está fora do periodo do Cronograma Geral!",
 					HttpStatus.PARTIAL_CONTENT);
 		}
 	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<ModelCronogramaMonitoria> getById(@PathVariable(name = "id") Long id) {
 		ModelCronogramaMonitoria cronogramaMonitoria = cronogramaMonitoriaService.getById(id);
 		return ResponseEntity.ok(cronogramaMonitoria);
 	}
-	
+
 	@GetMapping
-	public ResponseEntity<List<ModelCronogramaMonitoria>> getAll(){
+	public ResponseEntity<List<ModelCronogramaMonitoria>> getAll() {
 		List<ModelCronogramaMonitoria> listaCronogramaMonitoria = cronogramaMonitoriaService.listAll();
 		return ResponseEntity.ok(listaCronogramaMonitoria);
 	}

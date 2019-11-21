@@ -3,7 +3,7 @@ $(document).ready(function () {
         redirecionarIndexLogin();
         return;
     } else {
-        if (localStorage.getItem("Role") != "ROLE_COORD_MONITORIA" && localStorage.getItem("Role") != "ROLE_ADMIN") {
+        if (localStorage.getItem("Role") != "ROLE_COORD_MONITORIA" && localStorage.getItem("Role") != "ROLE_ADMIN" && localStorage.getItem("Role") != "ROLE_COORD_CAEME") {
             redirecionarMenuPrincipal();
         } else {
             carregarComboboxCursos();
@@ -50,15 +50,14 @@ $(document).ready(function () {
                             success: function (result, status, request) {
                                 limpaMensagensDeValidacao();
                                 if (request.status === 206) {
-                                    exibaAlerta(result + "\nCode status request: " + request.status);
+                                    registraInconsistencia(result);
                                 } else {
-                                    exibaAlerta(result);
+                                    registraInconsistencia(result);
                                 }
                             },
                             error: function (request, status, erro) {
                                 if (request.status === 400) {
-                                    $("#mensagens ul").append("<li>Todos os campos são obrigatórios!</li><br/>");
-                                    $("#mensagens").show();
+                                    registraInconsistencia("Todos os campos são obrigatórios!");
                                 }
                             }
                         });
@@ -77,15 +76,14 @@ $(document).ready(function () {
                             success: function (result, status, request) {
                                 limpaMensagensDeValidacao();
                                 if (request.status === 206) {
-                                    exibaAlerta(result + "\nCode status request: " + request.status);
+                                    registraInconsistencia(result);
                                 } else {
-                                    exibaAlerta(result);
+                                    registraInconsistencia(result);
                                 }
                             },
                             error: function (request, status, erro) {
                                 if (request.status === 400) {
-                                    $("#mensagens ul").append("<li>Todos os campos são obrigatórios!</li><br/>");
-                                    $("#mensagens").show();
+                                    registraInconsistencia("Todos os campos são obrigatórios!");
                                 }
                             }
                         });
@@ -139,13 +137,13 @@ $(document).ready(function () {
                         if (result != null) {
                             if (valorIdcurso != "") {
                                 preencheCamposTabelaPorCurso(result);
-                                $("#mensagensConsulta ul").empty();
-                                document.getElementById("mensagensConsulta").style.display = "none";
+                                $("#mensagens ul").empty();
+                                document.getElementById("mensagens").style.display = "none";
                             } else {
                                 preencheCamposTabela(result);
-                                $("#mensagensConsulta ul").empty();
-                                document.getElementById("mensagensConsulta").style.display = "inline-block";
-                                $("#mensagensConsulta ul").append("<li>É necessário selecionar pelo menos uma opção no campo curso!</li><br/>");
+                                $("#mensagens ul").empty();
+                                document.getElementById("mensagens").style.display = "inline-block";
+                                registraInconsistencia("É necessário selecionar pelo menos uma opção no campo curso!");
                             }
                         }
                     },
@@ -155,9 +153,9 @@ $(document).ready(function () {
                         }
                         if (request.status = 404) {
                             $('#tabela').empty();
-                            $("#mensagensConsulta ul").empty();
-                            document.getElementById("mensagensConsulta").style.display = "inline-block";
-                            $("#mensagensConsulta ul").append("<li>Não existe nenhum cronograma definido para o curso selecionado!</li><br/>");
+                            $("#mensagens ul").empty();
+                            document.getElementById("mensagens").style.display = "inline-block";
+                            registraInconsistencia("Não existe nenhum cronograma definido para o curso selecionado!");
                         }
                     }
                 });
