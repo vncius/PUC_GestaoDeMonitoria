@@ -40,6 +40,7 @@ public class ModelCurso implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "curso")
 	private List<ModelUsuario> usuarios;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "curso")
     private List<ModelDisciplina> disciplinas; 
 	

@@ -34,6 +34,10 @@ function recuperaMatriculaAluno() {
     return localStorage.getItem("Matricula");
 }
 
+function recuperaRole(){
+    return localStorage.getItem("Role");
+}
+
 function recuperaTokenParaRequisicao() {
     if (localStorage.getItem("Authorization") === null || localStorage.getItem("Authorization") === "") {
         alert("Usuário não autenticado ou sessão experiou, faça login novamente!");

@@ -110,6 +110,7 @@ $(document).ready(function () {
             error: function (request, status, erro) {
                 if (request.status = 500) {
                     // REDIRECIONAR TELA LOGIN - NÃO ESTÁ AUTENTICADO
+                    alert(status);
                 }
             }
         });
@@ -140,6 +141,7 @@ $(document).ready(function () {
             error: function (request, status, erro) {
                 if (request.status = 500) {
                     // REDIRECIONAR TELA LOGIN - NÃO ESTÁ AUTENTICADO
+                    alert(status);
                 }
             }
         });
@@ -331,6 +333,7 @@ $(document).ready(function () {
             error: function (request, status, erro) {
                 if (request.status = 500) {
                     // REDIRECIONAR TELA LOGIN - NÃO ESTÁ AUTENTICADO
+                    alert(status);
                 }
                 if(request.status = 404){
                     $('#tabela').empty();
@@ -363,6 +366,7 @@ $(document).ready(function () {
             error: function (request, status, erro) {
                 if (request.status = 500) {
                     // REDIRECIONAR TELA LOGIN - NÃO ESTÁ AUTENTICADO
+                    alert(status);
                 }
             }
         });

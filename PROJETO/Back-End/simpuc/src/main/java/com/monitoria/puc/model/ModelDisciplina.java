@@ -2,6 +2,7 @@ package com.monitoria.puc.model;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity(name = "disciplina")
 public class ModelDisciplina implements Serializable {
@@ -21,6 +24,7 @@ public class ModelDisciplina implements Serializable {
 	
 	private String codigoDisciplina;
 	
+	@JsonBackReference
 	@ManyToOne
     @JoinColumn(name = "fk_curso_id", referencedColumnName = "id")
 	private ModelCurso curso;
@@ -31,6 +35,8 @@ public class ModelDisciplina implements Serializable {
 	
 	@OneToMany(mappedBy = "disciplina")
     private List<ModelOrientador> orientadores;
+	
+	private int qtdeVgMonitoria;
 	
 	public boolean isEhSelecionado() {
 		return ehSelecionado;
@@ -71,6 +77,23 @@ public class ModelDisciplina implements Serializable {
 	public void setCodigoDisciplina(String codigoDisciplina) {
 		this.codigoDisciplina = codigoDisciplina;
 	}
+
+	public int getQtdeVgMonitoria() {
+		return qtdeVgMonitoria;
+	}
+
+	public void setQtdeVgMonitoria(int qtdeVgMonitoria) {
+		this.qtdeVgMonitoria = qtdeVgMonitoria;
+	}
+
+	public ModelCurso getCurso() {
+		return curso;
+	}
+
+	public void setCurso(ModelCurso curso) {
+		this.curso = curso;
+	}
 	
 	
+
 }
