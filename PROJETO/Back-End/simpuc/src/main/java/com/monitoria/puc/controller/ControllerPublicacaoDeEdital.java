@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+/*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
+/*DATA: 16/11/2019*/
 @RestController
 @RequestMapping(value = "/edital")
 public class ControllerPublicacaoDeEdital {

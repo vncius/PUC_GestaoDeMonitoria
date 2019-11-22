@@ -15,6 +15,8 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+/*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
+/*DATA: 16/11/2019*/
 @Component
 @Order(value = Ordered.HIGHEST_PRECEDENCE)
 public class CorsFilter implements Filter {
