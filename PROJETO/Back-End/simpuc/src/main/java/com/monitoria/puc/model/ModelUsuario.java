@@ -6,8 +6,6 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -15,36 +13,28 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.monitoria.puc.utilidades.Utilidades;
 
+/*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
+/*DATA: 16/11/2019*/
 @Entity(name = "usuario")
 public class ModelUsuario implements UserDetails {
 	
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private String matricula;
 	
 	private String nome;
 	
 	private String senha;
 	
-	private String matricula;
 	
 	@ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "fk_role_id", referencedColumnName = "id",nullable = false)
+    @JoinColumn(name = "fk_role_id", referencedColumnName = "id", nullable = false)
 	private Role role;
 	
 	@ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "fk_curso_id", referencedColumnName = "id",nullable = false)
+    @JoinColumn(name = "fk_curso_id", referencedColumnName = "id", nullable = false)
 	private ModelCurso curso;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getNome() {
 		return nome;

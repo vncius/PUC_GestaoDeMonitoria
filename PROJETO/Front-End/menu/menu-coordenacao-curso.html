@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <title>SIMPUC - Menu Principal</title>
+    <!--\/-------------------------------------------------------BOOTSTRAP-------------------------------------------------------\/-->
+    <script src="_javascript/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="_css/bootstrap_4.0.min.css">
+    <!--/\-----------------------------------------------------------------------------------------------------------------------/\-->
+    <!--\/-----------CSS da pagina------------\/-->
+    <link rel="stylesheet" href="../_css/_css_menu/menuh-coo-cur.css">
+    <!--/\------------------------------------/\-->
+    <!--\/------------------------------FONTS GOOGLE----------------------------------------------\/-->
+    <link href="https://fonts.googleapis.com/css?family=Acme|Baloo+Bhaina|Open+Sans&display=swap" rel="stylesheet">
+    <!--/\----------------------------------------------------------------------------------------/\-->
+</head>
+
+<body>
+    <div id=interface>
+        <a onclick="logout();">
+            <div class="sair">Sair</div>
+        </a>
+        <header id="cabecalho">
+            <h1 class="ola">Olá,</h1>
+            <h2 class="nome">Null</h2>
+            <h4 class="matricula">Null</h4>
+        </header>
+
+        <section id="corpo">
+            <div id="geral">
+                <aside id="esquerda">
+                    <h3 style="text-align: center; margin: 50px 0">
+                        <a target="_blank" style="text-decoration: none; font-size: 22pt; color: red;">
+                            <!--Para comunicado importantes-->
+                        </a>
+                    </h3>
+                    <!-- <a href="../not_implemented.html">
+                        <div class="serv inscricao-in" target="_blank">
+                            <p>Disponibilizar Vagas</p>
+                        </div>
+                    </a> -->
+                    <a href="../consultar-inscricao.html" target="_blank">
+                        <!--Colocar href com nome verdadeiro-->
+                        <div class="serv consult">
+                            <p>Consultar Inscrições</p>
+                        </div>
+                    </a>
+                </aside>
+
+                <aside id="direita">
+                    <div class="boxinfo b-graduacao">
+                        <h4>Perfil:</h4>
+                        <p>Coordenado do Curso</p>
+                    </div>
+                    <div class="avisos">
+                        <img width="100%">
+                    </div>
+                </aside>
+            </div>
+        </section>
+        <script>preencheCamposMenu();</script>
+    </div>
+</body>
+
+</html>

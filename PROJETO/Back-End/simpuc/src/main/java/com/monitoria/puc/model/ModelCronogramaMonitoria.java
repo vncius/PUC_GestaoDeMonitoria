@@ -14,6 +14,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.monitoria.puc.utilidades.Constantes;
 import com.monitoria.puc.utilidades.Utilidades;
 
 @Entity(name = "cronogramaMonitoria")
@@ -102,31 +103,88 @@ public class ModelCronogramaMonitoria implements Serializable{
     @NotNull(message = "Campo data Obrigatório!")
     private Date dataEntregaCertificadoFim;
 	
-	public Boolean validaCronogramaMonitoria() {
-		if (Utilidades.validaSeDataInicioMaiorQueDataFimDate(this.dataEditalInicio, this.dataEditalFim))
-			return false;
-		if (Utilidades.validaSeDataInicioMaiorQueDataFimDate(this.dataInscricaoInicio, this.dataInscricaoFim))
-			return false;
-		if (Utilidades.validaSeDataInicioMaiorQueDataFimDate(this.dataPeriodoAvaliacaoInicio,
-				this.dataPeriodoAvaliacaoFim))
-			return false;
-		if (Utilidades.validaSeDataInicioMaiorQueDataFimDate(this.dataEntregaResultadosInicio,
-				this.dataEntregaResultadosFim))
-			return false;
-		if (Utilidades.validaSeDataInicioMaiorQueDataFimDate(this.dataPeriodoLetivoInicio, this.dataPeriodoLetivoFim))
-			return false;
-		if (Utilidades.validaSeDataInicioMaiorQueDataFimDate(this.dataEntregaCertificadoInicio,
-				this.dataEntregaCertificadoFim))
-			return false;
-		return true;
+	public String validaSeEstaNoPeriodoDeInscricao() {
+		Date data = new Date(System.currentTimeMillis());
+		if (data.after(this.dataEditalInicio) && data.before(this.dataEditalFim)) {
+			return Constantes.PERIODO_PUBLICACAO_EDITAL;
+		} else if (data.after(this.dataInscricaoInicio) && data.before(this.dataInscricaoFim)) {
+			return Constantes.PERIODO_INSCRICAO;
+		} else if (data.after(this.dataPeriodoAvaliacaoInicio) && data.before(this.dataPeriodoAvaliacaoFim)) {
+			return Constantes.PERIODO_AVALIACAO;
+		} else if (data.after(this.dataEntregaResultadosInicio) && data.before(this.dataEntregaResultadosFim)) {
+			return Constantes.PERIODO_ENTREGA_RESULTADOS;
+		} else if (data.after(this.dataPeriodoLetivoInicio) && data.before(this.dataPeriodoLetivoFim)) {
+			return Constantes.PERIODO_LETIVO;
+		} else if (data.after(this.dataEntregaCertificadoInicio) && data.before(this.dataEntregaCertificadoFim)) {
+			return Constantes.PERIODO_ENTREGA_CERTIFICADOS;
+		} 
+		return Constantes.PERIODO_NENHUM;
 	}
 	
-	public Boolean validaSeEstaNoPeriodoDeInscricao() {
-		Date data = new Date(System.currentTimeMillis());
-		if (data.after(this.dataInscricaoFim) || data.before(this.dataInscricaoInicio)) {
-			return false;
-		}
-		return true;
+	public Boolean validaCronogramaMonitoria(ModelCronogramaGeral cronogramaGeral) throws Exception {
+		boolean retorno = true;
+		
+		if (Utilidades.validaSeDataInicioMaiorQueDataFimDate(this.dataEditalInicio, this.dataEditalFim) == false) {
+			if (Utilidades.validaSeDataEstaDentroDeUmPeriodoInformado(
+					this.dataEditalInicio,
+					this.dataEditalFim, 
+					Utilidades.convertDataStringEmDate(cronogramaGeral.getPublicacaoEdital_dtInicio()).getTime(), 
+					Utilidades.convertDataStringEmDate(cronogramaGeral.getPublicacaoEdital_dtFim()).getTime()) == false) {
+				retorno = false;
+			}
+		} else { retorno = false; }
+		
+		if (Utilidades.validaSeDataInicioMaiorQueDataFimDate(this.dataInscricaoInicio, this.dataInscricaoFim) == false) {
+			if (Utilidades.validaSeDataEstaDentroDeUmPeriodoInformado(
+					this.dataInscricaoInicio,
+					this.dataInscricaoFim, 
+					Utilidades.convertDataStringEmDate(cronogramaGeral.getPeriodoInscricao_dtInicio()).getTime(), 
+					Utilidades.convertDataStringEmDate(cronogramaGeral.getPeriodoInscricao_dtFim()).getTime()) == false) {
+				retorno = false;
+			}
+		} else { retorno = false; }
+		
+		if (Utilidades.validaSeDataInicioMaiorQueDataFimDate(this.dataPeriodoAvaliacaoInicio, this.dataPeriodoAvaliacaoFim) == false) {
+			if (Utilidades.validaSeDataEstaDentroDeUmPeriodoInformado(
+					this.dataPeriodoAvaliacaoInicio,
+					this.dataPeriodoAvaliacaoFim, 
+					Utilidades.convertDataStringEmDate(cronogramaGeral.getPeriodoAvaliacao_dtInicio()).getTime(), 
+					Utilidades.convertDataStringEmDate(cronogramaGeral.getPeriodoAvaliacao_dtFim()).getTime()) == false) {
+				retorno = false;
+			}
+		} else { retorno = false; }
+		
+		if (Utilidades.validaSeDataInicioMaiorQueDataFimDate(this.dataEntregaResultadosInicio, this.dataEntregaResultadosFim) == false) {
+			if (Utilidades.validaSeDataEstaDentroDeUmPeriodoInformado(
+					this.dataEntregaResultadosInicio,
+					this.dataEntregaResultadosFim, 
+					Utilidades.convertDataStringEmDate(cronogramaGeral.getEntregaDosResultados_dtInicio()).getTime(), 
+					Utilidades.convertDataStringEmDate(cronogramaGeral.getEntregaDosResultados_dtFim()).getTime()) == false) {
+				retorno = false;
+			}
+		} else { retorno = false; }
+		
+		if (Utilidades.validaSeDataInicioMaiorQueDataFimDate(this.dataPeriodoLetivoInicio, this.dataPeriodoLetivoFim) == false) {
+			if (Utilidades.validaSeDataEstaDentroDeUmPeriodoInformado(
+					this.dataPeriodoLetivoInicio,
+					this.dataPeriodoLetivoFim, 
+					Utilidades.convertDataStringEmDate(cronogramaGeral.getPeriodoLetivo_dtInicio()).getTime(), 
+					Utilidades.convertDataStringEmDate(cronogramaGeral.getPeriodoLetivo_dtFim()).getTime()) == false) {
+				retorno = false;
+			}
+		} else { retorno = false; }
+		
+		if (Utilidades.validaSeDataInicioMaiorQueDataFimDate(this.dataEntregaCertificadoInicio, this.dataEntregaCertificadoFim) == false) {
+			if (Utilidades.validaSeDataEstaDentroDeUmPeriodoInformado(
+					this.dataEntregaCertificadoInicio,
+					this.dataEntregaCertificadoFim, 
+					Utilidades.convertDataStringEmDate(cronogramaGeral.getEntregaDosCertificados_dtInicio()).getTime(), 
+					Utilidades.convertDataStringEmDate(cronogramaGeral.getEntregaDosCertificados_dtFim()).getTime()) == false) {
+				retorno = false;
+			}
+		} else { retorno = false; }
+
+		return retorno;
 	}
 
 	public Long getId() {

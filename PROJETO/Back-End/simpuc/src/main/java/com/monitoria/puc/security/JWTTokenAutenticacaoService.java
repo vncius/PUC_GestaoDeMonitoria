@@ -18,6 +18,8 @@ import com.monitoria.puc.repository.RepositoryUsuario;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+/*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
+/*DATA: 16/11/2019*/
 @Service
 @Component
 public class JWTTokenAutenticacaoService {

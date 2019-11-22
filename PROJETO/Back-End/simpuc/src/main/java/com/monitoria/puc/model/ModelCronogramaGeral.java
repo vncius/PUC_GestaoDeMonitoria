@@ -9,6 +9,8 @@ import javax.persistence.Id;
 
 import com.monitoria.puc.utilidades.Utilidades;
 
+/*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
+/*DATA: 16/11/2019*/
 @Entity(name="cronograma_geral")
 public class ModelCronogramaGeral implements Serializable {
 
