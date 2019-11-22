@@ -10,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.monitoria.puc.model.ModelDisciplina;
 
-/*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
-/*DATA: 16/11/2019*/
 @Repository
 public interface RepositoryDisciplina extends CrudRepository<ModelDisciplina, Long> {
 	

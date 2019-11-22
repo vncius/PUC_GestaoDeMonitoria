@@ -8,8 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-/*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
-/*DATA: 16/11/2019*/
 @Entity(name = "orientador")
 public class ModelOrientador implements Serializable {
 

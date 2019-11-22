@@ -5,8 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
-/*DATA: 16/11/2019*/
 @SuppressWarnings("rawtypes")
 @RestController
 public class ControllerIndex {

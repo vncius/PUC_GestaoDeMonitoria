@@ -17,8 +17,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.monitoria.puc.model.ModelUsuario;
 
-/*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
-/*DATA: 16/11/2019*/
 /*ESTABELECE O GERENCIADOR DO TOKEN*/
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 

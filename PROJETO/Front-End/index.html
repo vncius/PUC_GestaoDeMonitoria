@@ -4,12 +4,13 @@
 <head>
     <meta charset="utf-8" />
     <title>Monitoria PUC-GO</title>
-    <link rel="icon" href="_imagens/logo-graduacao.png" type="image/png">
+    <link rel="icon" href="" type="image/png">
     <!--\/-----------CSS da pagina------------\/-->
     <link rel="stylesheet" href="_css/index.css">
     <!--/\------------------------------------/\-->
     <!--\/-------------------------------------------------------BOOTSTRAP-------------------------------------------------------\/-->
-    <script src="_javascript/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
@@ -19,9 +20,14 @@
     <script language="javascript" src="_javascript/index.js"></script>
     <!--/\-----------------------------------------------------------------------------------------------------------------------/\-->
 </head>
-    <body>
-        <div id=interface>
-            <section id="corpo">
+
+<body>
+    <div id=interface>
+        <section id="corpo">
+            <img id="puc" src="_imagens/pucgo.png" />
+
+            <aside id="campos-corpo">
+
                 <header id="cabecalho-corpo">
                     <h5>SIMPUC</h5>
                 </header>
@@ -35,14 +41,21 @@
                     <input type="Senha" id="inputSenha" class="form-control" placeholder="Senha" required="">
                 </div>
 
+                <!--<div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" value="lembrar de mim"> Lembrar de mim
+                    </label>
+                </div>-->
+                <!--Lembre de min CANCELADO-->
+
                 <a href="">Esqueci minha senha</a>
                 <a href="">Cadastre-se</a>
 
                 <div class="container theme-showcase" role="main">
-                    <button class="btn-lg btn-sample" id="btnEntrar"><p>Entrar</p></button>
+                    <button class="btn-lg btn-sample" id="btnEntrar">Entrar</button>
                 </div>
-            </section>
-        </div>
-        <script src="_javascript/funcoes.js"></script>
-    </body>
-</html>
+            </aside>
+        </section>
+    </div>
+    <script src="_javascript/funcoes.js"></script>
+</body>

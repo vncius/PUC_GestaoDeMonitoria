@@ -17,7 +17,7 @@ public class CursoService {
 	private RepositoryCurso repositoryCurso;
 	
 	public List<ModelCurso> listAll(){
-		List<ModelCurso> listaDeCursos = repositoryCurso.findCursosByRegra();
+		List<ModelCurso> listaDeCursos = repositoryCurso.findAll();
 		return listaDeCursos;
 	}
 	

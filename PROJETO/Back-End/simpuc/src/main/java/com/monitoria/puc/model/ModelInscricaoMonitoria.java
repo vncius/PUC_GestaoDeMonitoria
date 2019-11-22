@@ -10,8 +10,6 @@ import com.monitoria.puc.repository.RepositoryCurso;
 import com.monitoria.puc.utilidades.DTOFichaDeInscricao;
 import com.monitoria.puc.utilidades.Utilidades;
 
-/*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
-/*DATA: 16/11/2019*/
 @Entity(name = "incricao_monitoria")
 public class ModelInscricaoMonitoria implements Serializable {
 

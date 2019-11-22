@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.monitoria.puc.model.ModelCronogramaGeral;
 import com.monitoria.puc.repository.RepositoryCronogramaGeral;
 
-/*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
-/*DATA: 16/11/2019*/
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/cronogramaGeral")

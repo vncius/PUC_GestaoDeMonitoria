@@ -6,9 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +28,6 @@ import com.monitoria.puc.utilidades.Constantes;
 import com.monitoria.puc.utilidades.DTOFichaDeInscricao;
 import com.monitoria.puc.utilidades.Utilidades;
 
-/*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
-/*DATA: 16/11/2019*/
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/fichaInscricao")
@@ -53,123 +48,6 @@ public class ControllerInscricaoMonitoria {
 	@Autowired
 	private RepositoryFichaDeInscricao fichaDeInscricaoRepository;
 
-	@PutMapping(value = "/")
-	public ResponseEntity<String> cadastrar_atualizar(ModelInscricaoMonitoria inscricaoMonitoria, MultipartFile file)
-			throws IOException {
-		String retorno = validaSeCursoEmPeriodoDeInscricao(inscricaoMonitoria.getMatricula());
-				 
-		if (retorno == Constantes.PERIODO_INSCRICAO){
-			inscricaoMonitoria.setStatusIncricao(Constantes.SITUACAO_CADASTRADA);
-
-			if (inscricaoMonitoria.validaInscricao() && file.getBytes().length > 0) {
-				String matricula = inscricaoMonitoria.getMatricula();
-				try {
-					fichaDeInscricaoRepository.save(inscricaoMonitoria);
-					if (Utilidades.validaSeArquivoEhValido(file.getBytes())) {
-						byte[] pdf = file.getBytes();
-						File file2 = new File(geraCaminhoDiretorioParaAnexos(matricula));
-						if (!file2.exists()) {
-							file2.mkdirs();
-						}
-						file2 = new File(geraNomeDoArquivoECaminhoDoAnexo(matricula));
-						OutputStream outputStream = new FileOutputStream(file2);
-						outputStream.write(pdf);
-						outputStream.flush();
-						outputStream.close();
-					}
-					String mensagem = "";
-					if (inscricaoMonitoria.getId() > 0) {
-						mensagem = String.format("Inscrição do aluno %s foi atualizado!", inscricaoMonitoria.getNome());
-					} else {
-						mensagem = String.format("Inscrição do aluno %s foi registrada!", inscricaoMonitoria.getNome());
-					}
-					return new ResponseEntity<String>(mensagem, HttpStatus.OK);
-				} catch (Exception e) {
-					return new ResponseEntity<String>("Houve uma erro interno da API", HttpStatus.INTERNAL_SERVER_ERROR);
-				}
-			} else {
-				return new ResponseEntity<String>("Dados obigatórios não preenchidos.", HttpStatus.PARTIAL_CONTENT);
-			}
-		} else if (retorno != Constantes.PERIODO_INSCRICAO && retorno != Constantes.SEM_CRONOGRAMA) {
-			return new ResponseEntity<String>("O curso não está no periodo de inscrição.", HttpStatus.PARTIAL_CONTENT);
-		} else {
-			return new ResponseEntity<String>("O curso ainda não possui cronograma de monitoria!", HttpStatus.NOT_FOUND);
-		}
-	}
-
-	@GetMapping(value = "/EstaNoCronograma/{matricula}", produces = "application/json")
-	public ResponseEntity<String> cursoEstaEmPeriodoDeInscricao(@PathVariable(value = "matricula") String matricula) {
-		ModelUsuario usuario = usuarioRepository.findUserByLogin(matricula);
-		long id_curso = usuario.getCurso().getId();
-		
-		ModelCronogramaMonitoria cronograma = repositoryCronogramaMonitoria.findCronogramaByIdCurso(id_curso);
-		
-		if (cronograma != null) {
-			String retornoValidacao = cronograma.validaSeEstaNoPeriodoDeInscricao();
-			
-			if (retornoValidacao == Constantes.PERIODO_INSCRICAO) {
-				return new ResponseEntity<String>("true", HttpStatus.OK);
-			} else {
-				return new ResponseEntity<String>(
-						String.format("Não é possivel alterar ou cancelar a inscrição para o curso de %s, pois o mesmo se encontra no periodo de %s.", 
-								usuario.getCurso().getDescricao(), retornoValidacao),
-						HttpStatus.PARTIAL_CONTENT);
-			}
-		} else {
-			return new ResponseEntity<String>(String.format("O curso %s ainda não possui cronograma de monitoria!",
-					usuario.getCurso().getDescricao()), HttpStatus.NOT_FOUND);
-		}
-	}
-
-	@DeleteMapping(value = "/{id}", produces = "application/text")
-	public ResponseEntity<String> cancelarInscricao(@PathVariable(value = "id") Long id) {
-		ModelInscricaoMonitoria inscricao = fichaDeInscricaoRepository.findById(id).get();
-		inscricao.setStatusIncricao(Constantes.SITUACAO_CANCELADA);
-		try {
-			fichaDeInscricaoRepository.save(inscricao);
-			return new ResponseEntity<String>("Inscrição cancelada com sucesso!", HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<String>("Houve uma erro interno da API", HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
-	private static String geraCaminhoDiretorioParaAnexos(String matricula) {
-		return FILEPATH + "\\" + matricula + "\\";
-	}
-
-	private static String geraNomeDoArquivoECaminhoDoAnexo(String matricula) {
-		return FILEPATH + "\\" + matricula + "\\" + NAMEFILE;
-	}
-	
-	private String validaSeCursoEmPeriodoDeInscricao(String matricula) {
-		ModelUsuario usuario = usuarioRepository.findUserByLogin(matricula);
-		long id_curso = usuario.getCurso().getId();
-		ModelCronogramaMonitoria cronograma = repositoryCronogramaMonitoria.findCronogramaByIdCurso(id_curso);
-
-		if (cronograma != null) {
-			return cronograma.validaSeEstaNoPeriodoDeInscricao();
-		} else {
-			return Constantes.SEM_CRONOGRAMA;
-		}
-	}
-	
-	// ----------------------------------------------------- CONSULTAS
-	
-	@GetMapping(value = "/", produces = "application/json")
-	public ResponseEntity<List<DTOFichaDeInscricao>> consultaPorTodosFiltros() {
-		List<DTOFichaDeInscricao> listaInscricoesDTO = new ArrayList<DTOFichaDeInscricao>();
-		
-		try {
-			Iterable<ModelInscricaoMonitoria> listaInscricoesModel = fichaDeInscricaoRepository.findAll();
-			listaInscricoesModel.forEach(inscricaoModel -> { 
-				listaInscricoesDTO.add(inscricaoModel.converteModelEmDTOParaConsulta(cursoRepository));
-			});
-			return new ResponseEntity<List<DTOFichaDeInscricao>>(listaInscricoesDTO, HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<List<DTOFichaDeInscricao>>(listaInscricoesDTO, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-	
 	@GetMapping(value = "/{matricula}", produces = "application/json")
 	public ResponseEntity<DTOFichaDeInscricao> consultarPorMatricula(
 			@PathVariable(value = "matricula") String matricula) {
@@ -203,6 +81,110 @@ public class ControllerInscricaoMonitoria {
 			return new ResponseEntity<byte[]>(editalEmBytes, HttpStatus.OK); // 200
 		} catch (IOException e) {
 			return new ResponseEntity<byte[]>(editalEmBytes, HttpStatus.INTERNAL_SERVER_ERROR); // 500
+		}
+	}
+
+	@PutMapping(value = "/")
+	public ResponseEntity<String> cadastrar_atualizar(ModelInscricaoMonitoria inscricaoMonitoria, MultipartFile file)
+			throws IOException {
+		HttpStatus retorno = validaSeCursoEmPeriodoDeInscricao(inscricaoMonitoria.getMatricula());
+				 
+		if (retorno == HttpStatus.OK){
+			inscricaoMonitoria.setStatusIncricao(Constantes.SITUACAO_CADASTRADA);
+
+			if (inscricaoMonitoria.validaInscricao() && file.getBytes().length > 0) {
+				String matricula = inscricaoMonitoria.getMatricula();
+				try {
+					fichaDeInscricaoRepository.save(inscricaoMonitoria);
+					if (Utilidades.validaSeArquivoEhValido(file.getBytes())) {
+						byte[] pdf = file.getBytes();
+						File file2 = new File(geraCaminhoDiretorioParaAnexos(matricula));
+						if (!file2.exists()) {
+							file2.mkdirs();
+						}
+						file2 = new File(geraNomeDoArquivoECaminhoDoAnexo(matricula));
+						OutputStream outputStream = new FileOutputStream(file2);
+						outputStream.write(pdf);
+						outputStream.flush();
+						outputStream.close();
+					}
+					String mensagem = "";
+					if (inscricaoMonitoria.getId() > 0) {
+						mensagem = String.format("Inscrição do aluno %s foi atualizado!", inscricaoMonitoria.getNome());
+					} else {
+						mensagem = String.format("Inscrição do aluno %s foi registrada!", inscricaoMonitoria.getNome());
+					}
+					return new ResponseEntity<String>(mensagem, HttpStatus.OK);
+				} catch (Exception e) {
+					return new ResponseEntity<String>("Houve uma erro interno da API", HttpStatus.INTERNAL_SERVER_ERROR);
+				}
+			} else {
+				return new ResponseEntity<String>("Dados obigatórios não preenchidos.", HttpStatus.PARTIAL_CONTENT);
+			}
+		} else if (retorno == HttpStatus.PARTIAL_CONTENT) {
+			return new ResponseEntity<String>("O curso não está no periodo de inscrição. Periodo de inscrição!", HttpStatus.PARTIAL_CONTENT);
+		} else {
+			return new ResponseEntity<String>("O curso ainda não possui cronograma de monitoria!", HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@GetMapping(value = "/EstaNoCronograma/{matricula}", produces = "application/json")
+	public ResponseEntity<String> cursoEstaEmPeriodoDeInscricao(@PathVariable(value = "matricula") String matricula) {
+		ModelUsuario usuario = usuarioRepository.findUserByLogin(matricula);
+		long id_curso = usuario.getCurso().getId();
+		
+		ModelCronogramaMonitoria cronograma = repositoryCronogramaMonitoria.findCronogramaByIdCurso(id_curso);
+		
+		if (cronograma != null) {
+			if (cronograma.validaSeEstaNoPeriodoDeInscricao()) {
+				return new ResponseEntity<String>("true", HttpStatus.OK);
+			} else {
+				return new ResponseEntity<String>(
+						String.format("O curso %s não está no periodo de inscrição. Periodo de inscrição: %s a %s",
+								usuario.getCurso().getDescricao(), cronograma.getDataInscricaoInicio(),
+								cronograma.getDataInscricaoFim()),
+						HttpStatus.PARTIAL_CONTENT);
+			}
+		} else {
+			return new ResponseEntity<String>(String.format("O curso %s ainda não possui cronograma de monitoria!",
+					usuario.getCurso().getDescricao()), HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@DeleteMapping(value = "/{id}", produces = "application/text")
+	public ResponseEntity<String> cancelarInscricao(@PathVariable(value = "id") Long id) {
+		ModelInscricaoMonitoria inscricao = fichaDeInscricaoRepository.findById(id).get();
+		inscricao.setStatusIncricao(Constantes.SITUACAO_CANCELADA);
+		try {
+			fichaDeInscricaoRepository.save(inscricao);
+			return new ResponseEntity<String>("Inscrição cancelada com sucesso!", HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<String>("Houve uma erro interno da API", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	private static String geraCaminhoDiretorioParaAnexos(String matricula) {
+		return FILEPATH + "\\" + matricula + "\\";
+	}
+
+	private static String geraNomeDoArquivoECaminhoDoAnexo(String matricula) {
+		return FILEPATH + "\\" + matricula + "\\" + NAMEFILE;
+	}
+	
+	private HttpStatus validaSeCursoEmPeriodoDeInscricao(String matricula) {
+		ModelUsuario usuario = usuarioRepository.findUserByLogin(matricula);
+		long id_curso = usuario.getCurso().getId();
+
+		ModelCronogramaMonitoria cronograma = repositoryCronogramaMonitoria.findCronogramaByIdCurso(id_curso);
+
+		if (cronograma != null) {
+			if (cronograma.validaSeEstaNoPeriodoDeInscricao()) {
+				return HttpStatus.OK;
+			} else {
+				return HttpStatus.PARTIAL_CONTENT;
+			}
+		} else {
+			return HttpStatus.NOT_FOUND;
 		}
 	}
 }

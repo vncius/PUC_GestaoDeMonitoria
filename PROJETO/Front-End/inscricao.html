@@ -5,21 +5,16 @@
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="icon" href="_imagens/logo-graduacao.png" type="image/png">
-	<title>SIMPUC - Inscrição</title>
+	<title>SIMPUC</title>
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="_css/bootstrap_4.0.min.css">
+	<link rel="stylesheet" href="_css/bootstrap.css">
 	<link rel="stylesheet" href="_css/font-awesome.min.css">
 	<!-- main css -->
 	<link rel="stylesheet" href="_css/inscricao.css">
 	<link rel="stylesheet" href="_css/responsive.css">
 	<!-- javascript -->
-	<script src="_javascript/jquery-3.4.1.min.js"></script>
 	<script src="_javascript/jquery.mask.js"></script>
 	<script src="_javascript/jquery.mask.min.js"></script>
-	<!------------------------ Verify Autenticação ---------------------------->
-	<script src="_javascript/funcoes.js"></script>
-	<!-------------------------------------------------------------------------->
 </head>
 
 <body id="body">
@@ -79,7 +74,7 @@
 					<div class="form-row ">
 						<div class="col">
 							<label for="telefone">Telefone</label>
-							<input type="text" class="form-control" id="telefone" minlength="15" maxlength="16" name="telefone" required />
+							<input type="text" class="form-control" id="telefone" name="telefone" required />
 							<script type="text/javascript">$("#telefone").mask("(00) 0 0000-0000");</script>
 						</div>
 
@@ -233,5 +228,10 @@
 		</div>
 	</section>
 </body>
+<script src="_javascript/funcoes.js"></script>
+<script>
+	usuarioEstaAutenticado();
+</script>
 <script language="javascript" src="_javascript/inscricao.js"></script>
+
 </html>

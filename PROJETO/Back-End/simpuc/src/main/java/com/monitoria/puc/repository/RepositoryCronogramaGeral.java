@@ -5,8 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import com.monitoria.puc.model.ModelCronogramaGeral;
 
-/*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
-/*DATA: 16/11/2019*/
 @Repository
 public interface RepositoryCronogramaGeral extends CrudRepository<ModelCronogramaGeral, Long> {
 	

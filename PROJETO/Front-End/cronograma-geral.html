@@ -1,26 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
+<!--\/-------------------------------------------------------BOOTSTRAP-------------------------------------------------------\/-->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+<!--/\-----------------------------------------------------------------------------------------------------------------------/\-->
+
 <head>
     <meta charset="utf-8" />
-    <title>SIMPUC - Cronograma Monitoria</title>
-    <link rel="icon" href="_imagens/logo-graduacao.png" type="image/png">
-    <!--\/-------------------------------------------------------BOOTSTRAP-------------------------------------------------------\/-->
-    <script src="_javascript/jquery-3.4.1.min.js"></script>
-    <link rel="stylesheet" href="_css/bootstrap_4.0.min.css">
-    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-    <!--/\-----------------------------------------------------------------------------------------------------------------------/\-->
-
+    <title>Monitoria PUC-GO</title>
+    <link rel="icon" href="" type="image/png">
     <!--\/-----------CSS da pagina------------\/-->
     <link rel="stylesheet" href="_css/cronograma-geral.css">
     <!--/\------------------------------------/\-->
-    <!------------------------ Verify Autenticação ---------------------------->
-	<script src="_javascript/funcoes.js"></script>
-	<script>
-		//if(usuarioEstaAutenticado() === false) { redirecionarIndexLogin(); }
-	</script>
-	<!-------------------------------------------------------------------------->
 </head>
 
 <body>
@@ -40,27 +36,27 @@
                     <h6>Publicação do Edital</h6>
                     <div class="col-14" id="camp-dat">
                         <ul>
-                            <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtIniPublicacaoEdital"></li>
+                            <li><input class="form-control" required type="date" id="DtIniPublicacaoEdital"></li>
                             <li><span>a</span></li>
-                            <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtFimPublicacaoEdital"></li>
+                            <li><input class="form-control" required type="date" id="DtFimPublicacaoEdital"></li>
                         </ul>
                     </div>
 
                     <h6>Período de Inscrição</h6>
                     <div class="col-14" id="camp-dat">
                         <ul type="circ">
-                            <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtIniPeriodoDeIncricao"></li>
+                            <li><input class="form-control" required type="date" id="DtIniPeriodoDeIncricao"></li>
                             <li><span>a</span></li>
-                            <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtFimPeriodoDeIncricao"></li>
+                            <li><input class="form-control" required type="date" id="DtFimPeriodoDeIncricao"></li>
                         </ul>
                     </div>
 
                     <h6>Período de Avaliação</h6>
                     <div class="col-14" id="camp-dat">
                         <ul type="circ">
-                            <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtIniPeriodoAvaliacao"></li>
+                            <li><input class="form-control" required type="date" id="DtIniPeriodoAvaliacao"></li>
                             <li><span>a</span></li>
-                            <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtFimPeriodoAvaliacao"></li>
+                            <li><input class="form-control" required type="date" id="DtFimPeriodoAvaliacao"></li>
                         </ul>
                     </div>
                 </aside>
@@ -68,7 +64,7 @@
                     <h6>Entrega dos Resultados</h6>
                     <div class="col-14" id="camp-dat">
                         <ul type="circ">
-                            <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtIniEntregaDeResultados"></li>
+                            <li><input class="form-control" required type="date" id="DtIniEntregaDeResultados"></li>
                             <li><span>a</span></li>
                             <li><input class="form-control" required type="date" id="DtFimEntregaDeResultados"></li>
                         </ul>
@@ -77,18 +73,18 @@
                     <h6>Período Letivo</h6>
                     <div class="col-14" id="camp-dat">
                         <ul type="circ">
-                            <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtIniPeriodoLetivo"></li>
+                            <li><input class="form-control" required type="date" id="DtIniPeriodoLetivo"></li>
                             <li><span>a</span></li>
-                            <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtFimPeriodoLetivo"></li>
+                            <li><input class="form-control" required type="date" id="DtFimPeriodoLetivo"></li>
                         </ul>
                     </div>
 
                     <h6>Entrega dos Certificados</h6>
                     <div class="col-14" id="camp-dat">
                         <ul type="circ">
-                            <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtIniEntregaDeCertificados"></li>
+                            <li><input class="form-control" required type="date" id="DtIniEntregaDeCertificados"></li>
                             <li><span>a</span></li>
-                            <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtFimEntregaDeCertificados"></li>
+                            <li><input class="form-control" required type="date" id="DtFimEntregaDeCertificados"></li>
                         </ul>
                     </div>
 
@@ -99,10 +95,13 @@
                         </div>
                     </div>
                 </aside>
-
+                
             </div>
         </section>
     </div>
-
+    <script src="_javascript/funcoes.js"></script>
+    <script>
+        usuarioEstaAutenticado();
+    </script>
     <script language="javascript" src="_javascript/cronograma-geral.js"></script>
 </body>

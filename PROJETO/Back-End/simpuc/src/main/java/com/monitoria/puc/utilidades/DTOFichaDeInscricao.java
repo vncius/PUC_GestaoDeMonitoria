@@ -2,8 +2,6 @@ package com.monitoria.puc.utilidades;
 
 import com.monitoria.puc.model.ModelCurso;
 
-/*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
-/*DATA: 16/11/2019*/
 public class DTOFichaDeInscricao {
 
 	private Long id;
