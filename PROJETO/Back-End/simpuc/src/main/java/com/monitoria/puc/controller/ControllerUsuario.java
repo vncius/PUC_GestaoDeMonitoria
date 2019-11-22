@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.monitoria.puc.model.ModelUsuario;
 import com.monitoria.puc.repository.RepositoryUsuario;
 
+/*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
+/*DATA: 16/11/2019*/
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/usuario")
@@ -41,8 +43,6 @@ public class ControllerUsuario {
 
 	@PostMapping(value = "/", produces = "application/text")
 	public ResponseEntity<String> cadastrar(@RequestBody ModelUsuario usuario) {
-		usuario.setId(null); // CASO OBJ VENHA COM ID PREENCHIDO, ELE É ZERADO PARA VALIDAR QUE END-POINT É
-								// PARA CADASTRO
 		Boolean resultado = usuario.validaSeCamposObrigatoriosPreenchidos();
 		if (resultado) {
 			try {
