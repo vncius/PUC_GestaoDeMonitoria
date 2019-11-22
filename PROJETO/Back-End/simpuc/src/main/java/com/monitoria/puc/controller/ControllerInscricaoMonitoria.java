@@ -6,6 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,42 +52,6 @@ public class ControllerInscricaoMonitoria {
 
 	@Autowired
 	private RepositoryFichaDeInscricao fichaDeInscricaoRepository;
-
-	@GetMapping(value = "/{matricula}", produces = "application/json")
-	public ResponseEntity<DTOFichaDeInscricao> consultarPorMatricula(
-			@PathVariable(value = "matricula") String matricula) {
-		ModelInscricaoMonitoria fichaDeInscricao = fichaDeInscricaoRepository.findInscricaoByMatricula(matricula);
-
-		if (fichaDeInscricao == null) {
-			ModelUsuario usuario = usuarioRepository.findUserByLogin(matricula);
-			DTOFichaDeInscricao dtoIncricao = new DTOFichaDeInscricao();
-			dtoIncricao.InicializeParaNovoCadastro(usuario.getCurso(), matricula, usuario.getNome());
-			return new ResponseEntity<DTOFichaDeInscricao>(dtoIncricao, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<DTOFichaDeInscricao>(
-					fichaDeInscricao.converteModelEmDTOParaConsulta(cursoRepository), HttpStatus.OK);
-		}
-	}
-
-	@GetMapping(value = "/anexos/{matricula}", produces = "application/json")
-	public ResponseEntity<byte[]> consultarAnexo(@PathVariable(value = "matricula") String matricula) {
-		byte[] editalEmBytes = null;
-		try {
-			File file = new File(geraNomeDoArquivoECaminhoDoAnexo(matricula));
-			if (!file.exists()) {
-				return new ResponseEntity<byte[]>(editalEmBytes, HttpStatus.PARTIAL_CONTENT); // 206
-			}
-
-			int tamanhoArquivo = Integer.parseInt(String.valueOf(file.length()));
-			editalEmBytes = new byte[tamanhoArquivo];
-			InputStream inputStream = new FileInputStream(file);
-			inputStream.read(editalEmBytes);
-			inputStream.close();
-			return new ResponseEntity<byte[]>(editalEmBytes, HttpStatus.OK); // 200
-		} catch (IOException e) {
-			return new ResponseEntity<byte[]>(editalEmBytes, HttpStatus.INTERNAL_SERVER_ERROR); // 500
-		}
-	}
 
 	@PutMapping(value = "/")
 	public ResponseEntity<String> cadastrar_atualizar(ModelInscricaoMonitoria inscricaoMonitoria, MultipartFile file)
@@ -183,6 +150,59 @@ public class ControllerInscricaoMonitoria {
 			return cronograma.validaSeEstaNoPeriodoDeInscricao();
 		} else {
 			return Constantes.SEM_CRONOGRAMA;
+		}
+	}
+	
+	// ----------------------------------------------------- CONSULTAS
+	
+	@GetMapping(value = "/", produces = "application/json")
+	public ResponseEntity<List<DTOFichaDeInscricao>> consultaPorTodosFiltros() {
+		List<DTOFichaDeInscricao> listaInscricoesDTO = new ArrayList<DTOFichaDeInscricao>();
+		
+		try {
+			Iterable<ModelInscricaoMonitoria> listaInscricoesModel = fichaDeInscricaoRepository.findAll();
+			listaInscricoesModel.forEach(inscricaoModel -> { 
+				listaInscricoesDTO.add(inscricaoModel.converteModelEmDTOParaConsulta(cursoRepository));
+			});
+			return new ResponseEntity<List<DTOFichaDeInscricao>>(listaInscricoesDTO, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<List<DTOFichaDeInscricao>>(listaInscricoesDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping(value = "/{matricula}", produces = "application/json")
+	public ResponseEntity<DTOFichaDeInscricao> consultarPorMatricula(
+			@PathVariable(value = "matricula") String matricula) {
+		ModelInscricaoMonitoria fichaDeInscricao = fichaDeInscricaoRepository.findInscricaoByMatricula(matricula);
+
+		if (fichaDeInscricao == null) {
+			ModelUsuario usuario = usuarioRepository.findUserByLogin(matricula);
+			DTOFichaDeInscricao dtoIncricao = new DTOFichaDeInscricao();
+			dtoIncricao.InicializeParaNovoCadastro(usuario.getCurso(), matricula, usuario.getNome());
+			return new ResponseEntity<DTOFichaDeInscricao>(dtoIncricao, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<DTOFichaDeInscricao>(
+					fichaDeInscricao.converteModelEmDTOParaConsulta(cursoRepository), HttpStatus.OK);
+		}
+	}
+
+	@GetMapping(value = "/anexos/{matricula}", produces = "application/json")
+	public ResponseEntity<byte[]> consultarAnexo(@PathVariable(value = "matricula") String matricula) {
+		byte[] editalEmBytes = null;
+		try {
+			File file = new File(geraNomeDoArquivoECaminhoDoAnexo(matricula));
+			if (!file.exists()) {
+				return new ResponseEntity<byte[]>(editalEmBytes, HttpStatus.PARTIAL_CONTENT); // 206
+			}
+
+			int tamanhoArquivo = Integer.parseInt(String.valueOf(file.length()));
+			editalEmBytes = new byte[tamanhoArquivo];
+			InputStream inputStream = new FileInputStream(file);
+			inputStream.read(editalEmBytes);
+			inputStream.close();
+			return new ResponseEntity<byte[]>(editalEmBytes, HttpStatus.OK); // 200
+		} catch (IOException e) {
+			return new ResponseEntity<byte[]>(editalEmBytes, HttpStatus.INTERNAL_SERVER_ERROR); // 500
 		}
 	}
 }

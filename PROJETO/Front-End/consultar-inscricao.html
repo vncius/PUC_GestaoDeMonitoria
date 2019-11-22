@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>SIMPUC</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="_css/bootstrap.css">
+	<!-- main css -->
+	<link rel="stylesheet" href="_css/consultar_inscricao.css">
+	<!-- javascript -->
+	<script src="_javascript/jquery.mask.js"></script>
+	<script src="_javascript/jquery.mask.min.js"></script>
+</head>
+<body>
+	<section class="about_area section_gap">
+		<div class="container">
+			<div class="container" >
+				<div class="banner_content text-center">
+					<p  class="font1">Consultar Inscrições</p>
+			   </div>
+			</div>
+			
+			 <div id="mensagens" class="topo">
+                <ul class="list-group-item list-group-item-danger">
+						<script>$("#mensagens").hide();</script>
+                        <!--MENSAGENS DE ERRO OU VALIDAÇÃO SÃO EXIBIDAS AQUI-->
+                </ul>
+            </div>
+			<form  id="formulario" method="post" enctype="multipart/form-data">
+					<div class="form-row">
+						<div class="form-group col-md-4">
+						  <label for="curso">Curso</label>
+						  <select id="curso" name="curso" class="form-control">
+								<option selected value="Selecione">Selecione</option>
+						  </select>
+						</div>
+						<div class="form-group col-md-4">
+						  <label for="status">Status</label>
+						  <select id="status" name="status" class="form-control">
+							<option selected value="Selecione">Selecione</option>
+							<option value="PENDENTE">Pendente</option>
+							<option value="APROVADA">Aprovada</option>
+							<option value="REPROVADA">Reprovada</option>
+							<option value="CANCELADA">Cancelada</option>
+						  </select>
+						</div>
+						<div class="form-group col-md-3">
+						  <label for="matricula">Matricula</label>
+						  <input type="text" id="matricula" name="matricula" class="form-control" >
+						</div>
+						
+						<div class="form-group col-md-1">
+						 <label for="inputEstado"style="color:#fff">.</label>
+						  <button type="button" id="buscar" class="form-control"style="background-color:#057af7;color:#fff;">Buscar</button>
+						</div>
+				<table class="table">
+				  <thead class="thead-dark">
+					<tr>
+					  <th scope="col">ID</th>
+					  <th scope="col">Matricula</th>
+					  <th scope="col">Aluno</th>
+					  <th scope="col">Curso</th>
+					  <th scope="col">Situação</th>
+					</tr>
+				  </thead>
+				  <tbody>
+					<!-- <tr>
+					  <th scope="row">1</th>
+					  <td></td>
+					  <td></td>
+					  <td></td>
+					  <td></td>
+					</tr> -->
+				  </tbody>
+				</table>
+			</form>
+		</div>
+	</section>
+	<script src="_javascript/funcoes.js"></script>
+    <script>
+        usuarioEstaAutenticado();
+	</script>
+	<script src="_javascript/consultar-inscricao.js"></script>
+	<script>
+    jQuery(function($){
+               //$("#matricula").mask("9999.9.9999.9999-9");
+    });
+</script>
+</body>
+</html>
