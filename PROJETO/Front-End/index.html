@@ -19,33 +19,36 @@
     <script language="javascript" src="_javascript/index.js"></script>
     <!--/\-----------------------------------------------------------------------------------------------------------------------/\-->
     <!--\/-------------------------------------FONTS---------------------------------------\/-->
-    <link href="https://fonts.googleapis.com/css?family=Acme&display=swap" rel="stylesheet">  
+    <link href="https://fonts.googleapis.com/css?family=Acme&display=swap" rel="stylesheet">
     <!--/\---------------------------------------------------------------------------------/\-->
 </head>
-    <body>
-        <div id=interface>
-            <section id="corpo">
+
+<body>
+    <div id=interface>
+        <section id="corpo">
+            <div style="width: 400px;">
                 <header id="cabecalho-corpo">
                     <h5>SIMPUC</h5>
                 </header>
 
                 <div class="form-label-group">
-                    <input type="text" id="inputMat" class="form-control" placeholder="Matricula" required=""
-                        autofocus="">
+                    <input id="inputMat" type="text" class="form-control" maxlength="30" name="matricula"
+                        placeholder="Matricula" required autofocus="true">
                 </div>
 
                 <div class="form-label-group">
-                    <input type="Senha" id="inputSenha" class="form-control" placeholder="Senha" required="">
+                    <input id="inputSenha" type="password" class="form-control" placeholder="Senha" maxlength="25"
+                        name="senha" required>
                 </div>
 
                 <a href="">Esqueci minha senha</a>
-                <a href="">Cadastre-se</a>
 
-                <div class="container theme-showcase" role="main">
-                    <button class="btn-lg btn-sample" id="btnEntrar"><p>Entrar</p></button>
+                <div style="width: 300px;" class="container theme-showcase">
+                    <button class="btn-lg btn-sample" id="btnEntrar">Entrar</button>
                 </div>
-            </section>
-        </div>
-        <script src="_javascript/funcoes.js"></script>
-    </body>
+            </div>
+        </section>
+    </div>
+    <script src="_javascript/funcoes.js"></script>
+</body>
 </html>

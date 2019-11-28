@@ -31,20 +31,27 @@ $(document).ready(function () {
 function carregaElementos() { // --------------------------------------- CARREGA FUNÇÕES DE PROCESSAMENTO
     $('#formulario').submit(function (e) {
         e.preventDefault();
-        var dadosIncricao = recuperaDadosPreCadastradosInscricao();
 
-        if (dadosIncricao.statusIncricao != "CANCELADA") {
-            dadosIncricao.statusIncricao = "PENDENTE";
-            registraDadosPreCadastradosInscricao(dadosIncricao);
-            salvarInscricao();
-            recarregarPagina();
+        var arquivoPdfEhValido = valideAnexo();
+
+        if (arquivoPdfEhValido === true){
+            var dadosIncricao = recuperaDadosPreCadastradosInscricao();
+
+            if (dadosIncricao.statusIncricao != "CANCELADA") {
+                dadosIncricao.statusIncricao = "PENDENTE";
+                registraDadosPreCadastradosInscricao(dadosIncricao);
+                salvarInscricao();
+                recarregarPagina();
+            } else {
+                dadosIncricao.statusIncricao = "PENDENTE";
+                limpaCamposInconsistencias();
+                $("#salvar").text("Salvar");
+                habilitaTodosCamposDoFormulario();
+                registraInconsistencia("Anexe os documentos obrigatórios para reativar inscrição!");
+                registraDadosPreCadastradosInscricao(dadosIncricao);
+            }
         } else {
-            dadosIncricao.statusIncricao = "PENDENTE";
-            limpaCamposInconsistencias();
-            $("#salvar").text("Salvar");
-            habilitaTodosCamposDoFormulario();
-            registraInconsistencia("Anexe os documentos obrigatórios para reativar inscrição!");
-            registraDadosPreCadastradosInscricao(dadosIncricao);
+            exibaAlerta("O campo anexo aceita somente arquivos do tipo PDF.");
         }
     });
 
@@ -83,6 +90,17 @@ function carregaElementos() { // --------------------------------------- CARREGA
 }
 
 // ----------------------------- FUNÇÕES
+
+function valideAnexo() {
+    var file = $("#file")[0].files;
+    var nameFile = file[0].name.split(".");
+
+    if (nameFile.slice(-1)[0] === "pdf") {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 function habilitaCamposNecessariosInicializacao() {
     var preInscricao = recuperaDadosPreCadastradosInscricao();
