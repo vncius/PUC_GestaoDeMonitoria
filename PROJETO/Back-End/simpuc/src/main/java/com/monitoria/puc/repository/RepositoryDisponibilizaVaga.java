@@ -2,10 +2,9 @@ package com.monitoria.puc.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
-import com.monitoria.puc.model.ModelInscricaoMonitoria;
+import com.monitoria.puc.model.ModelDisciplina;
 
 @Repository
-public interface RepositoryIncricaoMonitoria extends CrudRepository<ModelInscricaoMonitoria, Long> {
-	
+public interface RepositoryDisponibilizaVaga extends CrudRepository<ModelDisciplina, Long> {
+
 }

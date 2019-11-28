@@ -10,6 +10,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+/*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
+/*DATA: 16/11/2019*/
 @Entity(name = "disciplina")
 public class ModelDisciplina implements Serializable {
 
@@ -19,6 +25,11 @@ public class ModelDisciplina implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	private int qtdeVgMonitoria;
+	
+	private String codigoDisciplina;
+	
+	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name = "fk_curso_id", referencedColumnName = "id")
 	private ModelCurso curso;
@@ -61,4 +72,45 @@ public class ModelDisciplina implements Serializable {
 	public void setOrientadores(List<ModelOrientador> orientadores) {
 		this.orientadores = orientadores;
 	}
+
+	public ModelCurso getCurso() {
+		return curso;
+	}
+
+	public void setCurso(ModelCurso curso) {
+		this.curso = curso;
+	}
+
+	public int getQtdeVgMonitoria() {
+		return qtdeVgMonitoria;
+	}
+
+	public void setQtdeVgMonitoria(int qtdeVgMonitoria) {
+		this.qtdeVgMonitoria = qtdeVgMonitoria;
+	}
+
+	public String getCodigoDisciplina() {
+		return codigoDisciplina;
+	}
+
+	public void setCodigoDisciplina(String codigoDisciplina) {
+		this.codigoDisciplina = codigoDisciplina;
+	}
+
+	public ModelDisciplina(Long id, int qtdeVgMonitoria, String codigoDisciplina, ModelCurso curso, String descricao,
+			boolean ehSelecionado, List<ModelOrientador> orientadores) {
+		super();
+		this.id = id;
+		this.qtdeVgMonitoria = qtdeVgMonitoria;
+		this.codigoDisciplina = codigoDisciplina;
+		this.curso = curso;
+		this.descricao = descricao;
+		this.ehSelecionado = ehSelecionado;
+		this.orientadores = orientadores;
+	}
+
+	public ModelDisciplina() {
+		super();
+	}
+					
 }

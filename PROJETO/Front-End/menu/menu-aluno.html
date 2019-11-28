@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <title>SIMPUC - Menu Principal</title>
+    <script src="_javascript/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="_css/bootstrap_4.0.min.css">
+    <!--\/-----------CSS da pagina------------\/-->
+    <link rel="stylesheet" href="../_css/_css_menu/menuh-aluno.css">
+    <!--/\------------------------------------/\-->
+    <!--\/------------------------------FONTS GOOGLE----------------------------------------------\/-->
+    <link href="https://fonts.googleapis.com/css?family=Acme|Baloo+Bhaina|Open+Sans&display=swap" rel="stylesheet">
+    <!--/\----------------------------------------------------------------------------------------/\-->
+</head>
+
+<body>
+    <div id=interface>
+        <a onclick="logout();">
+            <div class="sair"><p>Sair</p></div>
+        </a>
+        <header id="cabecalho">
+            <h1 class="ola">Olá,</h1>
+            <h2 class="nome">Null</h2>
+            <h4 class="matricula">Null</h4>
+            <!-- <h3>SIM PUC</h3> -->
+        </header>
+
+        <section id="corpo">
+            <div id="geral">
+                <aside id="esquerda">
+                    <h3 style="text-align: center; margin: 50px 0">
+                        <a target="_blank" style="text-decoration: none; font-size: 22pt; color: red;">
+                            <!--Para comunicado importantes-->
+                        </a>
+                    </h3>
+                    <a href="../inscricao.html" target="_blank">
+                        <div class="serv inscricao-in">
+                            <p>Realizar Inscrição</p>
+                        </div>
+                    </a>
+                    <!-- <a href="../not_implemented.html" target="_blank">
+                        <div class="serv processo-acomp">
+                            <p>Acompanhar Processo</p>
+                        </div>
+                    </a> -->
+                </aside>
+
+                <aside id="direita">
+                    <div class="boxinfo b-graduacao">
+                        <h4>Perfil:</h4>
+                        <p>Aluno</p>
+                    </div>
+                    <div class="avisos">
+                        <img width="100%">
+                    </div>
+                </aside>
+            </div>
+        </section>
+        <script>preencheCamposMenu();</script>
+    </div>
+</body>
+
+</html>

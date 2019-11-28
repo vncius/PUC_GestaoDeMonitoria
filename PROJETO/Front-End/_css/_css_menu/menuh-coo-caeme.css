@@ -1,0 +1,455 @@
+@charset "UTF-8";
+
+body, html{
+    width: 100%;
+    height: 100%;
+}
+
+div#interface {
+    font-family: "Open Sans";
+    font-size: 16px;
+    background: url(../../_imagens/ok.png) no-repeat;
+        background-position: 95% 80%;
+        background-size: 1400px;
+    height: 100%;
+}
+
+div#geral{
+    width: 90%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+}
+
+.sair {
+    float: right;
+    width: 53px;
+    height: 35px;
+    color: #6d6d6d;
+    margin-right: 50px;
+    background:#eaeaea;
+        background-position-x: 0%;
+        background-position-y: 0%;
+        background-repeat: repeat;
+        background-image: none;
+        background-size: auto;
+    border-radius: 0 0 8px 8px;
+    background-image: url(../../_imagens/exit.png);
+    background-repeat: no-repeat;
+    background-position: center left 36px;
+    background-size: 16px;
+    line-height: 34px;
+    padding-left: 5px;
+    cursor:pointer;
+}
+.sair:hover{
+    background-color: #120a8f;
+    color:#FFFFFF;
+    transition: .2s ease-out;
+}
+
+/*Cabecalho*/
+header#cabecalho{
+    float: left;
+    width: 95%;
+    padding-left: 27px;
+    padding-bottom: 25px;
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-bottom: 70px;
+}
+
+
+header#cabecalho h1{
+    font-family: "Baloo Bhaina";
+    font-size: 40px;
+    color:#120a8f;
+    line-height: 40px;
+    margin: 0;
+}
+
+header#cabecalho h2{
+    font-family: "Open Sans";
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0;
+    color:#7E7E7E;
+}
+
+header#cabecalho h4{
+    font-family: "Open Sans";
+    margin: 0;
+    color: #333;
+    font-size: 16px;
+}
+header#cabecalho h3{
+    float: right;
+    margin-right:8%;
+    font-size: 50px;
+    font-family: 'Acme', sans-serif;
+    color:#FFF;
+}
+/*Corpo da esqueda*/
+aside#esquerda{
+    float: left;
+    width: 800px;
+    border: 3px solid#eaeaea;
+    border-radius: 8px;
+    padding-bottom: 0px;
+    background:#FFF;
+    margin-bottom: 0px;
+    padding-top: 0em;
+    min-height: 50vh;    
+}
+
+aside#esquerda p{
+    position: relative;
+    left: 10%;
+    width: 80%;
+    margin-top: 20px;
+}
+
+.serv{
+    float: left;
+    width: 30%;
+    border-radius: 8px;
+    min-height: 100px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    background-color:#eaeaea;
+    color: #6d6d6d;
+    background-repeat: no-repeat;
+    background-size: 55px 55px;
+    background-position: center left 10px;
+}
+.serv p {
+    width: 53%;
+    float: right;
+    font-size: 15px;
+    font-weight: 600;
+    padding-right: 20px;
+    padding-top: 18px;
+    line-height: 21px;
+}
+.serv:hover {
+    background-color: #120a8f;
+    color:#FFFFFF;
+    transition: background .2s ease-out;
+}
+
+/*Icones*/
+.inscricao-in {
+    background-image: url(../../_imagens/plus.png);
+}
+.cronograma{
+    background-image: url(../../_imagens/cronograma.png);
+}
+.consult {
+    background-image: url(../../_imagens/list.png);
+}
+.geral{
+    background-image: url(../../_imagens/manual.png);
+}
+.certific{
+    background-image: url(../../_imagens/comprovante.png);
+}
+
+
+/*Corpo da direita*/
+aside#direita{
+    float: left;
+    width: 25%;
+}
+
+.boxinfo {
+    height: 80px;
+    border-radius: 8px;
+    margin-left: 3%;
+    margin-bottom: 20px;
+    padding-top: 1px;
+    background: #eaeaea;
+    color:#6d6d6d;
+    font-size: 15px;
+    font-weight: 700;
+    background-repeat: no-repeat;
+    background-position: center left 10px;
+    padding-left: 10px;
+}
+
+.b-graduacao {
+    background-image: url(../../_imagens/logo-graduacao.png);
+}
+
+.boxinfo h4 {
+    margin: 23px 0px 12px 100px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.boxinfo p {
+    margin: -20px 5px 5px 100px;
+    padding: 5px;
+}
+
+.avisos {
+    border: 3px solid #eaeaea;
+    border-radius: 8px;
+    margin-left: 3%;
+    background:#FFF;
+    margin-bottom: 10px;
+}
+
+.avisos img {
+    border-radius: 6px;
+    width: 100%;
+}
+
+/*Mensagem DEBUG*/
+div#align-right{
+    float: right;
+    margin: 20px;
+}
+
+div#mensagens {
+    float: initial;
+    width: auto;
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+
+div#mensagens ul li{
+    width: auto;
+    height: auto;
+}
+
+/*Responsividade*/
+@media only screen and (min-width: 1900px) {
+
+    div#interface {
+        font-family: "Open Sans";
+        font-size: 16px;
+        background: url(../../_imagens/ok.png) no-repeat;
+            background-position: 90% 90%;
+            background-size: 1950px;
+        height: 100%;
+    }
+    aside#esquerda{
+        width: 1100px;
+    }
+
+    body {
+        background-position: 400px 0px;
+        background-size: 592px;
+    }
+
+    .serv {
+        margin-right: 20px;
+    }
+    .serv p{
+        font-size:20px;
+    }
+    
+    .boxinfo{
+        font-size:20px;
+    }
+    
+    .avisos{
+        width: 60%;
+        margin: 20px auto;
+    }
+    
+    }
+@media only screen and (max-width: 992px) {
+
+    body {
+        background-position: 400px 0px;
+        background-size: 592px;
+    
+    }
+
+    .serv {
+        width: 92%;
+        margin-right: 20px;
+    
+    }
+    .serv p{
+        font-size:30px;
+    }
+    aside#esquerda{
+        width: 100%;
+        
+    }
+        
+    aside#direita {
+        width: 90%;
+        margin: auto;
+        display: table;
+        float: none;
+    }	
+    .boxinfo{
+        font-size:30px;
+    }
+    .avisos{
+        width: 60%;
+        margin: 20px auto;
+    }
+    
+    }
+    
+    @media only screen and (max-width: 768px) {
+    
+    body {
+        background-position: 140px 0px;
+        background-size: 300px;
+    
+    }
+    
+    .serv {
+        width: 92%;
+        margin-right: 20px;
+    
+    }
+    
+    .avisos{
+        width: 100%;
+        margin-left: 0;
+    }
+    
+    .form-log {
+        width: 60%;
+    
+    }
+    
+    aside#direita {
+        width: 90%;
+        margin: auto;
+        display: table;
+        float: none;
+    }	
+    
+    .avisos{
+        width: 80%;
+        margin: 20px auto;
+    }
+    
+    }
+    
+    @media only screen and (max-width: 480px) {
+    
+    body {
+        background: none;
+    
+    }
+    .top{
+        margin-top: 0px;
+    }
+    
+    h2.nome {
+        font-size: 14px;
+        line-height: 16px;
+        color: #7E7E7E;
+    }
+    
+    h4.matricula {
+        color: #333;
+        margin: 0;
+    }
+    
+    aside#esquerda{
+        width: 100%;
+        
+    }
+    
+    .serv {
+        width: 87%;
+        margin-right: 20px;
+    
+    }
+        
+    aside#direita {
+        width: 90%;
+        margin: auto;
+        display: table;
+        float: none;
+    }	
+    
+    .avisos{
+        width: 90%;
+        margin: 20px auto;
+    }	
+    
+    .form-log {
+        width: 80%;
+    
+    }
+    
+    .p-top2{
+        margin-top: 90px;
+    }
+    
+    .boxinfo {
+        width: 99.8%;
+        margin-left: 0;
+    }
+    
+    .disciplina:nth-child(odd) {
+        float: left;
+        width: 80.3222%;
+    }
+    
+    .disciplina:nth-child(even) {
+        float: left;
+        width: 80.3222%;
+    }
+        
+    .voltar {
+        display: none;
+    }
+        
+    .sair {
+        display: none;
+    }	
+        
+    .sair-movel img{
+        width: 40%;
+        margin-top:15px;
+        margin-left: 15px; 
+    }
+    
+    .sair-movel{
+        display: block;
+        position: fixed;
+        width: 100%;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.8);
+        bottom: 0;
+        border-top: 3px solid #eaeaea;
+        box-shadow: 10px 50px 50px 40px rgba(0, 0, 0, .5);
+    }
+    
+    .sair-m{
+        width: 80px;
+        height: 100%;
+        background: #eaeaea;
+        float: right;
+        color:#6d6d6d;
+        font-size: 17px;
+        font-weight: 700;
+        background-image: url(../img/exit.png);
+        background-repeat: no-repeat;
+        background-position: center left 60px;
+        background-size: 16px;
+        padding-left: 10px;
+    }
+    
+    .sair-m p{
+        margin-top:16px;
+        padding-left: 10px;
+    }
+    
+    }
+/**{
+    border: 1px solid black;
+}*/

@@ -1,19 +1,29 @@
 $(document).ready(function () {
-    //-------------------------------------------- VALIDAÇÕES PRÉ-CARREGAMENTO
-    var cursoEstaNoPeriodo = verificaSeCursoEstaNoPeriodoDeInscricao();
-
-    if (cursoEstaNoPeriodo) {
-
-        var dadosInscricao = buscaDadosInscricao();
-
-        if (dadosInscricao != null && dadosInscricao != "null") {
-            registraDadosPreCadastradosInscricao(dadosInscricao);
-            preencheFormulario(dadosInscricao);
-            habilitaCamposNecessariosInicializacao();
-            carregaElementos();
+    if (usuarioEstaAutenticado() === false) {
+        redirecionarIndexLogin();
+        return;
+    } else {
+        if (localStorage.getItem("Role") != "ROLE_ALUNO" && localStorage.getItem("Role") != "ROLE_ADMIN") {
+            redirecionarMenuPrincipal();
         } else {
-            registraInconsistencia("Não foi possivel inicializar o formulário de inscrição!");
-            desabilitaTodosOsCamposDoForm();
+            //-------------------------------------------- VALIDAÇÕES PRÉ-CARREGAMENTO
+            var cursoEstaNoPeriodo = verificaSeCursoEstaNoPeriodoDeInscricao();
+
+            if (cursoEstaNoPeriodo) {
+
+                var dadosInscricao = buscaDadosInscricao();
+
+                if (dadosInscricao != null && dadosInscricao != "null") {
+                    registraDadosPreCadastradosInscricao(dadosInscricao);
+                    preencheFormulario(dadosInscricao);
+                    habilitaCamposNecessariosInicializacao();
+                    carregaElementos();
+                } else {
+                    registraInconsistencia("Não foi possivel inicializar o formulário de inscrição!");
+                    desabilitaTodosOsCamposDoForm();
+                }
+            }
+
         }
     }
 });
@@ -21,20 +31,27 @@ $(document).ready(function () {
 function carregaElementos() { // --------------------------------------- CARREGA FUNÇÕES DE PROCESSAMENTO
     $('#formulario').submit(function (e) {
         e.preventDefault();
-        var dadosIncricao = recuperaDadosPreCadastradosInscricao();
 
-        if (dadosIncricao.statusIncricao != "CANCELADA") {
-            dadosIncricao.statusIncricao = "PENDENTE";
-            registraDadosPreCadastradosInscricao(dadosIncricao);
-            salvarInscricao();
-            recarregarPagina();
+        var arquivoPdfEhValido = valideAnexo();
+
+        if (arquivoPdfEhValido === true){
+            var dadosIncricao = recuperaDadosPreCadastradosInscricao();
+
+            if (dadosIncricao.statusIncricao != "CANCELADA") {
+                dadosIncricao.statusIncricao = "PENDENTE";
+                registraDadosPreCadastradosInscricao(dadosIncricao);
+                salvarInscricao();
+                recarregarPagina();
+            } else {
+                dadosIncricao.statusIncricao = "PENDENTE";
+                limpaCamposInconsistencias();
+                $("#salvar").text("Salvar");
+                habilitaTodosCamposDoFormulario();
+                registraInconsistencia("Anexe os documentos obrigatórios para reativar inscrição!");
+                registraDadosPreCadastradosInscricao(dadosIncricao);
+            }
         } else {
-            dadosIncricao.statusIncricao = "PENDENTE";
-            limpaCamposInconsistencias();
-            $("#salvar").text("Salvar");
-            habilitaTodosCamposDoFormulario();
-            registraInconsistencia("Anexe os documentos obrigatórios para reativar inscrição!");
-            registraDadosPreCadastradosInscricao(dadosIncricao);
+            exibaAlerta("O campo anexo aceita somente arquivos do tipo PDF.");
         }
     });
 
@@ -73,6 +90,17 @@ function carregaElementos() { // --------------------------------------- CARREGA
 }
 
 // ----------------------------- FUNÇÕES
+
+function valideAnexo() {
+    var file = $("#file")[0].files;
+    var nameFile = file[0].name.split(".");
+
+    if (nameFile.slice(-1)[0] === "pdf") {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 function habilitaCamposNecessariosInicializacao() {
     var preInscricao = recuperaDadosPreCadastradosInscricao();
@@ -118,11 +146,11 @@ function salvarInscricao() {
         }
     });
     ajaxReq.done(function (msg) {
-        alert(msg);
+        exibaAlerta(msg);
         removeDadosPreCadastradosInscricao(); // REMOVE JSON DE PREINSCRICAO DO LOCALSTORAGE 
     });
     ajaxReq.fail(function (jqXHR) {
-        alert("Falha ao registrar inscrição!");
+        exibaAlerta("Falha ao registrar inscrição!");
     });
 }
 
@@ -148,11 +176,11 @@ function verificaSeCursoEstaNoPeriodoDeInscricao() {
         },
         error: function (request, status, erro) {
             if (request.status === 500) {
-                alert(status);
+                exibaAlerta(status);
             } else if (request.status === 404) {
                 registraInconsistencia(request.responseText);
             } else {
-                alert("Houve uma falha na requisição!");
+                exibaAlerta("Houve uma falha na requisição!");
             }
             desabilitaTodosOsCamposDoForm();
             desabilitaButtons(true, false);
@@ -173,14 +201,14 @@ function cancelarInscricaoDeAluno(idInscricao) {
         dataType: "text", // JSON JÁ CONVERTE O RESULT EM OBJETO
         async: false,
         success: function (result, status, request) {
-            alert(result);
+            exibaAlerta(result);
             retorno = true;
         },
         error: function (request, status, erro) {
             if (request.status === 500) {
-                alert(status);
+                exibaAlerta(status);
             } else {
-                alert("Houve uma falha na requisição!");
+                exibaAlerta("Houve uma falha na requisição!");
             }
             retorno = false;
         }
@@ -342,9 +370,9 @@ function buscaDadosInscricao() {
         },
         error: function (request, status, erro) {
             if (request.status === 500) {
-                alert(status);
+                exibaAlerta(status);
             } else {
-                alert("Houve uma falha na requisição!");
+                exibaAlerta("Houve uma falha na requisição!");
             }
             desabilitaTodosOsCamposDoForm();
             retorno = null;
@@ -370,7 +398,7 @@ function removeDadosPreCadastradosInscricao() {
 }
 
 function recarregarPagina() {
-    $(location).attr('href', obterUrlDePaginas("/inscricao.html"));
+    $(location).attr('href', obterUrlDePaginas("inscricao.html"));
 }
 
 /* ------------------------------------ HABILITA/DESABILITA CAMPOS --------------------------------------*/
@@ -433,7 +461,7 @@ function desabilitaButtonsInscricaoCancelada() {
     $("#salvar").text("Reativar");
 }
 
-function executaParametrizacaoParaImprimir(){
+function executaParametrizacaoParaImprimir() {
     $("#cancelar").hide();
     $("#editar").hide();
     $("#salvar").hide();
@@ -443,11 +471,11 @@ function executaParametrizacaoParaImprimir(){
     var inscricao = recuperaDadosPreCadastradosInscricao();
     $("#div_impresao").show();
     var status = inscricao.statusIncricao;
-    $("#div_impresao").css("font-family","Arial");
-    $("#div_impresao").css("font-weight","bold");
-    $("#div_impresao").css("color","white");
-    $("#div_impresao").css("text-align","center");
-    $("#div_impresao").css("font-size","35px");
+    $("#div_impresao").css("font-family", "Arial");
+    $("#div_impresao").css("font-weight", "bold");
+    $("#div_impresao").css("color", "white");
+    $("#div_impresao").css("text-align", "center");
+    $("#div_impresao").css("font-size", "35px");
     $("#div_impresao").append(`<p>STATUS: ${status}</p>`);
 
     window.print();
@@ -463,7 +491,7 @@ function executaParametrizacaoParaImprimir(){
     $("#").show();
     $("#").show();
 }
-    
+
 
 
 
