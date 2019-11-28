@@ -1,0 +1,91 @@
+</head>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>SIMPUC</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="_css/bootstrap.css">
+    <!-- main css -->
+    <link rel="stylesheet" href="_css/publicar-resultado.css">
+    <!-- javascript -->
+    <script src="_javascript/jquery.mask.js"></script>
+    <script src="_javascript/jquery.mask.min.js"></script>
+    <script src="_javascript/funcoes.js"></script>
+    <script src="_javascript/publicar-resultado.js"></script>
+</head>
+
+<body>
+    <section class="about_area section_gap">
+        <div class="container">
+            <div class="container">
+                <div class="banner_content text-center">
+                    <p class="font1">Publicar Resultado das Avaliações</p>
+                </div>
+            </div>
+
+            <div id="mensagens" class="topo">
+                <ul class="list-group-item list-group-item-danger">
+                    <script>
+                        $("#mensagens").hide();
+                    </script>
+                    <!--MENSAGENS DE ERRO OU VALIDAÇÃO SÃO EXIBIDAS AQUI-->
+                </ul>
+            </div>
+            <form id="formulario" method="post" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="curso">Curso</label>
+                        <select id="curso" name="curso" class="form-control">
+							<option selected value="Selecione">Selecione</option>
+						</select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="matricula">Matricula</label>
+                        <input type="text" id="matricula" name="matricula" class="form-control">
+                    </div>
+
+                    <div class="form-group col-md-1">
+                        <label for="inputEstado" style="color:#fff">.</label>
+                        <button type="button" id="buscar" class="form-control" style="background-color:#057af7;color:#fff;">Buscar</button>
+                    </div>
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Matricula</th>
+                                <th scope="col">Aluno</th>
+                                <th scope="col">Matéria</th>
+                                <th scope="col">Notas</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="linhaAluno">
+                                <th scope="row">2017.1.0120.0049-8</th>
+                                <td>Vinicius Vieira Abreu</td>
+                                <td>Desenvolvimento WEB</td>
+                                <td><input type="text" id="notaAluno" class="form-control" max="10" maxlength="4" required></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="form-group col-md-1">
+                        <label for="coeficiente">Coeficiente</label>
+                        <input type="text" id="coeficiente" name="coeficiente" class="form-control">
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label for="inputEstado" style="color:#fff">.</label>
+                        <button type="button" id="avaliar" class="form-control" style="background-color:#057af7;color:#fff;">Avaliar</button>
+                    </div>
+
+            </form>
+            </div>
+    </section>
+</body>
+
+</html>
