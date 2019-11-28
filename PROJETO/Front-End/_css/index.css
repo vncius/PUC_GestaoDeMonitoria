@@ -29,8 +29,10 @@ section#corpo{
 /*Cabecalho Corpo*/
 header#cabecalho-corpo h5{
     text-align: center;
-    margin-bottom: 20px;
-    font: normal normal normal 25px/1.4em 'Open Sans',sans-serif;
+    margin-bottom: 30px;
+    font-family: 'Acme', sans-serif;
+    font-size:40px;
+    color: #120a8f;
 }
 
 
@@ -70,7 +72,7 @@ background-color: #2B6CA3;
         font-size: 16px;
         background: url(../_imagens/logo.png) no-repeat;
             background-position: 30% 100%;
-            background-size: 300px;
+            background-size: 200px;
         height: 100%;        
     }
 }
@@ -100,19 +102,24 @@ background-color: #2B6CA3;
         height: 100%;        
     }
 }
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 576px) {
+
     div#interface{
         font-family: "Open Sans";
         font-size: 16px;
         background: url(../_imagens/logo.png) no-repeat;
-            background-position: 10% 0%;
+            background-position: 50% 0%;
             background-size: 100px;
-        height: 100%;        
+        height: 100%;  
+        margin-top: 160px; 
+        padding: 1rem;  
+         
     }
 
     /*Corpo*/
     section#corpo{
-        margin-left: 100px;
+        left: 0%;
+        width: 90%;
     }
 
     /* Esqueci minha senha */
@@ -123,6 +130,7 @@ background-color: #2B6CA3;
     /* Botão */
     .btn-sample{
         height: 40px;
+        
     }
     .btn-sample p {
         font-size: 15px;

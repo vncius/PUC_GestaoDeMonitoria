@@ -1,15 +1,18 @@
 @charset "UTF-8";
+body, html{
+    width: 100%;
+    height: 100%;
+}
 
-#geral{
-    width: fit-content;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
+div#interface{
+    width: 900px;
+    height: 100%;
+    margin: 0px auto 0px auto;
 }
 
 /*Cabecalho*/
 header#cabecalho{
-    margin:50px auto 50px auto;
+    margin:50px auto 60px auto;
     width: 100%;
     text-align: center;
 }
@@ -20,11 +23,19 @@ header#cabecalho h4{
     color: #414141;
 }
 
+.col-6{
+    margin: 0px 380px 10px auto;
+}
+
+select#cboCursos {
+    width: 320px;  
+}
+
 /*Corpo da esqueda*/
 aside#esquerda{
+    display: block;
+    width: 50%;
     float: left;
-    position: relative;
-    width: 500px;
     height: 360px;
     text-align: center;
 }
@@ -32,13 +43,14 @@ aside#esquerda h6{
     font: 'Open Sans';
     font-size: 22px;
     color:black;
+    margin-top:15px;
 }
 
 /*Corpo da direita*/
 aside#direita{
+    display: block;
+    width: 50%;
     float: right;
-    position: relative;
-    width: 500px;
     height: 360px;
     text-align: center;
 }
@@ -46,34 +58,37 @@ aside#direita h6{
     font: 'Open Sans';
     font-size: 22px;
     color:black;
+    margin-top:15px;
 }
+
 /*Campos DATA*/
-div#camp-dat{
-    position: relative;
-    width: 500px;
+ul{
+    margin-left: 10%;
 }
 
 ul li{
-    display: inline-block;
     list-style: none;
     margin: 5px;
+    float: left;
 }
 
 /*Botões*/
-div#botoes{
-    align-content: center;
-    float: inline-end;
-    position: relative;
-    width: 100%;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-div#align-right{
+div#botoes{  
+    width: 200px;
+    height: 50px;
+    margin: 20px auto;
     float: right;
-    margin: 20px;
 }
 
+.btn{
+    margin-left:5px;
+}
+div#align-right{
+    float: none;
+    margin: 10px auto 0px 40px;
+}
+
+/* Mensagem */
 div#mensagens {
     float: initial;
     width: auto;
@@ -85,3 +100,216 @@ div#mensagens ul li{
     width: auto;
     height: auto;
 }
+
+/*Responsividade*/
+@media only screen and (max-width: 992px) {
+/* Inicio*/
+header#cabecalho{
+    margin:50px auto 60px auto;
+}    
+.container-fluid{
+    padding-right: 0px;
+    padding-left: 0px;
+}  
+
+div#interface{
+    width: 750px;
+    height: 100%;
+    margin: 0px auto 0px auto;
+}
+
+/*Corpo da esqueda*/
+aside#esquerda{
+    display: block;
+    width: 50%;
+    float: left;
+    height: 360px;
+    text-align: center;
+}
+
+aside#esquerda h6{
+    margin-top:25px;
+}
+
+/*Corpo da direita*/
+aside#direita{
+    display: block;
+    width: 50%;
+    float: right;
+    height: 360px;
+    text-align: center;
+}
+
+aside#direita h6{
+    margin-top:25px;
+}
+
+/*Campos DATA*/
+div#camp-dat{
+   width: 100%;
+   margin-left: 0px; 
+}
+ul{
+    width: 400px;
+    margin-left: -10%;
+    line-height: 0.5;
+}
+
+ul li{
+    list-style: none;
+    margin: 5px auto auto 10px;
+    float: left;
+    line-height: 2em;
+}
+/*Botões*/
+div#botoes{  
+    width: 200px;
+    height: 50px;
+    margin: 20px auto;
+    float: right;
+}
+
+.btn{
+    margin-left:5px;
+}
+div#align-right{
+    float: none;
+    margin: 10px auto 0px 40px;
+}
+}
+@media only screen and (max-width: 768px) {
+/* Inicio*/
+header#cabecalho{
+    margin:50px auto 60px auto;
+}    
+.container-fluid{
+    padding-right: 0px;
+    padding-left: 0px;
+}  
+
+div#interface{
+    width: 700px;
+    height: 100%;
+    margin: 0px auto 0px auto;
+}
+
+/*Corpo da esqueda*/
+aside#esquerda{
+    display: block;
+    width: 50%;
+    float: left;
+    height: 360px;
+    text-align: center;
+}
+
+/*Corpo da direita*/
+aside#direita{
+    display: block;
+    width: 50%;
+    float: right;
+    height: 360px;
+    text-align: center;
+}
+
+/*Campos DATA*/
+div#camp-dat{
+   width: 100%;
+   margin-left: 0px; 
+}
+ul{
+    width: 400px;
+    margin-left: -10%;
+    line-height: 0.5;
+}
+
+ul li{
+    list-style: none;
+    margin: 5px auto auto 10px;
+    float: left;
+    line-height: 2em;
+}
+/*Botões*/
+div#botoes{  
+    width: 200px;
+    height: 50px;
+    margin: 10px auto;
+    float: right;
+}
+
+.btn{
+    margin-left:5px;
+}
+div#align-right{
+    float: none;
+    margin: 10px auto 0px 40px;
+}
+}
+
+@media only screen and (max-width: 576px) {
+
+.container-fluid{
+    padding-right: 0px;
+    padding-left: 0px;
+}    
+
+div#interface{
+    width: 360px;
+    height: 100%;
+    margin: 0px auto 0px auto;
+}
+
+/*Corpo da esqueda*/
+aside#esquerda{
+    display: block;
+    width: 100%;
+    float: start;
+    height: 340px;
+    text-align: center;
+}
+
+/*Corpo da direita*/
+aside#direita{
+    display: block;
+    width: 100%;
+    float: end;
+    height: 340px;
+    text-align: center;
+}
+
+/*Campos DATA*/
+div#camp-dat{
+   width: 100%;
+   margin-left: 0px; 
+}
+ul{
+    width: 400px;
+    margin-left: -10%;
+    line-height: 0.5;
+}
+
+ul li{
+    list-style: none;
+    margin: 5px auto auto 10px;
+    float: left;
+    line-height: 2em;
+}
+/*Botões*/
+div#botoes{  
+    width: 200px;
+    height: 50px;
+    margin: 0px auto 0px auto;
+}
+
+.btn{
+    margin-left:5px;
+}
+div#align-right{
+    float: none;
+    margin: 10px auto 0px auto;
+}
+
+}
+    
+/* *{
+    border: 1px solid black;
+} */
