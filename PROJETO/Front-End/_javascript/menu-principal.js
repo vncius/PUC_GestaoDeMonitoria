@@ -34,7 +34,7 @@ function selecioneMenu(role) {
             $("#div_menu").load("menu/menu-coordenacao-caeme.html");
             break;
         case "ROLE_COORD_CURSO":
-            $("#div_menu").load("menu/menu-coordenacao-curso.html");
+            $("#div_menu").load(obterUrlDePaginas("menu/menu-coordenacao-curso.html"));
             break;
         case "ROLE_COORD_MONITORIA":
             $("#div_menu").load("menu/menu-coordenacao-monitoria.html");
