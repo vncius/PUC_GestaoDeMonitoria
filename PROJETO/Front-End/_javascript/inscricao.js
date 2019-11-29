@@ -275,7 +275,7 @@ function preencheFormulario() {
     $('input[name="nome"]').val(nome);
     $('input[name="matricula"]').val(matricula);
     $('input[name="curso"]').val(descricaoCurso);
-    preencheComboDisciplinas(disciplinas);
+    preencheComboDisciplinas(disciplinas, dadosForm);
     $('input[name="telefone"]').val(telefone);
     $('input[name="email"]').val(email);
     $('input[name="carga_horaria_segunda"]').val(carga_horaria_segunda);
@@ -302,17 +302,17 @@ function preencheFormulario() {
     }
 }
 
-function preencheComboDisciplinas(disciplinas) {
+function preencheComboDisciplinas(disciplinas, dadosForm) {
     var existeDisciplinaSelecionada = false;
 
     if (disciplinas.length > 0) {
         disciplinas.forEach(disciplina => {
-            if (disciplina.ehSelecionado != true) {
+            if (disciplina.id != dadosForm.id_disciplina_selecionada) {
                 $('#disciplina').append(`<option value='${disciplina.id}'>${disciplina.descricao}</option>`);
             } else {
                 existeDisciplinaSelecionada = true;
                 $('#disciplina').append(`<option selected value='${disciplina.id}'>${disciplina.descricao}</option>`);
-                preencheComboOrientadores(disciplina.orientadores);
+                preencheComboOrientadores(disciplina.orientadores, dadosForm.id_orientador_selecionado);
             }
         });
 
@@ -328,13 +328,13 @@ function preencheComboDisciplinas(disciplinas) {
     }
 }
 
-function preencheComboOrientadores(orientadores) {
+function preencheComboOrientadores(orientadores, orientador_selecionado) {
     $('#orientador option').remove();
     var existeOrientadorSelecionado = false;
 
     if (orientadores.length > 0) {
         orientadores.forEach(orientador => {
-            if (orientador.ehSelecionado != true) {
+            if (orientador.id != orientador_selecionado) {
                 $('#orientador').append(`<option value='${orientador.id}'>${orientador.descricao}</option>`);
             } else {
                 existeOrientadorSelecionado = true;
