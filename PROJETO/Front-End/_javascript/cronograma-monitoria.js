@@ -121,8 +121,7 @@ $(document).ready(function () {
             });
 
             $('#btnconsulta').on("click", function (e) {
-                var id_curso = document.getElementById("cboCursos");
-                var valorIdcurso = id_curso.options[id_curso.selectedIndex].value;
+                var valorIdcurso = $('#cboCursos').val();
 
                 $.ajax({
                     method: "GET", // TIPO DE REQUISIÇÃO
@@ -194,7 +193,6 @@ function carregarComboboxCursos() {
 
 function preencheCamposDoCronogramaMonitoria(resultado) {
     $("#mensagens ul").empty();
-    document.getElementById("mensagens").style.display = "none";
     var cronogramaMonitoria = JSON.parse(resultado);
     document.querySelector("#idCronograma").value = cronogramaMonitoria.id;
     document.querySelector("#DtIniPublicacaoEdital").value = cronogramaMonitoria.dataEditalInicio;
