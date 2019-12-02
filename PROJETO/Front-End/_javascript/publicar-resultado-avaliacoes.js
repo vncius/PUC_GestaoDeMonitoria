@@ -10,15 +10,151 @@ $(document).ready(function () {
             //-------------------------------------------- VALIDAÇÕES PRÉ-CARREGAMENTO
             if (validacoes() === true) {
                 buscarTodosOsAlunosInscritos();
-                preencherCamposDaTable(recuperaDadosPublicacaoResultadoDaAvaliacao());
                 preencherCamposComboCursos();
+                
+                $('#btnBuscar').on("click", function (e) {
+                    pesquisarPorFiltros();
+                });
+
+                $("#curso").change(function () {
+                    pesquisarPorFiltros();
+                });
+    
+                $('#formulario').submit(function (e) {
+                    if (cursoSelecionadoEstaNoCronograma() === false){
+                        exibaAlerta("Curso selecionado não está no periodo de avaliação!");
+                        return;
+                    }
+
+                    e.preventDefault();
+    
+                    var objetoJSON = preenchaFormulario();
+    
+                    $.ajax({
+                        method: "POST", // TIPO DE REQUISIÇÃO
+                        url: obterUrlDaAPI("/publicarResultadoAvaliacoes/"),
+                        headers: {
+                            "Authorization": recuperaTokenParaRequisicao(),
+                        },
+                        contentType: "application/json;charset=UTF-8",
+                        dataType: "text", //RETORNO SE JSON JÁ CONVERTE O RESULT EM OBJETO
+                        async: false,
+                        data: JSON.stringify(objetoJSON),
+                        success: function (result, status, request) {
+                            alert('SUCESSO.')
+                            removDadosPublicacaoResultadoDaAvaliacao();
+                        },
+                        error: function (request, status, erro) {
+                            if (request.status === 500) {
+                                exibaAlerta(status);
+                            } else if (request.status === 404) {
+                                registraInconsistencia(request.responseText);
+                            } else {
+                                exibaAlerta("Houve uma falha na requisição!");
+                            }
+                        }
+                    });
+                });
             }
         }
     }
 });
 
+function preenchaFormulario() {
+    var objeto = new Object();
+    var lista = [];
+
+    objeto.coeficiente = $('#coeficiente').val();
+
+    $('tbody tr').each(function (el) {
+        var resultadoAvaliacao = new Object();
+        resultadoAvaliacao.status = $(this).find('#statusInscricao').text().trim();
+
+        if (resultadoAvaliacao.status != "APROVADA"){
+            resultadoAvaliacao.matricula = $(this).find('#matricula').text().trim();
+            resultadoAvaliacao.notaAluno = $(this).find('#notaAluno').val();
+            lista.push(resultadoAvaliacao);
+        }
+    });
+
+    objeto.listaAvaliacoes = lista;
+    objeto.idCurso = parseInt($('#curso').val());
+    return objeto;
+}
+
+function pesquisarPorFiltros() {
+    var idCurso = parseInt($('#curso').val());
+    var matricula = $('#matricula').val();
+    var inscricoesFiltradasPorCurso = [];
+    var inscricoesFiltradasPorMatricula = [];
+
+    if (idCurso === 0) {
+        exibaAlerta("Selecione um curso para o filtro!");
+        return;
+    }
+
+    RecuperaInscricoesLocal().forEach(inscricao => {
+        if (idCurso === inscricao.cursos.id && inscricao.statusIncricao != "CANCELADA") {
+            inscricoesFiltradasPorCurso.push(inscricao);
+        }
+    });
+
+    if (matricula != "") {
+        if (inscricoesFiltradasPorCurso.length > 0) {
+            inscricoesFiltradasPorCurso.forEach(inscricao => {
+                if (inscricao.matricula === matricula && inscricao.statusIncricao != "CANCELADA") {
+                    inscricoesFiltradasPorMatricula.push(inscricao);
+                }
+            });
+        }
+    }
+
+    if (inscricoesFiltradasPorMatricula.length > 0 || matricula != "") {
+        preencherCamposDaTable(inscricoesFiltradasPorMatricula);
+    } else {
+        preencherCamposDaTable(inscricoesFiltradasPorCurso);
+    }
+
+    if (inscricoesFiltradasPorCurso.length > 0){
+        if (inscricoesFiltradasPorMatricula.length > 0 || matricula === ""){
+            $('#div-coeficiente').show();
+            $('#div-btn-avalia').show();
+        } else {
+            $('#div-coeficiente').hide();
+            $('#div-btn-avalia').hide();
+        }
+    } else {
+        $('#div-coeficiente').hide();
+        $('#div-btn-avalia').hide();
+    }
+}
+
 function preencherCamposComboCursos() {
-    
+    $.ajax({
+        method: "GET",
+        url: obterUrlDaAPI("/curso/"),
+        headers: {
+            "Authorization": localStorage.getItem("Authorization"),
+        },
+        dataType: "json",
+        contentType: "application/json;charset=UTF-8",
+        async: true,
+        success: function (result, status, request) {
+            $('#curso').append(`<option selected value="0">Selecione</option>`);
+            if (result != "") {
+                if (result != "null") {
+                    result.forEach(curso => {
+                        var descCurso = curso.descricao;
+                        var idCurso = curso.id;
+                        $('#curso').append(`<option value="${idCurso}">${descCurso}</option>`);
+                    });
+                }
+            }
+        },
+        error: function (request, status, erro) {
+            exibaAlerta("Ocorreu um erro ao buscar os cursos!");
+        }
+    });
 }
 
 function preencherCamposDaTable(inscricoes) {
@@ -27,19 +163,23 @@ function preencherCamposDaTable(inscricoes) {
     inscricoes.forEach(inscricao => {
         var linha = "";
         linha = linha.concat(`<tr id="linhaAluno">`);
-        linha = linha.concat(`<th>${inscricao.matricula}</th>`);
+        linha = linha.concat(`<th id="matricula">${inscricao.matricula}</th>`);
         linha = linha.concat(`<td>${inscricao.nome}</td>`);
 
         inscricao.cursos.disciplinas.forEach(disciplina => {
-            if(disciplina.id === inscricao.id_disciplina_selecionada){
+            if (disciplina.id === inscricao.id_disciplina_selecionada) {
                 linha = linha.concat(`<td>${disciplina.descricao}</td>`);
             }
         });
-        linha = linha.concat(`<td><input type="text" id="notaAluno" class="form-control" max="10" maxlength="4" required></td>`);
-        linha = linha.concat(`<td>${inscricao.statusIncricao}</td>`);
+        linha = linha.concat(`<td><input type="number" id="notaAluno" class="form-control" min="0" max="100" required></td>`);
+        linha = linha.concat(`<td id="statusInscricao">${inscricao.statusIncricao}</td>`);
         linha = linha.concat(`</tr>`);
 
         inserirLinhaNaTable(linha);
+    });
+
+    $('tbody tr').each(function (el) {
+        $(this).find('#notaAluno').mask('000');
     });
 }
 
@@ -54,7 +194,7 @@ function buscarTodosOsAlunosInscritos() {
         dataType: "JSON", // SE JSON JÁ CONVERTE O RESULT EM OBJETO
         async: false,
         success: function (result, status, request) {
-            registraDadosPublicacaoResultadoDaAvaliacao(result);
+            RegistraInscricoesLocal(result);
         },
         error: function (request, status, erro) {
             if (request.status === 500) {
@@ -78,24 +218,69 @@ function validacoes() {
     var retorno = true;
 
     if (estaNoPeriodoDePublicarResultados() === false) {
+        exibaAlerta("Aguarde o periodo de avaliação se iniciar.");
+        redirecionarMenuPrincipal();
         retorno = false;
     }
 
     return retorno;
 }
 
+function cursoSelecionadoEstaNoCronograma() {
+    var retorno = false;
+    var idCurso = $('#curso').val();
+    $.ajax({
+        method: "GET",
+        url: obterUrlDaAPI(`/publicarResultadoAvaliacoes/validaPeriodoDeAvaliacao/${idCurso}`),
+        headers: {
+            "Authorization": localStorage.getItem("Authorization"),
+        },
+        dataType: "text",
+        async: false,
+        success: function (result, status, request) {
+            if (result === "true"){
+                retorno = true;
+            }
+        },
+        error: function (request, status, erro) {
+            exibaAlerta("Ocorreu um erro ao verificar se está no periodo de avaliação!");
+            return;
+        }
+    });
+    return retorno;
+}
+
 function estaNoPeriodoDePublicarResultados() {
-    // REQUISIÇÃO PARA VERIFICAR SE ESTÁ NO PERIODO DE PUBLICAR RESULTADOS
+    var retorno = false;
+    $.ajax({
+        method: "GET",
+        url: obterUrlDaAPI("/publicarResultadoAvaliacoes/validaPeriodoDeAvaliacao/"),
+        headers: {
+            "Authorization": localStorage.getItem("Authorization"),
+        },
+        dataType: "text",
+        async: false,
+        success: function (result, status, request) {
+            if (result === "true"){
+                retorno = true;
+            }
+        },
+        error: function (request, status, erro) {
+            exibaAlerta("Ocorreu um erro ao verificar se está no periodo de avaliação!");
+            retorno = false;
+        }
+    });
+    return retorno;
 }
 // ------------------------------------------------------------------------------------
 
 /* ------------------------------------ DADOS LOCALSTORAGE --------------------------------------*/
 
-function recuperaDadosPublicacaoResultadoDaAvaliacao() {
+function RecuperaInscricoesLocal() {
     return JSON.parse(localStorage.getItem("dadosPublicacaoResultado"));
 }
 
-function registraDadosPublicacaoResultadoDaAvaliacao(dadosPublicacaoResultado) {
+function RegistraInscricoesLocal(dadosPublicacaoResultado) {
     localStorage.removeItem("dadosPublicacaoResultado");
     localStorage.setItem("dadosPublicacaoResultado", JSON.stringify(dadosPublicacaoResultado));
 }

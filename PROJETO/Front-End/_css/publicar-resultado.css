@@ -7,19 +7,14 @@ body {
     color: #777777;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
     font-family: "Poppins", sans-serif;
     font-weight: 600;
     color: #222222;
 }
 
 #notaAluno {
-    width: 60px;
+    width: 90px;
     height: 25px;
 }
 
@@ -28,8 +23,7 @@ a {
     transition: all 0.3s ease-in-out;
 }
 
-a:hover,
-a:focus {
+a:hover, a:focus {
     text-decoration: none;
     outline: none;
 }
@@ -182,7 +176,6 @@ button:focus {
 .header_area .container {
     padding: 0px 8px;
 }
-
 
 /*---------------------------------------------------- */
 

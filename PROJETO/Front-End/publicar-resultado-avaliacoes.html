@@ -6,6 +6,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="_imagens/logo-graduacao.png" type="image/png">
     <title>SIMPUC</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="_css/bootstrap.css">
@@ -35,22 +36,23 @@
                     <!--MENSAGENS DE ERRO OU VALIDAÇÃO SÃO EXIBIDAS AQUI-->
                 </ul>
             </div>
-            <form id="formulario" method="post" enctype="multipart/form-data">
+            <form id="formulario" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="curso">Curso</label>
-                        <select id="curso" name="curso" class="form-control">
-							<option selected value="Selecione">Selecione</option>
-						</select>
+                        <select id="curso" class="form-control">
+
+                        </select>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="matricula">Matricula</label>
-                        <input type="text" id="matricula" name="matricula" class="form-control">
+                        <input type="text" id="matricula" class="form-control">
                     </div>
 
                     <div class="form-group col-md-1">
                         <label for="inputEstado" style="color:#fff">.</label>
-                        <button type="button" id="buscar" class="form-control" style="background-color:#057af7;color:#fff;">Buscar</button>
+                        <button type="button" id="btnBuscar" class="form-control"
+                            style="background-color:#057af7;color:#fff;">Buscar</button>
                     </div>
                     <table class="table">
                         <thead class="thead-dark">
@@ -58,32 +60,28 @@
                                 <th scope="col">Matricula</th>
                                 <th scope="col">Aluno</th>
                                 <th scope="col">Disciplina</th>
-                                <th scope="col">Notas</th>
+                                <th scope="col">Notas (0 a 100)</th>
                                 <th scope="col">Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr id="linhaAluno">
-                                <th scope="row">2017.1.0120.0049-8</th>
-                                <td>Vinicius Vieira Abreu</td>
-                                <td>Desenvolvimento WEB</td>
-                                <td><input type="text" id="notaAluno" class="form-control" max="10" maxlength="4" required></td>
-                                <td>Pendente</td>
-                            </tr>
+                           
                         </tbody>
                     </table>
 
-                    <div class="form-group col-md-1">
+                    <div id="div-coeficiente" class="form-group col-md-1">
+                        <script>$('#div-coeficiente').hide();</script>
                         <label for="coeficiente">Coeficiente</label>
-                        <input type="text" id="coeficiente" name="coeficiente" class="form-control">
+                        <input type="number" maxlength="3" onclick="$('#coeficiente').mask('000');" min="0" max="100" required id="coeficiente" name="coeficiente" class="form-control">
                     </div>
-                    <div class="form-group col-md-1">
+                    <div id="div-btn-avalia" class="form-group col-md-1">
+                        <script>$('#div-btn-avalia').hide();</script>
                         <label for="inputEstado" style="color:#fff">.</label>
-                        <button type="button" id="avaliar" class="form-control" style="background-color:#057af7;color:#fff;">Avaliar</button>
+                        <button type="submit" id="avaliar" class="form-control"
+                            style="background-color:#057af7;color:#fff;">Avaliar</button>
                     </div>
-
             </form>
-            </div>
+        </div>
     </section>
 </body>
 
