@@ -121,8 +121,7 @@ $(document).ready(function () {
             });
 
             $('#btnconsulta').on("click", function (e) {
-                var id_curso = document.getElementById("cboCursos");
-                var valorIdcurso = id_curso.options[id_curso.selectedIndex].value;
+                var valorIdcurso = $('#cboCursos').val();
 
                 $.ajax({
                     method: "GET", // TIPO DE REQUISIÇÃO

@@ -92,13 +92,17 @@ function carregaElementos() { // --------------------------------------- CARREGA
 // ----------------------------- FUNÇÕES
 
 function valideAnexo() {
-    var file = $("#file")[0].files;
-    var nameFile = file[0].name.split(".");
-
-    if (nameFile.slice(-1)[0] === "pdf") {
-        return true;
+    if ($('#salvar').text() != "Reativar"){
+        var file = $("#file")[0].files;
+        var nameFile = file[0].name.split(".");
+    
+        if (nameFile.slice(-1)[0] === "pdf") {
+            return true;
+        } else {
+            return false;
+        }
     } else {
-        return false;
+        return true;
     }
 }
 

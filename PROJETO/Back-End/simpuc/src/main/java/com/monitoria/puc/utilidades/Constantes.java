@@ -17,6 +17,6 @@ public class Constantes {
 	public final static String PERIODO_ENTREGA_RESULTADOS = "ENTREGA DE RESULTADOS";
 	public final static String PERIODO_LETIVO = "LETIVO";
 	public final static String PERIODO_ENTREGA_CERTIFICADOS = "ENTREGA DE CERTIFICADOS";
-	public final static String PERIODO_NENHUM = "NÃO SE ENCONTRA EM NENHUM PERIODO";
+	public final static String PERIODO_NENHUM = "NENHUM PERIODO";
 	public static final String SEM_CRONOGRAMA = "SEM CRONOGRAMA CADASTRADO";
 }
