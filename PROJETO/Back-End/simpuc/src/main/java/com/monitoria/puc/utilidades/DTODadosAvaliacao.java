@@ -26,6 +26,4 @@ public class DTODadosAvaliacao {
 	public void setIdCurso(int idCurso) {
 		this.idCurso = idCurso;
 	}
-	
-	
 }

@@ -14,4 +14,7 @@ public interface RepositoryFichaDeInscricao extends JpaRepository<ModelInscricao
 
 	@Query("select u from incricao_monitoria u where u.matricula = ?1")
 	ModelInscricaoMonitoria findInscricaoByMatricula(String matricula);
+
+	@Query("UPDATE incricao_monitoria im SET im.status_incricao = '?1' WHERE im.MATRICULA = '?2';")
+	void atualizeStatusInscricao(String situacaoAprovada, String matricula);
 }
