@@ -22,7 +22,26 @@ public class DTOFichaDeInscricao {
 	private String carga_horaria_sexta;
 	private String carga_horaria_sabado;
 	private String statusIncricao;
+	private Long id_curso_selecionado;
+	private Long id_disciplina_selecionada;
+	private Long id_orientador_selecionado;
 	
+	public Long getId_disciplina_selecionada() {
+		return id_disciplina_selecionada;
+	}
+
+	public void setId_disciplina_selecionada(Long id_disciplina_selecionada) {
+		this.id_disciplina_selecionada = id_disciplina_selecionada;
+	}
+
+	public Long getId_orientador_selecionado() {
+		return id_orientador_selecionado;
+	}
+
+	public void setId_orientador_selecionado(Long id_orientador_selecionado) {
+		this.id_orientador_selecionado = id_orientador_selecionado;
+	}
+
 	private ModelCurso curso;
 
 	public void InicializeParaNovoCadastro(ModelCurso curso, String matricula, String nome) {
@@ -134,5 +153,13 @@ public class DTOFichaDeInscricao {
 
 	public void setStatusIncricao(String statusIncricao) {
 		this.statusIncricao = statusIncricao;
+	}
+
+	public Long getId_curso_selecionado() {
+		return id_curso_selecionado;
+	}
+
+	public void setId_curso_selecionado(Long id_curso_selecionado) {
+		this.id_curso_selecionado = id_curso_selecionado;
 	}
 }

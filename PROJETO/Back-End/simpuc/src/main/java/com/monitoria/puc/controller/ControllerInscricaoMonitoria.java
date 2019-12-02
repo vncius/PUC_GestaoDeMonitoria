@@ -21,12 +21,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.monitoria.puc.model.ModelCronogramaMonitoria;
+import com.monitoria.puc.model.ModelCurso;
 import com.monitoria.puc.model.ModelInscricaoMonitoria;
 import com.monitoria.puc.model.ModelUsuario;
 import com.monitoria.puc.repository.RepositoryCronogramaMonitoria;
-import com.monitoria.puc.repository.RepositoryCurso;
 import com.monitoria.puc.repository.RepositoryFichaDeInscricao;
 import com.monitoria.puc.repository.RepositoryUsuario;
+import com.monitoria.puc.service.CursoService;
 import com.monitoria.puc.utilidades.Constantes;
 import com.monitoria.puc.utilidades.DTOFichaDeInscricao;
 import com.monitoria.puc.utilidades.Utilidades;
@@ -45,10 +46,10 @@ public class ControllerInscricaoMonitoria {
 	private RepositoryCronogramaMonitoria repositoryCronogramaMonitoria;
 
 	@Autowired
-	private RepositoryUsuario usuarioRepository;
-
+	private CursoService cursoService;
+	
 	@Autowired
-	private RepositoryCurso cursoRepository;
+	private RepositoryUsuario usuarioRepository;
 
 	@Autowired
 	private RepositoryFichaDeInscricao fichaDeInscricaoRepository;
@@ -160,12 +161,13 @@ public class ControllerInscricaoMonitoria {
 		List<DTOFichaDeInscricao> listaInscricoesDTO = new ArrayList<DTOFichaDeInscricao>();
 		
 		try {
-			Iterable<ModelInscricaoMonitoria> listaInscricoesModel = fichaDeInscricaoRepository.findAll();
+			List<ModelInscricaoMonitoria> listaInscricoesModel = fichaDeInscricaoRepository.findAll();
 			listaInscricoesModel.forEach(inscricaoModel -> { 
-				listaInscricoesDTO.add(inscricaoModel.converteModelEmDTOParaConsulta(cursoRepository));
+				listaInscricoesDTO.add(inscricaoModel.converteModelEmDTOParaConsulta(cursoService.listAll()));
 			});
 			return new ResponseEntity<List<DTOFichaDeInscricao>>(listaInscricoesDTO, HttpStatus.OK);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return new ResponseEntity<List<DTOFichaDeInscricao>>(listaInscricoesDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -182,7 +184,7 @@ public class ControllerInscricaoMonitoria {
 			return new ResponseEntity<DTOFichaDeInscricao>(dtoIncricao, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<DTOFichaDeInscricao>(
-					fichaDeInscricao.converteModelEmDTOParaConsulta(cursoRepository), HttpStatus.OK);
+					fichaDeInscricao.converteModelEmDTOParaConsulta(cursoService.listAll()), HttpStatus.OK);
 		}
 	}
 

@@ -35,19 +35,9 @@ public class ModelDisciplina implements Serializable {
 	private ModelCurso curso;
 	
 	private String descricao;
-    
-    private boolean ehSelecionado;
 	
 	@OneToMany(mappedBy = "disciplina")
     private List<ModelOrientador> orientadores;
-	
-	public boolean isEhSelecionado() {
-		return ehSelecionado;
-	}
-
-	public void setEhSelecionado(boolean ehSelecionado) {
-		this.ehSelecionado = ehSelecionado;
-	}
 
 	public Long getId() {
 		return id;
