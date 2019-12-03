@@ -88,4 +88,16 @@ public class Utilidades {
 			return false;
 		}
 	}
+	
+	@SuppressWarnings("deprecation")
+	public static boolean validaSeDataAtualEstaDentroDoPeriodo(Date DataInicialPeriodo, Date DataFinalPeriodo) {
+		Date dataAtual = new Date(System.currentTimeMillis());
+		DataInicialPeriodo.setDate(DataInicialPeriodo.getDate() - 1);
+		DataFinalPeriodo.setDate(DataFinalPeriodo.getDate() + 1);
+		if (dataAtual.after(DataInicialPeriodo) && dataAtual.before(DataFinalPeriodo)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

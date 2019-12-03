@@ -92,13 +92,17 @@ function carregaElementos() { // --------------------------------------- CARREGA
 // ----------------------------- FUNÇÕES
 
 function valideAnexo() {
-    var file = $("#file")[0].files;
-    var nameFile = file[0].name.split(".");
-
-    if (nameFile.slice(-1)[0] === "pdf") {
-        return true;
+    if ($('#salvar').text() != "Reativar"){
+        var file = $("#file")[0].files;
+        var nameFile = file[0].name.split(".");
+    
+        if (nameFile.slice(-1)[0] === "pdf") {
+            return true;
+        } else {
+            return false;
+        }
     } else {
-        return false;
+        return true;
     }
 }
 
@@ -113,6 +117,20 @@ function habilitaCamposNecessariosInicializacao() {
         desabilitaTodosOsCamposDoForm();
         desabilitaButtons(false, true);
         registraInconsistencia("Campos desabilitados pois a inscrição se encontra cancelada!");
+    } else if (preInscricao.statusIncricao === "REPROVADA" || preInscricao.statusIncricao === "APROVADA") {
+        desabilitaTodosOsCamposDoForm();
+        $("#cancelar").hide();
+        $("#editar").hide();
+        $("#salvar").hide();
+        $("#div_anexo").hide();
+        $("#div_impresao").show();
+        $("#div_impresao").css("font-family", "Arial");
+        $("#div_impresao").css("font-weight", "bold");
+        $("#div_impresao").css("color", "black");
+        $("#div_impresao").css("text-align", "center");
+        $("#div_impresao").css("font-size", "35px");
+        $("#div_impresao").append(`<p>STATUS: ${preInscricao.statusIncricao}</p>`);
+
     } else if (preInscricao.statusIncricao === null || preInscricao.statusIncricao === "null") {
         habilitaTodosCamposDoFormulario();
         $("#cancelar").attr('disabled', 'disabled');;
@@ -275,7 +293,7 @@ function preencheFormulario() {
     $('input[name="nome"]').val(nome);
     $('input[name="matricula"]').val(matricula);
     $('input[name="curso"]').val(descricaoCurso);
-    preencheComboDisciplinas(disciplinas);
+    preencheComboDisciplinas(disciplinas, dadosForm);
     $('input[name="telefone"]').val(telefone);
     $('input[name="email"]').val(email);
     $('input[name="carga_horaria_segunda"]').val(carga_horaria_segunda);
@@ -302,17 +320,17 @@ function preencheFormulario() {
     }
 }
 
-function preencheComboDisciplinas(disciplinas) {
+function preencheComboDisciplinas(disciplinas, dadosForm) {
     var existeDisciplinaSelecionada = false;
 
     if (disciplinas.length > 0) {
         disciplinas.forEach(disciplina => {
-            if (disciplina.ehSelecionado != true) {
+            if (disciplina.id != dadosForm.id_disciplina_selecionada) {
                 $('#disciplina').append(`<option value='${disciplina.id}'>${disciplina.descricao}</option>`);
             } else {
                 existeDisciplinaSelecionada = true;
                 $('#disciplina').append(`<option selected value='${disciplina.id}'>${disciplina.descricao}</option>`);
-                preencheComboOrientadores(disciplina.orientadores);
+                preencheComboOrientadores(disciplina.orientadores, dadosForm.id_orientador_selecionado);
             }
         });
 
@@ -328,13 +346,13 @@ function preencheComboDisciplinas(disciplinas) {
     }
 }
 
-function preencheComboOrientadores(orientadores) {
+function preencheComboOrientadores(orientadores, orientador_selecionado) {
     $('#orientador option').remove();
     var existeOrientadorSelecionado = false;
 
     if (orientadores.length > 0) {
         orientadores.forEach(orientador => {
-            if (orientador.ehSelecionado != true) {
+            if (orientador.id != orientador_selecionado) {
                 $('#orientador').append(`<option value='${orientador.id}'>${orientador.descricao}</option>`);
             } else {
                 existeOrientadorSelecionado = true;
@@ -462,6 +480,7 @@ function desabilitaButtonsInscricaoCancelada() {
 }
 
 function executaParametrizacaoParaImprimir() {
+    $("#div_impresao p").remove();
     $("#cancelar").hide();
     $("#editar").hide();
     $("#salvar").hide();
@@ -473,7 +492,7 @@ function executaParametrizacaoParaImprimir() {
     var status = inscricao.statusIncricao;
     $("#div_impresao").css("font-family", "Arial");
     $("#div_impresao").css("font-weight", "bold");
-    $("#div_impresao").css("color", "white");
+    $("#div_impresao").css("color", "black");
     $("#div_impresao").css("text-align", "center");
     $("#div_impresao").css("font-size", "35px");
     $("#div_impresao").append(`<p>STATUS: ${status}</p>`);
@@ -483,13 +502,15 @@ function executaParametrizacaoParaImprimir() {
     $("#div_impresao p").remove();
     $("#div_impresao").hide();
 
-    $("#cancelar").show();
-    $("#editar").show();
-    $("#salvar").show();
+    if (status != "REPROVADA" && status != "APROVADA") {
+        $("#cancelar").show();
+        $("#editar").show();
+        $("#salvar").show();
+        $("#div_anexo").show();
+    }
+
     $("#imprimir").show();
     $("#div_documentos").show();
-    $("#").show();
-    $("#").show();
 }
 
 

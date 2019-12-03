@@ -45,11 +45,11 @@ function recuperaTokenParaRequisicao() {
 
 // ------------------------------- FUNCOES PARA OBTER URL'S DA API E DO CLIENT -------------------------------
 function obterUrlDaAPI(direcionamento) {
-    return "http://189.5.96.65:8080/apimonitoria" + direcionamento;
+    return "http://localhost:8080/apimonitoria" + direcionamento;
 }
 
 function obterUrlDePaginas(direcionamento) {
-    return `http://189.5.96.65:200/${direcionamento}`;
+    return `http://localhost:200/${direcionamento}`;
 }
 
 function redirecionarIndexLogin(){
@@ -96,4 +96,8 @@ function logout() {
 // ------------------------------- FUNÇÕES DE MENSAGENS -------------------------------
 function exibaAlerta(mensagem) {
     alert(mensagem);
+}
+
+function questione(mensagem){
+    return confirm(mensagem);
 }
