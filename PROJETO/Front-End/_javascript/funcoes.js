@@ -97,3 +97,7 @@ function logout() {
 function exibaAlerta(mensagem) {
     alert(mensagem);
 }
+
+function questione(mensagem){
+    return confirm(mensagem);
+}

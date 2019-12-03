@@ -79,7 +79,8 @@
 					<div class="form-row ">
 						<div class="col">
 							<label for="telefone">Telefone</label>
-							<input type="text" class="form-control" id="telefone" minlength="15" maxlength="16" name="telefone" required />
+							<input type="text" class="form-control" id="telefone" minlength="15" maxlength="16"
+								name="telefone" required />
 							<script type="text/javascript">$("#telefone").mask("(00) 0 0000-0000");</script>
 						</div>
 
@@ -205,17 +206,19 @@
 					</div>
 
 					<div id="div_documentos">
-						<div class="banner_content text-center">
-							<p style="font-size:15px;margin-top:3%">DOCUMENTOS A SEREM ANEXADOS:</p>
-						</div>
-						<p style="font-size:15px;">(1) Fotocópia do Diagnóstico de Matrícula:</p>
-						<p style="font-size:15px">(2) Duas fotos 3x4</p>
-						<p style="font-size:15px;">(3) Fotocópia do Histórico Escolar (pode ser a do SOL)</p>
+						<div id="div_anexo">
+							<div class="banner_content text-center">
+								<p style="font-size:15px;margin-top:3%">DOCUMENTOS A SEREM ANEXADOS:</p>
+							</div>
+							<p style="font-size:15px;">(1) Fotocópia do Diagnóstico de Matrícula:</p>
+							<p style="font-size:15px">(2) Duas fotos 3x4</p>
+							<p style="font-size:15px;">(3) Fotocópia do Histórico Escolar (pode ser a do SOL)</p>
 
-						<div class="banner_content text-center">
-							<label for="file">Anexe um PDF com todos os documentos aqui</label>
-							<div class="form-group">
-								<input type="file" name="file" class="btn btn-primary" id="file" required>
+							<div class="banner_content text-center">
+								<label for="file">Anexe um PDF com todos os documentos aqui</label>
+								<div class="form-group">
+									<input type="file" name="file" class="btn btn-primary" id="file" required>
+								</div>
 							</div>
 						</div>
 
@@ -234,4 +237,5 @@
 	</section>
 </body>
 <script language="javascript" src="_javascript/inscricao.js"></script>
+
 </html>

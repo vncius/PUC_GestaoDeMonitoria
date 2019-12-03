@@ -39,7 +39,17 @@ public class ModelInscricaoMonitoria implements Serializable {
 	private long id_curso;
 	private long id_disciplina;
 	private long id_orientador;
+	private int nota_avaliacao;
+	private int nota_coeficiente;
 	
+	public int getNota_coeficiente() {
+		return nota_coeficiente;
+	}
+
+	public void setNota_coeficiente(int nota_coeficiente) {
+		this.nota_coeficiente = nota_coeficiente;
+	}
+
 	public ModelInscricaoMonitoria() {
 		super();
 		this.matricula = "";
@@ -57,6 +67,8 @@ public class ModelInscricaoMonitoria implements Serializable {
 		this.id_curso = 0;
 		this.id_disciplina = 0;
 		this.id_orientador = 0;
+		this.nota_avaliacao = 0;
+		this.nota_coeficiente = 0;
 	}
 
 	public boolean validaInscricao() {
@@ -96,9 +108,8 @@ public class ModelInscricaoMonitoria implements Serializable {
 		model.setCarga_horaria_sexta(this.carga_horaria_sexta);
 		model.setCarga_horaria_sabado(this.carga_horaria_sabado);
 		model.setStatusIncricao(this.statusIncricao);
-
-		
-		 
+		model.setNota_avaliacao(this.nota_avaliacao);
+		model.setNota_coeficiente(this.nota_coeficiente);
 		
 		//PERCORRE A LISTA DE CURSOS E VERIFICA O ID DO CURSO INFORMADO NA FICHA DE INSCRICAO
 		listCursos.forEach(curso -> {
@@ -264,5 +275,13 @@ public class ModelInscricaoMonitoria implements Serializable {
 
 	public void setCarga_horaria_sabado(String carga_horaria_sabado) {
 		this.carga_horaria_sabado = carga_horaria_sabado;
+	}
+
+	public int getNota_avaliacao() {
+		return nota_avaliacao;
+	}
+
+	public void setNota_avaliacao(int nota_avaliacao) {
+		this.nota_avaliacao = nota_avaliacao;
 	}
 }

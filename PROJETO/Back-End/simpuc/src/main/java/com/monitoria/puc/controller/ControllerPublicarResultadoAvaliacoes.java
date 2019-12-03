@@ -44,20 +44,27 @@ public class ControllerPublicarResultadoAvaliacoes {
 
 	@Autowired
 	RepositoryFichaDeInscricao fichaInscricaoRepository;
-	
+
 	@Autowired
 	RepositoryCronogramaMonitoria cronogramaDeCursoRepository;
-	
+
 	@Autowired
 	RepositoryDisciplina disciplinaRepository;
-	
+
 	@Autowired
 	RepositoryCurso cursoRepository;
 
+	private int contador = 0;
+
 	@PostMapping(value = "/", produces = "application/text")
 	public ResponseEntity<String> save(@RequestBody DTODadosAvaliacao dadosAvaliacao) {
-		avalieAlunosInscritos(dadosAvaliacao);
-		return new ResponseEntity<String>("ok", HttpStatus.OK);
+		try {
+			avalieAlunosInscritos(dadosAvaliacao);
+			return new ResponseEntity<String>("Avaliação concluida com sucesso!", HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<String>("O processamento disparou uma exceção. EX: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
 	}
 
 	// ----------------------------------------------------- CONSULTAS
@@ -91,12 +98,17 @@ public class ControllerPublicarResultadoAvaliacoes {
 	private void avalieAlunosInscritos(DTODadosAvaliacao dadosAvaliacao) {
 		double coeficiente = dadosAvaliacao.getCoeficiente();
 		List<DTOResultadoAvaliacoes> aprovadosPorNota = new ArrayList<DTOResultadoAvaliacoes>();
-		
-		
+
 		dadosAvaliacao.getListaAvaliacoes().forEach(avaliacao -> {
 			ModelInscricaoMonitoria inscricao = fichaInscricaoRepository.findInscricaoByMatricula(avaliacao.getMatricula());
-			ModelCurso curso = cursoRepository.findById(inscricao.getId_curso()).get();
+			String notaParaSalvar = String.valueOf(avaliacao.getNotaAluno()).replace(".0", "");
+			String notaCoeficienteSalvar = String.valueOf(coeficiente).replace(".0", "");
+			inscricao.setNota_avaliacao(Integer.parseInt(notaParaSalvar));
+			inscricao.setNota_coeficiente(Integer.parseInt(notaCoeficienteSalvar));
+			fichaInscricaoRepository.save(inscricao);
 			
+			ModelCurso curso = cursoRepository.findById(inscricao.getId_curso()).get();
+
 			curso.getDisciplinas().forEach(disciplina -> {
 				if (disciplina.getId().equals(inscricao.getId_disciplina())) {
 					avaliacao.setIdDisciplina(disciplina.getId());
@@ -108,19 +120,20 @@ public class ControllerPublicarResultadoAvaliacoes {
 				}
 			});
 		});
-		
+
 		List<DTOResultadoAvaliacoes> melhoresAprovados = separeAlunosComMaiorNota(aprovadosPorNota);
+
+		melhoresAprovados.forEach(aprov -> {
+			aproveAluno(aprov.getMatricula(), aprov.getIdDisciplina().toString());
+		});
 		
-		melhoresAprovados.forEach(aprov -> { aproveAluno(aprov.getMatricula(), aprov.getIdDisciplina()); });
+		cursoRepository.atualizeSituacaoDoCurso(Constantes.SITUACAO_CURSO_AVALIADO, dadosAvaliacao.getIdCurso());
 	}
 
-	
-	
 	private List<DTOResultadoAvaliacoes> separeAlunosComMaiorNota(List<DTOResultadoAvaliacoes> avaliacoes1) {
 		List<DTOResultadoAvaliacoes> alunosComMelhoresNotas = new ArrayList<DTOResultadoAvaliacoes>();
 		List<String> disciplinas = new ArrayList<String>();
-		
-		// ORDENA LISTA POR ID DA DISCIPLINA
+
 		Collections.sort(avaliacoes1, new Comparator<Object>() {  
             public int compare(Object o1, Object o2) {  
             	DTOResultadoAvaliacoes c1 = (DTOResultadoAvaliacoes) o1;  
@@ -128,42 +141,40 @@ public class ControllerPublicarResultadoAvaliacoes {
                 return c1.getIdDisciplina().compareTo(c2.getIdDisciplina());
              }
 		});
-		
+
 		// PEGA TODAS AS DISCIPLINAS QUE FORAM AVALIADAS
 		avaliacoes1.forEach(avaliacao -> {
 			if (!disciplinas.contains(avaliacao.getIdDisciplina().toString())) {
 				disciplinas.add(avaliacao.getIdDisciplina().toString());
 			}
 		});
-		
-		//SEPARA OS MELHOERES POR DISCIPLINA DE ACORDO COM A QUANTIDADE DE VAGAS
+
+		// SEPARA OS MELHOERES POR DISCIPLINA DE ACORDO COM A QUANTIDADE DE VAGAS
 		disciplinas.forEach(idDisciplina -> {
 			List<DTOResultadoAvaliacoes> aprovadosPorDisciplina = new ArrayList<DTOResultadoAvaliacoes>();
 			ModelDisciplina disciplina = disciplinaRepository.findById(Long.parseLong(idDisciplina)).get();
 			int qtdVgDisciplina = disciplina.getQtdeVgMonitoria();
-			
+
 			avaliacoes1.forEach(avaliacao -> {
 				if (avaliacao.getIdDisciplina().equals(Long.parseLong(idDisciplina))) {
 					aprovadosPorDisciplina.add(avaliacao);
 				}
 			});
-			
-			Collections.sort(aprovadosPorDisciplina, new Comparator<Object>() {  
-	            public int compare(Object o1, Object o2) {  
-	            	DTOResultadoAvaliacoes c1 = (DTOResultadoAvaliacoes) o1;  
-	            	DTOResultadoAvaliacoes c2 = (DTOResultadoAvaliacoes) o2;  
-	                return c1.getNotaAluno() > c2.getNotaAluno() ? 1 : 
-	                	c1.getNotaAluno() < c2.getNotaAluno() ? -1 : 0;
-	             }
-			});
-			
-			for (int i = 0; i < qtdVgDisciplina; i++) {
-				if (i <= aprovadosPorDisciplina.size() -1 ) {
-					alunosComMelhoresNotas.add(aprovadosPorDisciplina.get(i));
+
+			Collections.sort(aprovadosPorDisciplina);
+
+			aprovadosPorDisciplina.forEach(aluno -> {
+				this.contador = contador + 1;
+				if (contador <= qtdVgDisciplina) {
+					alunosComMelhoresNotas.add(aluno);
+				} else {
+					reproveAluno(aluno.getMatricula());
 				}
-			}
+			});
+
+			this.contador = 0;
 		});
-		
+
 		return alunosComMelhoresNotas;
 	}
 
@@ -171,8 +182,8 @@ public class ControllerPublicarResultadoAvaliacoes {
 		fichaInscricaoRepository.atualizeStatusInscricao(Constantes.SITUACAO_REPROVADA, matricula);
 	}
 
-	private void aproveAluno(String matricula, long idDisciplina) {
+	private void aproveAluno(String matricula, String idDisciplina) {
 		fichaInscricaoRepository.atualizeStatusInscricao(Constantes.SITUACAO_APROVADA, matricula);
-		disciplinaRepository.decrementeQuantidadeDeVagas(Integer.parseInt(String.valueOf(idDisciplina)));
+		disciplinaRepository.decrementeQuantidadeDeVagas(Long.parseLong(idDisciplina));
 	}
 }

@@ -2,7 +2,7 @@ package com.monitoria.puc.utilidades;
 
 /*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
 /*DATA: 01/12/2019*/
-public class DTOResultadoAvaliacoes {
+public class DTOResultadoAvaliacoes implements Comparable<DTOResultadoAvaliacoes> {
 
 	private String matricula;
 	private Long idDisciplina;
@@ -32,5 +32,12 @@ public class DTOResultadoAvaliacoes {
 	}
 	public void setIdDisciplina(Long idDisciplina) {
 		this.idDisciplina = idDisciplina;
+	}
+	
+	@Override
+	public int compareTo(DTOResultadoAvaliacoes resultado) {
+		if (this.notaAluno > resultado.notaAluno) return -1;
+		if (this.notaAluno < resultado.notaAluno) return 1;
+		return 0;
 	}
 }

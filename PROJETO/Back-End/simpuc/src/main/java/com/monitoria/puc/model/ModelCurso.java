@@ -46,6 +46,8 @@ public class ModelCurso implements Serializable{
 	@JsonBackReference
 	@OneToOne(mappedBy = "curso")
     private ModelCronogramaMonitoria cronogramaMonitoria;
+
+	private String situacao_avaliacao;
 	
 	@JsonCreator
 	public ModelCurso(Long id) {
@@ -87,6 +89,14 @@ public class ModelCurso implements Serializable{
 
 	public void setDisciplinas(List<ModelDisciplina> disciplinas) {
 		this.disciplinas = disciplinas;
+	}
+
+	public String getSituacao_avaliacao() {
+		return situacao_avaliacao;
+	}
+
+	public void setSituacao_avaliacao(String situacao_avaliacao) {
+		this.situacao_avaliacao = situacao_avaliacao;
 	}
 	
 }

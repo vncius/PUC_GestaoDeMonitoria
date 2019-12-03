@@ -117,6 +117,20 @@ function habilitaCamposNecessariosInicializacao() {
         desabilitaTodosOsCamposDoForm();
         desabilitaButtons(false, true);
         registraInconsistencia("Campos desabilitados pois a inscrição se encontra cancelada!");
+    } else if (preInscricao.statusIncricao === "REPROVADA" || preInscricao.statusIncricao === "APROVADA") {
+        desabilitaTodosOsCamposDoForm();
+        $("#cancelar").hide();
+        $("#editar").hide();
+        $("#salvar").hide();
+        $("#div_anexo").hide();
+        $("#div_impresao").show();
+        $("#div_impresao").css("font-family", "Arial");
+        $("#div_impresao").css("font-weight", "bold");
+        $("#div_impresao").css("color", "black");
+        $("#div_impresao").css("text-align", "center");
+        $("#div_impresao").css("font-size", "35px");
+        $("#div_impresao").append(`<p>STATUS: ${preInscricao.statusIncricao}</p>`);
+
     } else if (preInscricao.statusIncricao === null || preInscricao.statusIncricao === "null") {
         habilitaTodosCamposDoFormulario();
         $("#cancelar").attr('disabled', 'disabled');;
@@ -466,6 +480,7 @@ function desabilitaButtonsInscricaoCancelada() {
 }
 
 function executaParametrizacaoParaImprimir() {
+    $("#div_impresao p").remove();
     $("#cancelar").hide();
     $("#editar").hide();
     $("#salvar").hide();
@@ -477,7 +492,7 @@ function executaParametrizacaoParaImprimir() {
     var status = inscricao.statusIncricao;
     $("#div_impresao").css("font-family", "Arial");
     $("#div_impresao").css("font-weight", "bold");
-    $("#div_impresao").css("color", "white");
+    $("#div_impresao").css("color", "black");
     $("#div_impresao").css("text-align", "center");
     $("#div_impresao").css("font-size", "35px");
     $("#div_impresao").append(`<p>STATUS: ${status}</p>`);
@@ -487,13 +502,15 @@ function executaParametrizacaoParaImprimir() {
     $("#div_impresao p").remove();
     $("#div_impresao").hide();
 
-    $("#cancelar").show();
-    $("#editar").show();
-    $("#salvar").show();
+    if (status != "REPROVADA" && status != "APROVADA") {
+        $("#cancelar").show();
+        $("#editar").show();
+        $("#salvar").show();
+        $("#div_anexo").show();
+    }
+
     $("#imprimir").show();
     $("#div_documentos").show();
-    $("#").show();
-    $("#").show();
 }
 
 
