@@ -4,7 +4,7 @@ import java.util.List;
 
 public class DTODadosAvaliacao {
 	
-	private int idCurso;
+	private long idCurso;
 	private double coeficiente;
 	private List<DTOResultadoAvaliacoes> listaAvaliacoes;
 	
@@ -20,10 +20,10 @@ public class DTODadosAvaliacao {
 	public void setListaAvaliacoes(List<DTOResultadoAvaliacoes> listaAvaliacoes) {
 		this.listaAvaliacoes = listaAvaliacoes;
 	}
-	public int getIdCurso() {
+	public long getIdCurso() {
 		return idCurso;
 	}
-	public void setIdCurso(int idCurso) {
+	public void setIdCurso(long idCurso) {
 		this.idCurso = idCurso;
 	}
 }

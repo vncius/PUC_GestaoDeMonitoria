@@ -218,7 +218,7 @@ function validacoes() {
     var retorno = true;
 
     if (estaNoPeriodoDePublicarResultados() === false) {
-        exibaAlerta("Aguarde o periodo de avaliação se iniciar.");
+        exibaAlerta("Não é possivel publicar os resultados, a data atual não está no perido de avaliação. Verifique o cronograma geral!");
         redirecionarMenuPrincipal();
         retorno = false;
     }

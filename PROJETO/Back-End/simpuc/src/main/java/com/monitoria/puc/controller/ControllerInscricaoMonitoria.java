@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.monitoria.puc.model.ModelCronogramaMonitoria;
-import com.monitoria.puc.model.ModelCurso;
 import com.monitoria.puc.model.ModelInscricaoMonitoria;
 import com.monitoria.puc.model.ModelUsuario;
 import com.monitoria.puc.repository.RepositoryCronogramaMonitoria;

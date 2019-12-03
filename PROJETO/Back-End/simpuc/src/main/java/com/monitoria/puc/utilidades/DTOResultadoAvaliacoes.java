@@ -5,6 +5,7 @@ package com.monitoria.puc.utilidades;
 public class DTOResultadoAvaliacoes {
 
 	private String matricula;
+	private Long idDisciplina;
 	private double notaAluno;
 	private String status;
 	
@@ -25,5 +26,11 @@ public class DTOResultadoAvaliacoes {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public Long getIdDisciplina() {
+		return idDisciplina;
+	}
+	public void setIdDisciplina(Long idDisciplina) {
+		this.idDisciplina = idDisciplina;
 	}
 }
