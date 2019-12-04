@@ -26,5 +26,6 @@ public class Constantes {
 	public final static String PERIODO_ENTREGA_CERTIFICADOS = "Entrega de Certificados";
 	public final static String PERIODO_NENHUM = "Nenhum";
 	public static final String SEM_CRONOGRAMA = "Sem Cronograma Cadastrado";
+	public static final String MENSAGEM_EDITAL_NAO_PUBLICADO = "<h1 style='width:100%; text-align:center; height: 100%;'>Edital não publicado!</h1>";
 	
 }
