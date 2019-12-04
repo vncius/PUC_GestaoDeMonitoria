@@ -2,6 +2,7 @@ package com.monitoria.puc.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -30,6 +31,7 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 		/*ATIVANDO A RESTRICAO A URL*/
 		.disable().authorizeRequests().antMatchers("/").permitAll()
 		.antMatchers("/index").permitAll()
+		.antMatchers(HttpMethod.GET, "/edital/").permitAll()
 		/*URL DE LOGOUT - REDIRECIONA O USUARIO APOS DESLOGAR*/
 		.anyRequest().authenticated().and().logout()
 		/*MAPEIA URL DE LOGOUT E INVALIDA USUARIO*/
