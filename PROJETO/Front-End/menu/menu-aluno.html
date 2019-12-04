@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <title>SIMPUC - Menu Principal</title>
-    <script src="_javascript/jquery-3.4.1.min.js"></script>
-    <link rel="stylesheet" href="_css/bootstrap_4.0.min.css">
+    <script src="../_javascript/jquery-3.4.1.min.js"></script>
+    <script src="../_javascript/funcoes.js"></script>
     <!--\/-----------CSS da pagina------------\/-->
     <link rel="stylesheet" href="../_css/_css_menu/menuh-aluno.css">
     <!--/\------------------------------------/\-->
@@ -17,7 +17,9 @@
 <body>
     <div id=interface>
         <a onclick="logout();">
-            <div class="sair"><p>Sair</p></div>
+            <div class="sair">
+                <p>Sair</p>
+            </div>
         </a>
         <header id="cabecalho">
             <h1 class="ola">Olá,</h1>
@@ -39,6 +41,11 @@
                             <p>Realizar Inscrição</p>
                         </div>
                     </a>
+                    <a href="#" id="acessarEdital">
+                        <div class="serv inscricao-in">
+                            <p>Acessar Edital</p>
+                        </div>
+                    </a>
                     <!-- <a href="../not_implemented.html" target="_blank">
                         <div class="serv processo-acomp">
                             <p>Acompanhar Processo</p>
@@ -58,6 +65,11 @@
             </div>
         </section>
         <script>preencheCamposMenu();</script>
+        <script>
+            $('#acessarEdital').on("click", function() {
+                window.open(obterUrlDaAPI('/edital/'));
+            });
+        </script>
     </div>
 </body>
 
