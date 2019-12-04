@@ -21,7 +21,8 @@ $(document).ready(function () {
                 });
     
                 $('#formulario').submit(function (e) {
-                    if (questione('Confirmar avaliação!')){
+
+                    if (questione('Confirmar avaliação?') === true){
                         if (cursoSelecionadoEstaNoCronograma() === false){
                             exibaAlerta("Curso selecionado não está no periodo de avaliação!");
                             return;

@@ -156,6 +156,7 @@ function preencherCamposBusca(inscricoes) {
             inserirItemNaComboCurso(`<option>${inscricao.cursos.descricao}</option>`);
             cursosJaInseridos.push(inscricao.cursos.descricao);
         }
+        cursoInserido = false;
     });
 }
 
