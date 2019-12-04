@@ -79,9 +79,9 @@ public class ControllerInscricaoMonitoria {
 					}
 					String mensagem = "";
 					if (inscricaoMonitoria.getId() > 0) {
-						mensagem = String.format("Inscrição do aluno %s foi atualizado!", inscricaoMonitoria.getNome());
+						mensagem = String.format("Inscrição do aluno(a) %s foi atualizado!", inscricaoMonitoria.getNome());
 					} else {
-						mensagem = String.format("Inscrição do aluno %s foi registrada!", inscricaoMonitoria.getNome());
+						mensagem = String.format("Inscrição do aluno(a) %s foi registrada!", inscricaoMonitoria.getNome());
 					}
 					return new ResponseEntity<String>(mensagem, HttpStatus.OK);
 				} catch (Exception e) {
@@ -105,14 +105,12 @@ public class ControllerInscricaoMonitoria {
 		ModelCronogramaMonitoria cronograma = repositoryCronogramaMonitoria.findCronogramaByIdCurso(id_curso);
 		
 		if (cronograma != null) {
-			String retornoValidacao = cronograma.validaSeEstaNoPeriodoDeInscricao();
-			
-			if (retornoValidacao == Constantes.PERIODO_INSCRICAO) {
+			if (Utilidades.validaSeDataAtualEstaDentroDoPeriodo(cronograma.getDataInscricaoInicio(), cronograma.getDataInscricaoFim())) {
 				return new ResponseEntity<String>("true", HttpStatus.OK);
 			} else {
 				return new ResponseEntity<String>(
-						String.format("Não é possivel alterar ou cancelar a inscrição para o curso de %s, pois o mesmo se encontra no periodo de %s.", 
-								usuario.getCurso().getDescricao(), retornoValidacao),
+						String.format("Não é possivel alterar ou cancelar a inscrição para o curso de %s, o curso não está no periodo de inscrição.", 
+								usuario.getCurso().getDescricao()),
 						HttpStatus.PARTIAL_CONTENT);
 			}
 		} else {
@@ -147,7 +145,11 @@ public class ControllerInscricaoMonitoria {
 		ModelCronogramaMonitoria cronograma = repositoryCronogramaMonitoria.findCronogramaByIdCurso(id_curso);
 
 		if (cronograma != null) {
-			return cronograma.validaSeEstaNoPeriodoDeInscricao();
+			if (Utilidades.validaSeDataAtualEstaDentroDoPeriodo(cronograma.getDataInscricaoInicio(), cronograma.getDataInscricaoFim())) {
+				return Constantes.PERIODO_INSCRICAO;
+			} else {
+				return Constantes.PERIODO_NENHUM;
+			}
 		} else {
 			return Constantes.SEM_CRONOGRAMA;
 		}

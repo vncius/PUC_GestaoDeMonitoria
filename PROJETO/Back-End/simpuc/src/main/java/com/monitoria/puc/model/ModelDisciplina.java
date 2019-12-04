@@ -9,9 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
@@ -95,7 +92,6 @@ public class ModelDisciplina implements Serializable {
 		this.codigoDisciplina = codigoDisciplina;
 		this.curso = curso;
 		this.descricao = descricao;
-		this.ehSelecionado = ehSelecionado;
 		this.orientadores = orientadores;
 	}
 

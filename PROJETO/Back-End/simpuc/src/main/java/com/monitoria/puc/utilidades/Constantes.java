@@ -13,18 +13,18 @@ public class Constantes {
 	/*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
 	/*DATA: 03/11/2019*/
 	public final static String SITUACAO_CURSO_AVALIADO = "AVALIADO";
-	public final static String SITUACAO_CURSO_PENDENTE = "PENDENTE AVALIACAO";
+	public final static String SITUACAO_CURSO_PENDENTE = "PENDENTE DE AVALIACAO";
 	
 	/*CONSTANTES DE CRONOGRAMA DE MONITORIA*/
 	/*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
 	/*DATA: 16/11/2019*/
-	public final static String PERIODO_PUBLICACAO_EDITAL = "PUBLICAÇÃO DE EDITAL";
-	public final static String PERIODO_INSCRICAO = "INSCRIÇÃO";
-	public final static String PERIODO_AVALIACAO = "AVALIAÇÃO";
-	public final static String PERIODO_ENTREGA_RESULTADOS = "ENTREGA DE RESULTADOS";
-	public final static String PERIODO_LETIVO = "LETIVO";
-	public final static String PERIODO_ENTREGA_CERTIFICADOS = "ENTREGA DE CERTIFICADOS";
-	public final static String PERIODO_NENHUM = "NENHUM PERIODO";
-	public static final String SEM_CRONOGRAMA = "SEM CRONOGRAMA CADASTRADO";
+	public final static String PERIODO_PUBLICACAO_EDITAL = "Publicação de Edital";
+	public final static String PERIODO_INSCRICAO = "Inscrição";
+	public final static String PERIODO_AVALIACAO = "Avaliação";
+	public final static String PERIODO_ENTREGA_RESULTADOS = "Entrega de Resultados";
+	public final static String PERIODO_LETIVO = "Letiovo";
+	public final static String PERIODO_ENTREGA_CERTIFICADOS = "Entrega de Certificados";
+	public final static String PERIODO_NENHUM = "Nenhum";
+	public static final String SEM_CRONOGRAMA = "Sem Cronograma Cadastrado";
 	
 }
