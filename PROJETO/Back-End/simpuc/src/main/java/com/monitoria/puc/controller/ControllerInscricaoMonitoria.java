@@ -6,8 +6,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,6 +44,7 @@ public class ControllerInscricaoMonitoria {
 
 	final static String FILEPATH = System.getProperty("user.home") + "\\Documents\\InscricoesMonitoria";
 	final static String NAMEFILE = "ANEXO_INSCRICAO.pdf";
+	final static String NAMEFILERETORNO = "ANEXO_ALUNO_";
 	
 	@Autowired
 	private RepositoryCronogramaMonitoria repositoryCronogramaMonitoria;
@@ -156,6 +161,28 @@ public class ControllerInscricaoMonitoria {
 	}
 	
 	// ----------------------------------------------------- CONSULTAS
+	
+	@GetMapping(value = "/downloadAnexo/{matricula}", produces = "application/PDF")
+	public void consultarEdital(HttpServletRequest request, HttpServletResponse response, @PathVariable(value = "matricula") String matricula) throws IOException {
+		File file = new File(geraNomeDoArquivoECaminhoDoAnexo(matricula));
+		if (file.exists()) {
+			response.setContentType("application/pdf");
+			response.addHeader("Content-Disposition", "attachment; filename=" + NAMEFILERETORNO + matricula + ".pdf");
+			try {
+				Files.copy(file.toPath(), response.getOutputStream());
+				response.getOutputStream().flush();
+				response.getOutputStream().close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		} else {
+			response.setContentType("text/html");
+			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+			response.getWriter().write(Constantes.MENSAGEM_ALUNO_SEM_ANEXO);
+			response.getWriter().flush();
+			response.getWriter().close();
+		}
+	}
 	
 	@GetMapping(value = "/", produces = "application/json")
 	public ResponseEntity<List<DTOFichaDeInscricao>> consultaPorTodosFiltros() {

@@ -125,13 +125,19 @@ function buscarInscricoesPorFiltro(filtrarPorCurso, filtrarPorStatus, filtrarPor
 // ------------------------------------------------------------------ FUNÇÕES AUXILIARES
 function preencherTableDeInscricoes(inscricoes) {
     $('.table tbody tr').remove();
+
+    
     var linha = "";
     inscricoes.forEach(inscricao => {
+        var linkDownload = obterUrlDaAPI('/fichaInscricao/downloadAnexo/');
+        linkDownload = linkDownload + inscricao.matricula;
+
         linha = linha.concat("<tr>");
         linha = linha.concat(`<td>${inscricao.id}</td>`);
         linha = linha.concat(`<td>${inscricao.matricula}</td>`);
         linha = linha.concat(`<td>${inscricao.nome}</td>`);
         linha = linha.concat(`<td>${inscricao.cursos.descricao}</td>`);
+        linha = linha.concat(`<td><a href="${linkDownload}">Download</a></td>`);
         linha = linha.concat(`<td>${inscricao.statusIncricao}</td>`);
         linha = linha.concat("</tr>");
         inserirLinhaTable(linha);

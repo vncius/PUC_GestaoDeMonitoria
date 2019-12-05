@@ -1,25 +1,17 @@
 package com.monitoria.puc.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -48,6 +40,7 @@ public class ControllerPublicacaoDeEdital {
 				ex.printStackTrace();
 			}
 		} else {
+			response.setContentType("text/html");
 			response.setStatus(HttpStatus.PARTIAL_CONTENT.value());
 			response.getWriter().write(Constantes.MENSAGEM_EDITAL_NAO_PUBLICADO);
 			response.getWriter().flush();
