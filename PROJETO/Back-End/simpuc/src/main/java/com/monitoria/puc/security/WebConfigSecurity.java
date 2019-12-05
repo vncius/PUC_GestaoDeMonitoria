@@ -32,6 +32,7 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 		.disable().authorizeRequests().antMatchers("/").permitAll()
 		.antMatchers("/index").permitAll()
 		.antMatchers(HttpMethod.GET, "/edital/").permitAll()
+		.antMatchers(HttpMethod.GET, "/fichaInscricao/downloadAnexo/{matricula}").permitAll()
 		/*URL DE LOGOUT - REDIRECIONA O USUARIO APOS DESLOGAR*/
 		.anyRequest().authenticated().and().logout()
 		/*MAPEIA URL DE LOGOUT E INVALIDA USUARIO*/
