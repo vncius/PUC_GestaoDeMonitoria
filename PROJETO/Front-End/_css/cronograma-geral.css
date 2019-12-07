@@ -63,7 +63,7 @@ aside#direita h6{
 
 /*Campos DATA*/
 ul{
-    margin-left: 10%;
+    margin: 0 auto;
 }
 
 ul li{
@@ -107,13 +107,14 @@ div#mensagens ul li{
 header#cabecalho{
     margin:50px auto 60px auto;
 }    
+
 .container-fluid{
     padding-right: 0px;
     padding-left: 0px;
 }  
 
 div#interface{
-    width: 750px;
+    width: 800px;
     height: 100%;
     margin: 0px auto 0px auto;
 }
@@ -150,9 +151,10 @@ div#camp-dat{
    margin-left: 0px; 
 }
 ul{
-    width: 400px;
+    width: 450px;
     margin-left: -10%;
     line-height: 0.5;
+    margin-bottom: 20px;
 }
 
 ul li{
@@ -161,12 +163,13 @@ ul li{
     float: left;
     line-height: 2em;
 }
+
+
 /*Botões*/
 div#botoes{  
     width: 200px;
     height: 50px;
-    margin: 20px auto;
-    float: right;
+    margin: 0px auto 0px auto;
 }
 
 .btn{
@@ -174,7 +177,7 @@ div#botoes{
 }
 div#align-right{
     float: none;
-    margin: 10px auto 0px 40px;
+    margin: 10px auto 0px auto;
 }
 }
 @media only screen and (max-width: 768px) {
@@ -188,7 +191,7 @@ header#cabecalho{
 }  
 
 div#interface{
-    width: 700px;
+    width: 750px;
     height: 100%;
     margin: 0px auto 0px auto;
 }
@@ -217,74 +220,13 @@ div#camp-dat{
    margin-left: 0px; 
 }
 ul{
-    width: 400px;
+    width: 450px;
     margin-left: -10%;
     line-height: 0.5;
 }
 
-ul li{
-    list-style: none;
-    margin: 5px auto auto 10px;
-    float: left;
-    line-height: 2em;
-}
-/*Botões*/
-div#botoes{  
-    width: 200px;
-    height: 50px;
-    margin: 10px auto;
-    float: right;
-}
-
-.btn{
-    margin-left:5px;
-}
-div#align-right{
-    float: none;
-    margin: 10px auto 0px 40px;
-}
-}
-
-@media only screen and (max-width: 576px) {
-
-.container-fluid{
-    padding-right: 0px;
-    padding-left: 0px;
-}    
-
-div#interface{
-    width: 360px;
-    height: 100%;
-    margin: 0px auto 0px auto;
-}
-
-/*Corpo da esqueda*/
-aside#esquerda{
-    display: block;
-    width: 100%;
-    float: start;
-    height: 340px;
-    text-align: center;
-}
-
-/*Corpo da direita*/
-aside#direita{
-    display: block;
-    width: 100%;
-    float: end;
-    height: 340px;
-    text-align: center;
-}
-
-/*Campos DATA*/
-div#camp-dat{
-   width: 100%;
-   margin-left: 0px; 
-}
-ul{
-    width: 400px;
-    margin-left: -10%;
-    line-height: 0.5;
+.form-control{
+    padding: 5px !important;
 }
 
 ul li{
@@ -306,6 +248,79 @@ div#botoes{
 div#align-right{
     float: none;
     margin: 10px auto 0px auto;
+}
+}
+
+@media only screen and (max-width: 576px) {
+
+.container-fluid{
+    padding-right: 0px;
+    padding-left: 0px;
+}    
+
+div#interface{
+    width: 450px;
+    height: 100%;
+    margin: 0px auto 0px auto;
+}
+
+/* Cabecalho */
+header#cabecalho h4{
+    font-size: 30px;
+}
+
+/*Corpo da esqueda*/
+aside#esquerda{
+    display: block;
+    width: 100%;
+    float: start;
+    height: 340px;
+    text-align: center;
+}
+
+/*Corpo da direita*/
+aside#direita{
+    margin-top:20px;
+    display: block;
+    width: 100%;
+    float: end;
+    height: 340px;
+    text-align: center;
+}
+
+/*Campos DATA*/
+div#camp-dat{
+   width: 100%;
+   margin-left: 0px; 
+}
+ul{
+    width: 435px;
+    margin-left: 0%;
+    margin-bottom: 20px;
+    line-height: 0.5;
+}
+
+ul li{
+    list-style: none;
+    margin: 5px auto auto 10px;
+    float: left;
+    line-height: 2em;
+}
+/*Botões*/
+div#botoes{  
+    width: 400px;
+    height: 150px;
+    margin: 0px 0px 0px auto;
+    float: center;
+}
+
+div#align-right{
+    margin: 10px auto 0px -50px;
+}
+
+.btn{
+    margin:5px;
+    padding: 10px 100px 10px 100px;
 }
 
 }
