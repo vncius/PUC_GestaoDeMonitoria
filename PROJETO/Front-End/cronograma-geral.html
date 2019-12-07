@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="_css/cronograma-geral.css">
     <!--/\---------------------------------------------------/\-->
     <!------------------------ Verify Autenticação ---------------------------->
-	<script src="_javascript/funcoes.js"></script>
-	<script>
+	<script src="_javascript/funcoes.js"></script> -->
+	 <script>
 		if(usuarioEstaAutenticado() === false) { redirecionarIndexLogin(); }
 	</script>
 	<!-------------------------------------------------------------------------->
@@ -69,7 +69,7 @@
                             <ul type="circ">
                                 <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtIniEntregaDeResultados"></li>
                                 <li><span>a</span></li>
-                                <li><input class="form-control" required type="date" id="DtFimEntregaDeResultados"></li>
+                                <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtFimEntregaDeResultados"></li>
                             </ul>
                         </div>
 
