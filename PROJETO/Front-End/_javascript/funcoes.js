@@ -5,7 +5,7 @@ function mudaFoto(foto) {
 
 function usuarioEstaAutenticado() {
     var retorno = true;
-    if (localStorage.getItem("Authorization") === null || localStorage.getItem("Authorization") === "") { 
+    if (localStorage.getItem("Authorization") === null || localStorage.getItem("Authorization") === "") {
         retorno = false;
     } else {
         $.ajax({
@@ -19,7 +19,7 @@ function usuarioEstaAutenticado() {
             success: function (result, status, request) {
                 if (result === "true") {
                     retorno = true;
-                } 
+                }
             },
             error: function (request, status, erro) {
                 retorno = false;
@@ -52,11 +52,11 @@ function obterUrlDePaginas(direcionamento) {
     return `http://localhost:200/${direcionamento}`;
 }
 
-function redirecionarIndexLogin(){
+function redirecionarIndexLogin() {
     $(location).attr('href', obterUrlDePaginas(""));
 }
 
-function redirecionarMenuPrincipal(){
+function redirecionarMenuPrincipal() {
     $(location).attr('href', obterUrlDePaginas("menu-principal.html"));
 }
 
@@ -82,7 +82,7 @@ function ocultaCamposInconsistencias() {
 
 // ------------------------------- FUNÇOES DE MENU -------------------------------
 
-function preencheCamposMenu(){
+function preencheCamposMenu() {
     $(".nome").html(localStorage.getItem("Nome"));
     $(".matricula").html(localStorage.getItem("Matricula"));
 }
@@ -98,7 +98,38 @@ function exibaAlerta(mensagem) {
     alert(mensagem);
 }
 
-function questione(mensagem){
+function questione(mensagem) {
     var retorno = confirm(mensagem);
     return retorno;
+}
+
+
+// -------------------------------- FUNÇÃO DE DOWNLOAD
+function realizarDownload(url) {
+    var fileURL = obterUrlDaAPI(url);
+
+    // for non-IE
+    if (!window.ActiveXObject) {
+        var save = document.createElement('a');
+        save.href = fileURL;
+        save.target = '_blank';
+        save.download = "arquivo" || 'unknown';
+
+        var evt = new MouseEvent('click', {
+            'view': window,
+            'bubbles': true,
+            'cancelable': false
+        });
+        save.dispatchEvent(evt);
+
+        (window.URL || window.webkitURL).revokeObjectURL(save.href);
+    }
+
+    // for IE < 11
+    else if (!!window.ActiveXObject && document.execCommand) {
+        var _window = window.open(fileURL, '_blank');
+        _window.document.close();
+        _window.document.execCommand('SaveAs', true, fileName || fileURL)
+        _window.close();
+    }
 }
