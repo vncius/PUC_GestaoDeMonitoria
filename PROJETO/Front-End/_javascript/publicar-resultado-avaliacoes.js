@@ -91,6 +91,7 @@ function preenchaFormulario() {
 
     objeto.listaAvaliacoes = lista;
     objeto.idCurso = parseInt($('#curso').val());
+    $('#coeficiente').val("");
     return objeto;
 }
 
@@ -130,6 +131,7 @@ function pesquisarPorFiltros() {
 
     if (inscricoesFiltradasPorCurso.length > 0){
         if (inscricoesFiltradasPorMatricula.length > 0 || matricula === ""){
+            $('#coeficiente').prop("disabled", false);
             $('#div-coeficiente').show();
             $('#div-btn-avalia').show();
         } else {
@@ -195,6 +197,7 @@ function preencherCamposDaTable(inscricoes) {
             linha = linha.concat(`<td><input type="number" id="notaAluno" class="form-control" min="0" max="100" required></td>`);
         }
 
+        $('#coeficiente').val("");
         if (inscricao.nota_coeficiente != 0 && inscricao.statusIncricao != "PENDENTE") {
             $('#coeficiente').val(inscricao.nota_coeficiente);
         }

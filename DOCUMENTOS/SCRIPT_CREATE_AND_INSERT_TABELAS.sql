@@ -112,7 +112,7 @@ INSERT INTO `curso` (`id`, `descricao`, `situacao_avaliacao`) VALUES
 	(10, 'Ciências Contábeis', 'PENDENTE DE AVALIACAO'),
 	(11, 'Ciências Econômicas', 'PENDENTE DE AVALIACAO'),
 	(12, 'Ciências Naturais', 'PENDENTE DE AVALIACAO'),
-	(13, 'Ciências Sociais', 'PENDENTE DE AVALIACAO'),
+	(13, 'Ciências Aeronaútica', 'PENDENTE DE AVALIACAO'),
 	(14, 'Ciências Sociais', 'PENDENTE DE AVALIACAO'),
 	(15, 'Cinema e Audiovisual', 'PENDENTE DE AVALIACAO');
 /*!40000 ALTER TABLE `curso` ENABLE KEYS */;
@@ -180,13 +180,13 @@ CREATE TABLE IF NOT EXISTS `hibernate_sequence` (
 DELETE FROM `hibernate_sequence`;
 /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-	(2),
-	(2),
-	(2),
-	(2),
-	(2),
-	(2),
-	(2);
+	(100),
+	(100),
+	(100),
+	(100),
+	(100),
+	(100),
+	(100);
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela sysmonitoria.incricao_monitoria
