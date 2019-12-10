@@ -81,61 +81,174 @@ background-color: #2B6CA3;
         font-family: "Open Sans";
         font-size: 16px;
         background: url(../_imagens/logo.png) no-repeat;
-            background-position: 30% 50%;
-            background-size: 150px;
-        height: 100%;        
-    }
-
-     /* Botão */
-     .btn-sample{
-        height: 50px;
-    }
-
-}
-@media only screen and (max-width: 768px) {
-    div#interface{
-        font-family: "Open Sans";
-        font-size: 16px;
-        background: url(../_imagens/logo.png) no-repeat;
-            background-position: 25% 0%;
-            background-size: 135px;
-        height: 100%;        
-    }
-}
-@media only screen and (max-width: 576px) {
-
-    div#interface{
-        font-family: "Open Sans";
-        font-size: 16px;
-        background: url(../_imagens/logo.png) no-repeat;
             background-position: 50% 0%;
-            background-size: 100px;
+            background-size: 250px;
         height: 100%;  
         margin-top: 160px; 
         padding: 1rem;  
          
     }
 
+    /* CABECALHO */
+    header{
+        margin-top:-25px;
+        margin-bottom:55px;
+    }
+    header h5{
+        font-size:80px!important;
+    }
+
     /*Corpo*/
     section#corpo{
+        margin-top:400px;
         left: 0%;
-        width: 90%;
+        width: 70%;
+    }
+
+    /*Campo Matricula e Senha*/
+    .form-control{
+        height: 80px !important;
+        font-size:30px!important;
+    }
+    .form-label-group{
+        padding: 10px;
+        margin-bottom: 25px;
     }
 
     /* Esqueci minha senha */
     a{
-        font-size: 10px;
+        font-size: 30px;
     }
 
     /* Botão */
     .btn-sample{
-        height: 40px;
-        
-    }
-    .btn-sample p {
-        font-size: 15px;
+        margin-top:25px;
+        height: 70px;
+        font-size: 25px!important;
         text-align: center;
+        width: 400px;
     }
+}
+
+@media only screen and (max-width: 768px) {
+.body, html{
+    width: 100%;
+    height: 100%;
+    margin: -30px auto;
+}
+div#interface{
+    font-family: "Open Sans";
+    font-size: 16px;
+    background: url(../_imagens/logo.png) no-repeat;
+        background-position: 15% 0%;
+        background-size: 180px;
+    height: 100%;        
+}
+    
+/*Corpo*/
+section#corpo{
+    position: relative;
+    margin:0 auto;
+    width: 50%;
+    font: normal normal bold 14px/1.4em 'Open Sans',sans-serif;
+    left: 12%;
+}
+
+/*Cabecalho Corpo*/
+header#cabecalho-corpo{
+    margin-bottom: 10px!important;
+}
+header#cabecalho-corpo h5{
+    text-align: center;
+    font-size:40px!important;
+}
+
+
+/*Campo Matricula e Senha*/
+.form-label-group{
+    padding: 30px;
+    margin-bottom: 0px;
+}
+
+.form-control{
+    font-size:20px!important;
+    width: 300px!important;
+    height: 40px !important;
+}
+
+/* Esqueci minha senha */
+a{
+    font-size: 15px;
+}
+
+/* Botão */
+.btn-sample{
+    height: 40px;
+    margin-top:10px;
+    line-height: 0.5em!important;
+    width: 200px;
+}
+
+
+}
+@media only screen and (max-width: 576px) {
+
+div#interface{
+    font-family: "Open Sans";
+    font-size: 16px;
+    background: url(../_imagens/logo.png) no-repeat;
+        background-position: 50% 0%;
+        background-size: 100px;
+    height: 100%;  
+    margin-top: 160px; 
+    padding: 1rem;  
+        
+}
+    
+/*Corpo*/
+section#corpo{
+    position: relative;
+    margin:0 auto;
+    margin-top: 150px;
+    width: 30%;
+    font: normal normal bold 14px/1.4em 'Open Sans',sans-serif;
+    left: 12%;
+}
+
+/*Cabecalho Corpo*/
+header#cabecalho-corpo h5{
+    text-align: center;
+    margin-bottom: 30px;
+    font-size:40px;
+}
+
+
+/*Campo Matricula e Senha*/
+.form-label-group{
+    padding: 10px;
+}
+
+.form-control{
+    margin: 0px 40px auto auto !important;
+    height: 50px;
+}
+
+/*Corpo*/
+section#corpo{
+    left: 0%;
+    width: 90%;
+}
+
+/* Esqueci minha senha */
+a{
+    font-size: 15px;
+}
+
+/* Botão */
+.btn-sample{
+    height: 40px;
+    line-height: 1em;
+}
 }
 
 /* DEBUD  */
