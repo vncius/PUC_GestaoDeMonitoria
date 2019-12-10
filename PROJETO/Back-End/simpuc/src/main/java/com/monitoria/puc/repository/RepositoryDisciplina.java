@@ -18,6 +18,11 @@ public interface RepositoryDisciplina extends CrudRepository<ModelDisciplina, Lo
 	@Query("SELECT d FROM disciplina d WHERE fk_curso_id = ?1")
 	public List<ModelDisciplina> findByIdCurso(Long id);
 	
+	@Modifying
+	@Transactional(readOnly = false)
+	@Query("update disciplina d set d.qtdeVgDisponiveis = ?1 where d.id = ?2")
+	public void updateQtdeVgDisponiveis(int qtdeVg, Long id);
+	
 	@Transactional
 	@Modifying
 	@Query("UPDATE disciplina d SET d.qtdeVgMonitoria = d.qtdeVgMonitoria - 1 WHERE d.id = ?1")

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!--\/-------------------------------------------------------BOOTSTRAP-------------------------------------------------------\/-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--/\-----------------------------------------------------------------------------------------------------------------------/\-->
+    <meta charset="utf-8" />
+    <title>Monitoria PUC-GO</title>
+    <!--\/-----------CSS da pagina------------\/-->
+    <link rel="stylesheet" href="_css/solicitar-monitores.css">
+    <!--/\------------------------------------/\-->
+      <!------------------------ Verify Autenticação ---------------------------->
+      <script src="_javascript/funcoes.js"></script>
+      <!-------------------------------------------------------------------------->
+</head>
+
+<body>
+    <div id=interface>
+        <header id="cabecalho">
+            <h4>Solicitar Monitores</h4>
+        </header>
+        <section id="corpo">
+            <div class="container-fluid">
+                <div id="mensagens">
+                    <ul class="list-group-item list-group-item-danger">
+                        <!--MENSAGENS DE ERRO OU VALIDAÇÃO SÃO EXIBIDAS AQUI-->
+                    </ul>
+                </div>
+                <aside id="esquerda">
+                    <select class="custom-select"  id="cboDisciplinas" required="Selecione uma opção">
+                    </select> 
+                    
+                    <p>
+                        <label>Qtd. Vagas:</label>  
+                        <input type="text" id="qtd-vag" class="form-control" maxlength="2" onkeypress="return validacaoQtdeVagas();">
+                    </p>
+                </aside>
+
+                <aside id="direita">
+                    <p>
+                        <label>Número de Vagas Disponiveis:</label>  
+                        <input type="text" id="nvagas" class="form-control" maxlength="2" disabled>
+                    </p>
+                </aside>
+
+                <div id="botoes">
+                    <div id="align-right">
+                        <button type="button" class="btn btn-primary" id="voltar" onclick="botaoCancelar();">Cancelar</button>
+                        <button type="button" class="btn btn-primary" id="editar"onclick="buscaVagaEditar();">Editar</button>                        
+                        <button type="button" class="btn btn-primary" id="salvar" onclick="solicitaVagaDisciplina()">Solicitar</button>
+                    </div>
+                </div>                
+            </div>
+        </section>
+    </div>
+    <script language="javascript" src="_javascript/solicitar-monitores.js"></script>
+</body>
