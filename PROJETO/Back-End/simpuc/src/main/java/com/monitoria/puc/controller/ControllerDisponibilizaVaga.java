@@ -19,6 +19,7 @@ import com.monitoria.puc.model.ModelDisciplina;
 import com.monitoria.puc.service.CronogramaMonitoriaService;
 import com.monitoria.puc.service.DisciplinaService;
 import com.monitoria.puc.service.DisponibilizaVagaService;
+import com.monitoria.puc.service.SolicitaVagaService;
 
 @RestController
 @RequestMapping(value = "/disponibilizaVaga")
@@ -32,6 +33,9 @@ public class ControllerDisponibilizaVaga {
 
 	@Autowired
 	private DisponibilizaVagaService disponibilizaVagaService;
+	
+	@Autowired
+	private SolicitaVagaService solicitaVagaService;
 
 	@GetMapping("/curso/{id}")
 	public ResponseEntity<List<ModelDisciplina>> listAllIdCurso(@PathVariable(name = "id") Long id) {
@@ -48,9 +52,16 @@ public class ControllerDisponibilizaVaga {
 		disciplinaBuscada.setQtdeVgMonitoria(disciplina.getQtdeVgMonitoria());
 		cronogramaBuscado = cronogramaMonitoriaService.getById(disciplinaBuscada.getCurso().getId());
 		if (dataAtual.before(cronogramaBuscado.getDataEditalInicio())) {
+			int quantidadeSomadaVgDisciplina = solicitaVagaService.somaQtdeVgSolicitada(disciplinaBuscada.getId()); 
+			if(quantidadeSomadaVgDisciplina < disciplina.getQtdeVgMonitoria()) {
+			disciplinaBuscada.setQtdeVgDisponiveis(disciplina.getQtdeVgMonitoria() - quantidadeSomadaVgDisciplina);
 			ModelDisciplina disciplinaUpdate = disponibilizaVagaService.updateVagas(disciplinaBuscada);
 			listaDisciplinas = disciplinaService.listAll(disciplinaBuscada.getCurso().getId());
 			return ResponseEntity.ok(listaDisciplinas);
+			}else {
+				listaDisciplinas = disciplinaService.listAll(disciplinaBuscada.getCurso().getId());
+				return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body(listaDisciplinas);
+			}
 		}
 		listaDisciplinas = disciplinaService.listAll(disciplinaBuscada.getCurso().getId());
 		return ResponseEntity.status(HttpStatus.FOUND).body(listaDisciplinas);
