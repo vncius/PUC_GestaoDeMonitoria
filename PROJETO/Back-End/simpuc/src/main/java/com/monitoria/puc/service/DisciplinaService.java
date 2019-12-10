@@ -24,4 +24,8 @@ public class DisciplinaService {
 		return result.orElseThrow(()-> new NotFoundException("Não existe disciplina com o id: = " + id));
 	}
 	
+	public void updateQtdeVgDisp(int qtdeVg, Long id) {
+		repositoryDisciplina.updateQtdeVgDisponiveis(qtdeVg, id);
+	}
+
 }

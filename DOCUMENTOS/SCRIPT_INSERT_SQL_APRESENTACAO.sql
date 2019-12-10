@@ -254,7 +254,10 @@ INSERT INTO `usuario` (`matricula`, `nome`, `senha`, `fk_curso_id`, `fk_role_id`
 	('MAT_ALUNO7', 'Inês', '$2a$10$PbeSDMyjcB7rENa1Hepuy.ZFGtkkCUAxQmsx7sno2Wm8deSN0aaF.', 1, 2),
 	('MAT_ALUNO8', 'Sofia', '$2a$10$PbeSDMyjcB7rENa1Hepuy.ZFGtkkCUAxQmsx7sno2Wm8deSN0aaF.', 1, 2),
 	('MAT_ALUNO9', 'Margarida', '$2a$10$PbeSDMyjcB7rENa1Hepuy.ZFGtkkCUAxQmsx7sno2Wm8deSN0aaF.', 2, 2),
-	('PROFESSOR', 'Leticia Ferreira', '$2a$10$PbeSDMyjcB7rENa1Hepuy.ZFGtkkCUAxQmsx7sno2Wm8deSN0aaF.', 0, 3);
+	('PROFESSOR', 'Leticia Ferreira', '$2a$10$PbeSDMyjcB7rENa1Hepuy.ZFGtkkCUAxQmsx7sno2Wm8deSN0aaF.', 1, 3);
+	('PROFESSOR', 'Leticia Ferreira', '$2a$10$PbeSDMyjcB7rENa1Hepuy.ZFGtkkCUAxQmsx7sno2Wm8deSN0aaF.', 2, 3);
+	('PROFESSOR', 'Leticia Ferreira', '$2a$10$PbeSDMyjcB7rENa1Hepuy.ZFGtkkCUAxQmsx7sno2Wm8deSN0aaF.', 3, 3);
+	('PROFESSOR', 'Leticia Ferreira', '$2a$10$PbeSDMyjcB7rENa1Hepuy.ZFGtkkCUAxQmsx7sno2Wm8deSN0aaF.', 4, 3);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

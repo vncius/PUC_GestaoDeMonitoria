@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,6 +25,8 @@ public class ModelDisciplina implements Serializable {
 	
 	private int qtdeVgMonitoria;
 	
+	private int qtdeVgDisponiveis;
+	
 	private String codigoDisciplina;
 	
 	@JsonIgnore
@@ -35,6 +38,10 @@ public class ModelDisciplina implements Serializable {
 	
 	@OneToMany(mappedBy = "disciplina")
     private List<ModelOrientador> orientadores;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "modelDisciplina")
+	private List<ModelVaga> vgdisciplinas;
 
 	public Long getId() {
 		return id;
@@ -83,6 +90,22 @@ public class ModelDisciplina implements Serializable {
 	public void setCodigoDisciplina(String codigoDisciplina) {
 		this.codigoDisciplina = codigoDisciplina;
 	}
+	
+	public List<ModelVaga> getVgdisciplinas() {
+		return vgdisciplinas;
+	}
+
+	public void setVgdisciplinas(List<ModelVaga> vgdisciplinas) {
+		this.vgdisciplinas = vgdisciplinas;
+	}
+	
+	public int getQtdeVgDisponiveis() {
+		return qtdeVgDisponiveis;
+	}
+
+	public void setQtdeVgDisponiveis(int qtdeVgDisponiveis) {
+		this.qtdeVgDisponiveis = qtdeVgDisponiveis;
+	}
 
 	public ModelDisciplina(Long id, int qtdeVgMonitoria, String codigoDisciplina, ModelCurso curso, String descricao,
 			boolean ehSelecionado, List<ModelOrientador> orientadores) {
@@ -98,5 +121,5 @@ public class ModelDisciplina implements Serializable {
 	public ModelDisciplina() {
 		super();
 	}
-					
+			
 }

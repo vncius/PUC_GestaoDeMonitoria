@@ -1,13 +1,11 @@
 package com.monitoria.puc.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
+import org.springframework.stereotype.Service;
 import com.monitoria.puc.model.ModelDisciplina;
 import com.monitoria.puc.repository.RepositoryDisciplina;
-import com.monitoria.puc.repository.RepositoryDisponibilizaVaga;
 
-@Repository
+@Service
 public class DisponibilizaVagaService {
 	
 	@Autowired
@@ -18,6 +16,4 @@ public class DisponibilizaVagaService {
 		return updateQtdeVagaMonitoria;
 	}
 	
-	
-
 }
