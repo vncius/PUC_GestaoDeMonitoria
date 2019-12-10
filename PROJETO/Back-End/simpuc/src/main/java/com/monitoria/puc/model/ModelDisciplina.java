@@ -27,6 +27,8 @@ public class ModelDisciplina implements Serializable {
 	
 	private int qtdeVgMonitoria;
 	
+	private int qtdeVgDisponiveis;
+	
 	private String codigoDisciplina;
 	
 	@JsonIgnore
