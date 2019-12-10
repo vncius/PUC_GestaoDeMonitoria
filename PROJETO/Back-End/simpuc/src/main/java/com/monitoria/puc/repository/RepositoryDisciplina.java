@@ -23,5 +23,8 @@ public interface RepositoryDisciplina extends CrudRepository<ModelDisciplina, Lo
 	@Query("update disciplina d set d.qtdeVgDisponiveis = ?1 where d.id = ?2")
 	public void updateQtdeVgDisponiveis(int qtdeVg, Long id);
 	
-	
+	@Transactional
+	@Modifying
+	@Query("UPDATE disciplina d SET d.qtdeVgMonitoria = d.qtdeVgMonitoria - 1 WHERE d.id = ?1")
+	public void decrementeQuantidadeDeVagas(Long idDisciplina);
 }

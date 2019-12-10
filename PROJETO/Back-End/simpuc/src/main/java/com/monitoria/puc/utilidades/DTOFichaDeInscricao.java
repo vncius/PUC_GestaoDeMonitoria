@@ -22,7 +22,28 @@ public class DTOFichaDeInscricao {
 	private String carga_horaria_sexta;
 	private String carga_horaria_sabado;
 	private String statusIncricao;
+	private Long id_curso_selecionado;
+	private Long id_disciplina_selecionada;
+	private Long id_orientador_selecionado;
+	private int nota_avaliacao;
+	private int nota_coeficiente;
 	
+	public Long getId_disciplina_selecionada() {
+		return id_disciplina_selecionada;
+	}
+
+	public void setId_disciplina_selecionada(Long id_disciplina_selecionada) {
+		this.id_disciplina_selecionada = id_disciplina_selecionada;
+	}
+
+	public Long getId_orientador_selecionado() {
+		return id_orientador_selecionado;
+	}
+
+	public void setId_orientador_selecionado(Long id_orientador_selecionado) {
+		this.id_orientador_selecionado = id_orientador_selecionado;
+	}
+
 	private ModelCurso curso;
 
 	public void InicializeParaNovoCadastro(ModelCurso curso, String matricula, String nome) {
@@ -39,6 +60,8 @@ public class DTOFichaDeInscricao {
 		this.carga_horaria_sexta = "";
 		this.carga_horaria_sabado = "";
 		this.curso = curso;
+		this.nota_avaliacao = 0;
+		this.nota_coeficiente = 0;
 	}
 
 	public Long getId() {
@@ -134,5 +157,29 @@ public class DTOFichaDeInscricao {
 
 	public void setStatusIncricao(String statusIncricao) {
 		this.statusIncricao = statusIncricao;
+	}
+
+	public Long getId_curso_selecionado() {
+		return id_curso_selecionado;
+	}
+
+	public void setId_curso_selecionado(Long id_curso_selecionado) {
+		this.id_curso_selecionado = id_curso_selecionado;
+	}
+
+	public int getNota_avaliacao() {
+		return nota_avaliacao;
+	}
+
+	public void setNota_avaliacao(int nota_avaliacao) {
+		this.nota_avaliacao = nota_avaliacao;
+	}
+
+	public int getNota_coeficiente() {
+		return nota_coeficiente;
+	}
+
+	public void setNota_coeficiente(int nota_coeficiente) {
+		this.nota_coeficiente = nota_coeficiente;
 	}
 }

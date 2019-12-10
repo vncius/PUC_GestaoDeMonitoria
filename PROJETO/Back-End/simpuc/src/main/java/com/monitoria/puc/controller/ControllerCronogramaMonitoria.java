@@ -47,7 +47,7 @@ public class ControllerCronogramaMonitoria {
 			}
 		} else {
 			return new ResponseEntity<String>(
-					"Cronograma de curso não válido. Existe data inicio maior que data fim ou está fora do periodo do Cronograma Geral!",
+					"Cronograma de curso não é válido. Verifique se as datas estão dentro do cronograma geral!",
 					HttpStatus.PARTIAL_CONTENT);
 		}
 	}
@@ -72,7 +72,7 @@ public class ControllerCronogramaMonitoria {
 			}
 		} else {
 			return new ResponseEntity<String>(
-					"Cronograma de curso não válido. Existe data inicio maior que data fim ou está fora do periodo do Cronograma Geral!",
+					"Cronograma de curso não é válido. Verifique se as datas estão dentro do cronograma geral!",
 					HttpStatus.PARTIAL_CONTENT);
 		}
 	}

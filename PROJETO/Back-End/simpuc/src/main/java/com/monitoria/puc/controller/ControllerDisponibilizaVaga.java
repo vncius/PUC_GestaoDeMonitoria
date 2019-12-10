@@ -20,6 +20,7 @@ import com.monitoria.puc.service.CronogramaMonitoriaService;
 import com.monitoria.puc.service.DisciplinaService;
 import com.monitoria.puc.service.DisponibilizaVagaService;
 import com.monitoria.puc.service.SolicitaVagaService;
+import com.monitoria.puc.utilidades.Utilidades;
 
 @RestController
 @RequestMapping(value = "/disponibilizaVaga")
@@ -43,6 +44,7 @@ public class ControllerDisponibilizaVaga {
 		return ResponseEntity.ok(listaDeDisciplinas);
 	}
 
+	@SuppressWarnings("unused")
 	@PutMapping()
 	public ResponseEntity<List<ModelDisciplina>> update(@RequestBody ModelDisciplina disciplina) {
 		Date dataAtual = new Date();
@@ -51,8 +53,10 @@ public class ControllerDisponibilizaVaga {
 		List<ModelDisciplina> listaDisciplinas = null;
 		disciplinaBuscada.setQtdeVgMonitoria(disciplina.getQtdeVgMonitoria());
 		cronogramaBuscado = cronogramaMonitoriaService.getById(disciplinaBuscada.getCurso().getId());
-		if (dataAtual.before(cronogramaBuscado.getDataEditalInicio())) {
-			int quantidadeSomadaVgDisciplina = solicitaVagaService.somaQtdeVgSolicitada(disciplinaBuscada.getId()); 
+
+		if (Utilidades.validaSeDataAtualEstaDentroDoPeriodo(cronogramaBuscado.getDataEditalInicio(), cronogramaBuscado.getDataEditalFim())) {
+
+      int quantidadeSomadaVgDisciplina = solicitaVagaService.somaQtdeVgSolicitada(disciplinaBuscada.getId()); 
 			if(quantidadeSomadaVgDisciplina < disciplina.getQtdeVgMonitoria()) {
 			disciplinaBuscada.setQtdeVgDisponiveis(disciplina.getQtdeVgMonitoria() - quantidadeSomadaVgDisciplina);
 			ModelDisciplina disciplinaUpdate = disponibilizaVagaService.updateVagas(disciplinaBuscada);
@@ -73,7 +77,7 @@ public class ControllerDisponibilizaVaga {
 		Date dataAtual = new Date();
 		try {
 			ModelCronogramaMonitoria cronogramaBuscado = cronogramaMonitoriaService.getById(id);
-			if (dataAtual.before(cronogramaBuscado.getDataEditalInicio())) {
+			if (Utilidades.validaSeDataAtualEstaDentroDoPeriodo(cronogramaBuscado.getDataEditalInicio(), cronogramaBuscado.getDataEditalFim())) {
 				return new ResponseEntity<String>("true", HttpStatus.OK);
 			} else if (dataAtual.after(cronogramaBuscado.getDataEditalInicio())) {
 				return new ResponseEntity<String>("false", HttpStatus.OK);

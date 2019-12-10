@@ -35,24 +35,13 @@ public class ModelDisciplina implements Serializable {
 	private ModelCurso curso;
 	
 	private String descricao;
-    
-    private boolean ehSelecionado;
 	
 	@OneToMany(mappedBy = "disciplina")
     private List<ModelOrientador> orientadores;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "modelDisciplina")
 	private List<ModelVaga> vgdisciplinas;
-	
-	
-	public boolean isEhSelecionado() {
-		return ehSelecionado;
-	}
-
-	public void setEhSelecionado(boolean ehSelecionado) {
-		this.ehSelecionado = ehSelecionado;
-	}
 
 	public Long getId() {
 		return id;
@@ -126,7 +115,6 @@ public class ModelDisciplina implements Serializable {
 		this.codigoDisciplina = codigoDisciplina;
 		this.curso = curso;
 		this.descricao = descricao;
-		this.ehSelecionado = ehSelecionado;
 		this.orientadores = orientadores;
 	}
 

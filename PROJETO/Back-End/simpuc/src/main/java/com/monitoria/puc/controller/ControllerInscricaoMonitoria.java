@@ -6,8 +6,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,9 +28,9 @@ import com.monitoria.puc.model.ModelCronogramaMonitoria;
 import com.monitoria.puc.model.ModelInscricaoMonitoria;
 import com.monitoria.puc.model.ModelUsuario;
 import com.monitoria.puc.repository.RepositoryCronogramaMonitoria;
-import com.monitoria.puc.repository.RepositoryCurso;
 import com.monitoria.puc.repository.RepositoryFichaDeInscricao;
 import com.monitoria.puc.repository.RepositoryUsuario;
+import com.monitoria.puc.service.CursoService;
 import com.monitoria.puc.utilidades.Constantes;
 import com.monitoria.puc.utilidades.DTOFichaDeInscricao;
 import com.monitoria.puc.utilidades.Utilidades;
@@ -40,15 +44,16 @@ public class ControllerInscricaoMonitoria {
 
 	final static String FILEPATH = System.getProperty("user.home") + "\\Documents\\InscricoesMonitoria";
 	final static String NAMEFILE = "ANEXO_INSCRICAO.pdf";
+	final static String NAMEFILERETORNO = "ANEXO_ALUNO_";
 	
 	@Autowired
 	private RepositoryCronogramaMonitoria repositoryCronogramaMonitoria;
 
 	@Autowired
-	private RepositoryUsuario usuarioRepository;
-
+	private CursoService cursoService;
+	
 	@Autowired
-	private RepositoryCurso cursoRepository;
+	private RepositoryUsuario usuarioRepository;
 
 	@Autowired
 	private RepositoryFichaDeInscricao fichaDeInscricaoRepository;
@@ -79,9 +84,9 @@ public class ControllerInscricaoMonitoria {
 					}
 					String mensagem = "";
 					if (inscricaoMonitoria.getId() > 0) {
-						mensagem = String.format("Inscrição do aluno %s foi atualizado!", inscricaoMonitoria.getNome());
+						mensagem = String.format("Inscrição do aluno(a) %s foi atualizado!", inscricaoMonitoria.getNome());
 					} else {
-						mensagem = String.format("Inscrição do aluno %s foi registrada!", inscricaoMonitoria.getNome());
+						mensagem = String.format("Inscrição do aluno(a) %s foi registrada!", inscricaoMonitoria.getNome());
 					}
 					return new ResponseEntity<String>(mensagem, HttpStatus.OK);
 				} catch (Exception e) {
@@ -105,14 +110,12 @@ public class ControllerInscricaoMonitoria {
 		ModelCronogramaMonitoria cronograma = repositoryCronogramaMonitoria.findCronogramaByIdCurso(id_curso);
 		
 		if (cronograma != null) {
-			String retornoValidacao = cronograma.validaSeEstaNoPeriodoDeInscricao();
-			
-			if (retornoValidacao == Constantes.PERIODO_INSCRICAO) {
+			if (Utilidades.validaSeDataAtualEstaDentroDoPeriodo(cronograma.getDataInscricaoInicio(), cronograma.getDataInscricaoFim())) {
 				return new ResponseEntity<String>("true", HttpStatus.OK);
 			} else {
 				return new ResponseEntity<String>(
-						String.format("Não é possivel alterar ou cancelar a inscrição para o curso de %s, pois o mesmo se encontra no periodo de %s.", 
-								usuario.getCurso().getDescricao(), retornoValidacao),
+						String.format("Não é possivel alterar ou cancelar a inscrição para o curso de %s, o curso não está no periodo de inscrição.", 
+								usuario.getCurso().getDescricao()),
 						HttpStatus.PARTIAL_CONTENT);
 			}
 		} else {
@@ -147,7 +150,11 @@ public class ControllerInscricaoMonitoria {
 		ModelCronogramaMonitoria cronograma = repositoryCronogramaMonitoria.findCronogramaByIdCurso(id_curso);
 
 		if (cronograma != null) {
-			return cronograma.validaSeEstaNoPeriodoDeInscricao();
+			if (Utilidades.validaSeDataAtualEstaDentroDoPeriodo(cronograma.getDataInscricaoInicio(), cronograma.getDataInscricaoFim())) {
+				return Constantes.PERIODO_INSCRICAO;
+			} else {
+				return Constantes.PERIODO_NENHUM;
+			}
 		} else {
 			return Constantes.SEM_CRONOGRAMA;
 		}
@@ -155,17 +162,40 @@ public class ControllerInscricaoMonitoria {
 	
 	// ----------------------------------------------------- CONSULTAS
 	
+	@GetMapping(value = "/downloadAnexo/{matricula}", produces = "application/PDF")
+	public void consultarEdital(HttpServletRequest request, HttpServletResponse response, @PathVariable(value = "matricula") String matricula) throws IOException {
+		File file = new File(geraNomeDoArquivoECaminhoDoAnexo(matricula));
+		if (file.exists()) {
+			response.setContentType("application/pdf");
+			response.addHeader("Content-Disposition", "attachment; filename=" + NAMEFILERETORNO + matricula + ".pdf");
+			try {
+				Files.copy(file.toPath(), response.getOutputStream());
+				response.getOutputStream().flush();
+				response.getOutputStream().close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		} else {
+			response.setContentType("text/html");
+			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+			response.getWriter().write(Constantes.MENSAGEM_ALUNO_SEM_ANEXO);
+			response.getWriter().flush();
+			response.getWriter().close();
+		}
+	}
+	
 	@GetMapping(value = "/", produces = "application/json")
 	public ResponseEntity<List<DTOFichaDeInscricao>> consultaPorTodosFiltros() {
 		List<DTOFichaDeInscricao> listaInscricoesDTO = new ArrayList<DTOFichaDeInscricao>();
 		
 		try {
-			Iterable<ModelInscricaoMonitoria> listaInscricoesModel = fichaDeInscricaoRepository.findAll();
+			List<ModelInscricaoMonitoria> listaInscricoesModel = fichaDeInscricaoRepository.findAll();
 			listaInscricoesModel.forEach(inscricaoModel -> { 
-				listaInscricoesDTO.add(inscricaoModel.converteModelEmDTOParaConsulta(cursoRepository));
+				listaInscricoesDTO.add(inscricaoModel.converteModelEmDTOParaConsulta(cursoService.listAll()));
 			});
 			return new ResponseEntity<List<DTOFichaDeInscricao>>(listaInscricoesDTO, HttpStatus.OK);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return new ResponseEntity<List<DTOFichaDeInscricao>>(listaInscricoesDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -182,7 +212,7 @@ public class ControllerInscricaoMonitoria {
 			return new ResponseEntity<DTOFichaDeInscricao>(dtoIncricao, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<DTOFichaDeInscricao>(
-					fichaDeInscricao.converteModelEmDTOParaConsulta(cursoRepository), HttpStatus.OK);
+					fichaDeInscricao.converteModelEmDTOParaConsulta(cursoService.listAll()), HttpStatus.OK);
 		}
 	}
 

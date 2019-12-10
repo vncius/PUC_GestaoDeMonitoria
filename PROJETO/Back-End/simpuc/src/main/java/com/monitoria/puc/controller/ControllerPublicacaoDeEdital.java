@@ -1,11 +1,12 @@
 package com.monitoria.puc.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.monitoria.puc.utilidades.Constantes;
+
 /*DESENVOLVEDOR: VINICIUS VIEIRA ABREU*/
 /*DATA: 16/11/2019*/
 @RestController
@@ -23,23 +26,25 @@ public class ControllerPublicacaoDeEdital {
 
 	static String FILEPATH = System.getProperty("user.home") + "\\Documents\\Edital_Puc.pdf";
 
-	@GetMapping(value = "/", produces = "application/json")
-	public ResponseEntity<byte[]> consultarEdital() {
-		byte[] editalEmBytes = null;
-		try {
-			File file = new File(FILEPATH);
-			if (!file.exists()) {
-				return new ResponseEntity<byte[]>(editalEmBytes, HttpStatus.PARTIAL_CONTENT); // 206
+	@GetMapping(value = "/", produces = "application/PDF")
+	public void consultarEdital(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		File file = new File(FILEPATH);
+		if (file.exists()) {
+			response.setContentType("application/pdf");
+			response.addHeader("Content-Disposition", "inline");
+			try {
+				Files.copy(file.toPath(), response.getOutputStream());
+				response.getOutputStream().flush();
+				response.getOutputStream().close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
 			}
-
-			int tamanhoArquivo = Integer.parseInt(String.valueOf(file.length()));
-			editalEmBytes = new byte[tamanhoArquivo];
-			InputStream inputStream = new FileInputStream(file);
-			inputStream.read(editalEmBytes);
-			inputStream.close();
-			return new ResponseEntity<byte[]>(editalEmBytes, HttpStatus.OK); // 200
-		} catch (IOException e) {
-			return new ResponseEntity<byte[]>(editalEmBytes, HttpStatus.INTERNAL_SERVER_ERROR); // 500
+		} else {
+			response.setContentType("text/html");
+			response.setStatus(HttpStatus.PARTIAL_CONTENT.value());
+			response.getWriter().write(Constantes.MENSAGEM_EDITAL_NAO_PUBLICADO);
+			response.getWriter().flush();
+			response.getWriter().close();
 		}
 	}
 

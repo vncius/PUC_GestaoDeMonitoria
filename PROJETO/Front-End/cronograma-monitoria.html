@@ -25,84 +25,98 @@
             <h4>Cronograma da Monitoria</h4>
         </header>
         <section id="corpo">
-            <div id="container-fluid">
-                <script>$("#mensagens").hide();</script>
-                <ul class="list-group-item list-group-item-danger">
-                    <!--MENSAGENS DE ERRO OU VALIDAÇÃO SÃO EXIBIDAS AQUI-->
-                </ul>
-            </div>
-            <div class="col-6" id="camp-dat">
-                <h4>Curso</h4>
-                <select name="sel" class="form-control" id="cboCursos">
-                    <option value="">Escolha o curso</option>
-                </select>
-            </div>
-            <div>
-                <input type="hidden" id="idCronograma">
-            </div>
-            <aside id="esquerda">
-                <h6>Publicação do Edital</h6>
-                <div  class="row col-sm-14 col-xs-3" id="camp-dat">
-                    <ul>
-                        <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtIniPublicacaoEdital"></li>
-                        <li><span>a</span></li>
-                        <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtFimPublicacaoEdital"></li>
+            <div class="container-fluid">
+                <div id="mensagens" class="topo">
+                    <ul class="list-group-item list-group-item-danger">
+                        <script>$("#mensagens").hide();</script>
+                        <!--MENSAGENS DE ERRO OU VALIDAÇÃO SÃO EXIBIDAS AQUI-->
                     </ul>
                 </div>
-
-                <h6>Período de Inscrição</h6>
-                <div  class="row col-sm-14 col-xs-3" id="camp-dat">
-                    <ul type="circ">
-                        <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtIniPeriodoDeIncricao"></li>
-                        <li><span>a</span></li>
-                        <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtFimPeriodoDeIncricao"></li>
-                    </ul>
+                <div class="col-6" id="camp-dat">
+                    <h4>Curso</h4>
+                    <select name="sel" class="form-control" id="cboCursos">
+                        <option value="">Escolha o curso</option>
+                    </select>
                 </div>
-
-                <h6>Período de Avaliação</h6>
-                <div  class="row col-sm-14 col-xs-3" id="camp-dat">
-                    <ul type="circ">
-                        <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtIniPeriodoAvaliacao"></li>
-                        <li><span>a</span></li>
-                        <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtFimPeriodoAvaliacao"></li>
-                    </ul>
+                <div>
+                    <input type="hidden" id="idCronograma">
                 </div>
-            </aside>
-            <aside id="direita">
-                <h6>Entrega dos Resultados</h6>
-                <div  class="row col-sm-14 col-xs-3" id="camp-dat">
-                    <ul type="circ">
-                        <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtIniEntregaDeResultados"></li>
-                        <li><span>a</span></li>
-                        <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtFimEntregaDeResultados"></li>
-                    </ul>
-                </div>
-
-                <h6>Período Letivo</h6>
-                <div  class="row col-sm-14 col-xs-3" id="camp-dat">
-                    <ul type="circ">
-                        <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtIniPeriodoLetivo"></li>
-                        <li><span>a</span></li>
-                        <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtFimPeriodoLetivo"></li>
-                    </ul>
-                </div>
-
-                <h6>Entrega dos Certificados</h6>
-                <div  class="row col-sm-14 col-xs-3" id="camp-dat">
-                    <ul type="circ">
-                        <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtIniEntregaDeCertificados"></li>
-                        <li><span>a</span></li>
-                        <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date" id="DtFimEntregaDeCertificados"></li>
-                    </ul>
-                </div>
-
-                <div id="botoes">
-                    <div id="align-right">
-                        <button type="button" class="btn btn-primary" id="voltar">Voltar</button>
-                        <button type="button" class="btn btn-primary" id="salvar">Salvar</button>
+                <aside id="esquerda">
+                    <h6>Publicação do Edital</h6>
+                    <div class="row col-sm-14 col-xs-3" id="camp-dat">
+                        <ul>
+                            <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date"
+                                    id="DtIniPublicacaoEdital"></li>
+                            <li><span>a</span></li>
+                            <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date"
+                                    id="DtFimPublicacaoEdital"></li>
+                        </ul>
                     </div>
-                </div>
-            </aside>
+
+                    <h6>Período de Inscrição</h6>
+                    <div class="row col-sm-14 col-xs-3" id="camp-dat">
+                        <ul type="circ">
+                            <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date"
+                                    id="DtIniPeriodoDeIncricao"></li>
+                            <li><span>a</span></li>
+                            <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date"
+                                    id="DtFimPeriodoDeIncricao"></li>
+                        </ul>
+                    </div>
+
+                    <h6>Período de Avaliação</h6>
+                    <div class="row col-sm-14 col-xs-3" id="camp-dat">
+                        <ul type="circ">
+                            <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date"
+                                    id="DtIniPeriodoAvaliacao"></li>
+                            <li><span>a</span></li>
+                            <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date"
+                                    id="DtFimPeriodoAvaliacao"></li>
+                        </ul>
+                    </div>
+                </aside>
+                <aside id="direita">
+                    <h6>Entrega dos Resultados</h6>
+                    <div class="row col-sm-14 col-xs-3" id="camp-dat">
+                        <ul type="circ">
+                            <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date"
+                                    id="DtIniEntregaDeResultados"></li>
+                            <li><span>a</span></li>
+                            <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date"
+                                    id="DtFimEntregaDeResultados"></li>
+                        </ul>
+                    </div>
+
+                    <h6>Período Letivo</h6>
+                    <div class="row col-sm-14 col-xs-3" id="camp-dat">
+                        <ul type="circ">
+                            <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date"
+                                    id="DtIniPeriodoLetivo"></li>
+                            <li><span>a</span></li>
+                            <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date"
+                                    id="DtFimPeriodoLetivo"></li>
+                        </ul>
+                    </div>
+
+                    <h6>Entrega dos Certificados</h6>
+                    <div class="row col-sm-14 col-xs-3" id="camp-dat">
+                        <ul type="circ">
+                            <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date"
+                                    id="DtIniEntregaDeCertificados"></li>
+                            <li><span>a</span></li>
+                            <li><input class="form-control" min="2019-10-10" max="3000-12-31" required type="date"
+                                    id="DtFimEntregaDeCertificados"></li>
+                        </ul>
+                    </div>
+
+                    <div id="botoes">
+                        <div id="align-right">
+                            <button type="button" class="btn btn-primary" id="voltar">Voltar</button>
+                            <button type="button" class="btn btn-primary" id="salvar">Salvar</button>
+                        </div>
+                    </div>
+                </aside>
+            </div>
         </section>
     </div>
     <script language="javascript" src="_javascript/cronograma-monitoria.js"></script>

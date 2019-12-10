@@ -50,14 +50,17 @@ $(document).ready(function () {
                             success: function (result, status, request) {
                                 limpaMensagensDeValidacao();
                                 if (request.status === 206) {
-                                    registraInconsistencia(result);
+                                    $("#mensagens ul").append("<li>"+result+"</li><br/>");
+                                    $("#mensagens").show();
                                 } else {
-                                    registraInconsistencia(result);
+                                    $("#mensagens ul").append("<li>"+result+"</li><br/>");
+                                    $("#mensagens").show();
                                 }
                             },
                             error: function (request, status, erro) {
                                 if (request.status === 400) {
-                                    registraInconsistencia("Todos os campos são obrigatórios!");
+                                    $("#mensagens ul").append("<li>Todos os campos são obrigatórios!</li><br/>");
+                                    $("#mensagens").show();
                                 }
                             }
                         });
@@ -76,14 +79,17 @@ $(document).ready(function () {
                             success: function (result, status, request) {
                                 limpaMensagensDeValidacao();
                                 if (request.status === 206) {
-                                    registraInconsistencia(result);
+                                    $("#mensagens ul").append("<li>"+result+"</li><br/>");
+                                    $("#mensagens").show();
                                 } else {
-                                    registraInconsistencia(result);
+                                    $("#mensagens ul").append("<li>"+result+"</li><br/>");
+                                    $("#mensagens").show();
                                 }
                             },
                             error: function (request, status, erro) {
                                 if (request.status === 400) {
-                                    registraInconsistencia("Todos os campos são obrigatórios!");
+                                    $("#mensagens ul").append("<li>Todos os campos são obrigatórios!</li><br/>");
+                                    $("#mensagens").show();
                                 }
                             }
                         });
@@ -121,8 +127,7 @@ $(document).ready(function () {
             });
 
             $('#btnconsulta').on("click", function (e) {
-                var id_curso = document.getElementById("cboCursos");
-                var valorIdcurso = id_curso.options[id_curso.selectedIndex].value;
+                var valorIdcurso = $('#cboCursos').val();
 
                 $.ajax({
                     method: "GET", // TIPO DE REQUISIÇÃO
@@ -143,7 +148,8 @@ $(document).ready(function () {
                                 preencheCamposTabela(result);
                                 $("#mensagens ul").empty();
                                 document.getElementById("mensagens").style.display = "inline-block";
-                                registraInconsistencia("É necessário selecionar pelo menos uma opção no campo curso!");
+                                $("#mensagens ul").append("<li>É necessário selecionar pelo menos uma opção no campo curso!</li><br/>");
+                                $("#mensagens").show();
                             }
                         }
                     },
@@ -155,7 +161,7 @@ $(document).ready(function () {
                             $('#tabela').empty();
                             $("#mensagens ul").empty();
                             document.getElementById("mensagens").style.display = "inline-block";
-                            registraInconsistencia("Não existe nenhum cronograma definido para o curso selecionado!");
+                            $("#mensagens ul").append("<li>Não existe nenhum cronograma definido para o curso selecionado!</li><br/>")
                         }
                     }
                 });
@@ -194,7 +200,6 @@ function carregarComboboxCursos() {
 
 function preencheCamposDoCronogramaMonitoria(resultado) {
     $("#mensagens ul").empty();
-    document.getElementById("mensagens").style.display = "none";
     var cronogramaMonitoria = JSON.parse(resultado);
     document.querySelector("#idCronograma").value = cronogramaMonitoria.id;
     document.querySelector("#DtIniPublicacaoEdital").value = cronogramaMonitoria.dataEditalInicio;

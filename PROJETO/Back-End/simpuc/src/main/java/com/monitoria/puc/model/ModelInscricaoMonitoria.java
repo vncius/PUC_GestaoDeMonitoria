@@ -1,12 +1,12 @@
 package com.monitoria.puc.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import com.monitoria.puc.repository.RepositoryCurso;
 import com.monitoria.puc.utilidades.DTOFichaDeInscricao;
 import com.monitoria.puc.utilidades.Utilidades;
 
@@ -39,7 +39,17 @@ public class ModelInscricaoMonitoria implements Serializable {
 	private long id_curso;
 	private long id_disciplina;
 	private long id_orientador;
+	private int nota_avaliacao;
+	private int nota_coeficiente;
 	
+	public int getNota_coeficiente() {
+		return nota_coeficiente;
+	}
+
+	public void setNota_coeficiente(int nota_coeficiente) {
+		this.nota_coeficiente = nota_coeficiente;
+	}
+
 	public ModelInscricaoMonitoria() {
 		super();
 		this.matricula = "";
@@ -57,6 +67,8 @@ public class ModelInscricaoMonitoria implements Serializable {
 		this.id_curso = 0;
 		this.id_disciplina = 0;
 		this.id_orientador = 0;
+		this.nota_avaliacao = 0;
+		this.nota_coeficiente = 0;
 	}
 
 	public boolean validaInscricao() {
@@ -79,8 +91,7 @@ public class ModelInscricaoMonitoria implements Serializable {
 		return retorno;
 	}
 	
-	@SuppressWarnings("unused")
-	public DTOFichaDeInscricao converteModelEmDTOParaConsulta(RepositoryCurso cursoRepository) {
+	public DTOFichaDeInscricao converteModelEmDTOParaConsulta(List<ModelCurso> listCursos) {
 
 		DTOFichaDeInscricao model = new DTOFichaDeInscricao();
 		model.setId(this.id);
@@ -97,23 +108,26 @@ public class ModelInscricaoMonitoria implements Serializable {
 		model.setCarga_horaria_sexta(this.carga_horaria_sexta);
 		model.setCarga_horaria_sabado(this.carga_horaria_sabado);
 		model.setStatusIncricao(this.statusIncricao);
-		Iterable<ModelCurso> listCursos = cursoRepository.findAll();
-
+		model.setNota_avaliacao(this.nota_avaliacao);
+		model.setNota_coeficiente(this.nota_coeficiente);
+		
 		//PERCORRE A LISTA DE CURSOS E VERIFICA O ID DO CURSO INFORMADO NA FICHA DE INSCRICAO
 		listCursos.forEach(curso -> {
 			
 			if (curso.getId().equals(this.id_curso)) {
 				//PERCORRE A LISTA DE DISCIPLINAS E VERIFICA O ID DA DISCIPLINA INFORMADO NA FICHA DE INSCRICAO
+				model.setId_curso_selecionado(curso.getId());
+				
 				curso.getDisciplinas().forEach(disciplina -> {
 					if (disciplina.getId().equals(this.id_disciplina)) {
 						//MARCA DISCIPLINA COMO SELECIONADA PARA SER PRÉ SELECIONADO NO HTML
-						disciplina.setEhSelecionado(true);
+						model.setId_disciplina_selecionada(disciplina.getId());
 
 						//PERCORRE A LISTA DE ORIENTADORES E VERIFICA O ID DA DISCIPLINA INFORMADO NA FICHA DE INSCRICAO
 						disciplina.getOrientadores().forEach(orientador -> {
 							if (orientador.getId().equals(this.id_orientador)) {
 								//MARCA DISCIPLINA COMO SELECIONADA PARA SER PRÉ SELECIONADO NO HTML
-								orientador.setEhSelecionado(true);
+								model.setId_orientador_selecionado(orientador.getId());
 							}
 						});
 					}
@@ -261,5 +275,13 @@ public class ModelInscricaoMonitoria implements Serializable {
 
 	public void setCarga_horaria_sabado(String carga_horaria_sabado) {
 		this.carga_horaria_sabado = carga_horaria_sabado;
+	}
+
+	public int getNota_avaliacao() {
+		return nota_avaliacao;
+	}
+
+	public void setNota_avaliacao(int nota_avaliacao) {
+		this.nota_avaliacao = nota_avaliacao;
 	}
 }

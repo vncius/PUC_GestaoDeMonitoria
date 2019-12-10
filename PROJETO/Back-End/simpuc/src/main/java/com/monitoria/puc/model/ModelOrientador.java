@@ -25,8 +25,6 @@ public class ModelOrientador implements Serializable {
 	
 	private String descricao;
     
-    private boolean ehSelecionado;
-    
 	public Long getId() {
 		return id;
 	}
@@ -43,11 +41,4 @@ public class ModelOrientador implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public boolean isEhSelecionado() {
-		return ehSelecionado;
-	}
-
-	public void setEhSelecionado(boolean ehSelecionado) {
-		this.ehSelecionado = ehSelecionado;
-	}
 }
