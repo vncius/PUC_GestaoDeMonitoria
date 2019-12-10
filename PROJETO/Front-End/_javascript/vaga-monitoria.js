@@ -64,7 +64,7 @@ var listaDisciplinas = 0;
 
 function buscaDisciplinas(idCurso) {
     $.ajax({
-        method: "GET", // TIPO DE REQUISIÇÃO
+        method: "GET",
         url: obterUrlDaAPI("/disponibilizaVaga/curso/" + idCurso),
         headers: {
             "Authorization": recuperaTokenParaRequisicao(),
@@ -82,7 +82,6 @@ function buscaDisciplinas(idCurso) {
         },
         error: function (request, status, erro) {
             if (request.status = 500) {
-                // REDIRECIONAR TELA LOGIN - NÃO ESTÁ AUTENTICADO
                 alert(status);
             }
         }
@@ -130,25 +129,32 @@ function salvarQtdeVagas() {
         contentType: "application/json;charset=UTF-8",
         data: disciplina,
         success: function (result, status, request) {
+            if(request.status == 200){
             preencheCamposTabela(result);
             $('#exampleModal').modal('hide');
             listaDisciplinas = result;
-            $("#mensagens ul").append('<li class="alert alert-success" role="alert">Disponibilização de vagas Registrado com Sucesso!!</li>');
+            $("#mensagens ul").append('<li class="alert alert-success" role="alert">Disponibilização de vagas Registrado com Sucesso!</li>');
                 $("#mensagens").show();
-        },  error: function (request, status, erro) {
-            if (request.status == 302) {
+            }
+            if(request.status == 304){
                 $("#mensagens ul").empty();
-                $("#mensagens ul").append('<li class="alert alert-danger" role="alert" >Período de disponibilização de vagas encerrado!!</li>');
+                $("#mensagens ul").append('<li class="alert alert-danger" role="alert" >Qtde de vagas não pode ser inferior as vagas já solicitadas!</li>');
                 $("#mensagens").show();
                 $('#exampleModal').modal('hide');
+            }
+        },  error: function (request, status, erro) {
+            if (request.status === 302) {
+                $("#mensagens ul").empty();
+                $("#mensagens ul").append('<li class="alert alert-danger" role="alert" >Período de disponibilização de vagas encerrado!</li>');
+                $("#mensagens").show();
+                $('#exampleModal').modal('hide');
+            }
+            if(request.status === 404){
+                alert(status);
             }
         }
     });
 }
-
-
-
-
 
 //Função para buscar qualquer campo da tabela sem requisição.
 $(function () {
